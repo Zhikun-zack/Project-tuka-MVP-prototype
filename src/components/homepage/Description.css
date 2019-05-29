@@ -1,0 +1,10 @@
+.description{
+    text-align: center;
+    margin: 2%;
+}
+
+.tuka_pict{
+    display: flex;
+    align-items: flex-start;
+    
+}

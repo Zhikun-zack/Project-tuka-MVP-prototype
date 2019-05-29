@@ -1,0 +1,24 @@
+.row_header{
+    margin-left: 8%;
+    margin-top: 2% !important;
+    font-size: 25px;
+}
+
+.outer_container{
+    display: inline-block; 
+    margin-top: 6%;
+}
+
+.my_divider{
+    border-top: 2px solid rgba(34,36,38,.15) !important;
+    border-bottom: 2px solid rgba(34,36,38,.15) !important;
+    width: 95%;
+    margin: 0 auto !important;
+}
+
+.flex_wraper{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
