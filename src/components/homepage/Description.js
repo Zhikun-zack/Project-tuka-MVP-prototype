@@ -1,8 +1,9 @@
 import React from 'react';
-import des1 from './img/describe1.png';
-import des2 from './img/describe2.png';
-import des3 from './img/describe3.png';
-import des4 from './img/describe4.png';
+import des1 from './img/icon-1.png';
+import des2 from './img/icon-2.png';
+import des3 from './img/icon-3.png';
+import des4 from './img/icon-4.png';
+import underline from './img/underline.png';
 import DescriptionItem from "./DescriptionItem";
 import './Description.css'
 
@@ -21,11 +22,13 @@ class Description extends React.Component{
     };
     render() {
         return (
-            <div className="description">
-                <h2 className="main_content">
+            <div className="description" id="hideMe">
+                <h1 className="main_content">
                     What is Tuka?
-                </h2>
-                <div> Tuka is a digital music platform for sharing and marketing music content.</div>
+                </h1>
+                <div><img width="200px" src={underline} /></div>
+                <div><p style={{color:"grey", fontSize:"17px",marginBottom:"25px"}}> <i>Tuka</i> is a content sharing platform and peer-to-peer marketplace<br />
+                    for sharing, curating, and marketing original music content<br /></p></div>
 
                 <div className="ui grid tuka_pict">
                     <DescriptionItem descrips={this.state.descrips}/>

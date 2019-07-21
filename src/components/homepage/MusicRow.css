@@ -1,5 +1,5 @@
 .row_header{
-    margin-left: 8%;
+    margin-left: 1%;
     margin-top: 2% !important;
     font-size: 25px;
 }
@@ -21,4 +21,30 @@
     justify-content: space-between;
     align-content: center;
     align-items: center;
+}
+
+.WholeRow:nth-child(even){
+    background-color:#edf2f3;
+}
+.artist_element{
+    margin: 2%;
+    height: auto;
+    width: auto;
+}
+
+
+.center_item{
+    text-align: center;
+    width: 100px;
+}
+
+.my_img{
+    /*box-shadow: 0 4px 8px 0 rgba(0,0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.artist_info{
+    margin-top: 10px;
 }

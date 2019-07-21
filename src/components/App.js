@@ -1,7 +1,5 @@
 import React from 'react'
 import { BrowserRouter , Route } from 'react-router-dom'
-
-
 import Homepage_Content from './homepage/Homepage_Content'
 import Header from './Header'
 import Footer from './Footer'

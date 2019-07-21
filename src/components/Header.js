@@ -1,14 +1,22 @@
 import React from 'react'
-import Logo_Img from './homepage/img/tuka.png'
-import Login_Img from './homepage/img/logIn.png'
+import Logo_Img from './homepage/img/placeholder-logo.png'
 import './Header.css'
-
+import DropdownSign2 from './Sign2'
 
 import Nav_Catgory from './Nav_Catgory'
 
 class Header extends React.Component {
 
-    state = {input: null, storedInput: []};
+
+
+    constructor(props){
+        super(props);
+        this.state = {
+            input: null,
+            storedInput: [],
+        };
+    }
+
 
     handleChange = e => {
         this.setState({input: e.target.value});
@@ -16,19 +24,19 @@ class Header extends React.Component {
     };
 
     handleSubmit = (e) => {
-        this.setState(state => {state.input, state.storedInput.push(state.input)});
+        this.setState(state => {state.storedInput.push(state.input)});
         e.preventDefault();
 
         console.log(this.state);
-    }
+    };
 
     render() {
         console.log(this.props);
         return (
             <div className="nav_bar">
-                <div name="tuka_logo">< img src={Logo_Img} alt="No pict shown" /></div>
+                <div name="tuka_logo"><img width="120px" src={Logo_Img} alt="No pict shown" /></div>
                 <div style={{width: '40%'}}>
-                    <h1 style={{textAlign: "center"}}> CONNECTING THE CREATIVE </h1>
+                    <h1 style={{textAlign: "center", color:"#d95457"}}><i> Discover-Share-Connect </i></h1>
                     <form onSubmit={this.handleSubmit} className='ui form'>
                         <div className='ui icon input' style={{width: '100%'}}>
                             <input onChange={this.handleChange} type="text" placeholder="artist, genre, mood what you are looking for?"/>
@@ -44,7 +52,9 @@ class Header extends React.Component {
                 
                 <div>
                     <div name="logIn" className="login_btn">
-                        <img src={Login_Img} alt="No pict shown" />
+
+                        {/*<img width="50px" src={Login_Img} alt="No pict shown" />*/}
+                        <DropdownSign2 />
                     </div>
                 </div>
             </div>

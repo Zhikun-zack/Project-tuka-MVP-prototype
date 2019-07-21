@@ -4,7 +4,7 @@ import MusicRow from './MusicRow'
 
 class Homepage_Content extends React.Component{
     state = {
-        genres:["TRENDING NOW","POP","HIP-HOP / R&B","ROCK","COUNTRY WESTERN"]
+        genres:["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]
     };
 
     render () {
