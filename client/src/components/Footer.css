@@ -1,0 +1,20 @@
+/*.footer_left{*/
+    /*width: 50%;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-content: center;*/
+
+/*}*/
+.footer_bg{
+    background:#d2d8d9;
+    width:100%;
+    height:80px;
+}
+
+.footer_content{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    margin: 0 5%;
+}

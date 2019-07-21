@@ -1,0 +1,22 @@
+.nav_bar{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background: -webkit-linear-gradient(#5D6373, #121335); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#5D6373, #121335); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#5D6373, #121335); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#5D6373, #121335); /* 标准的语法（必须放在最后） */
+
+}
+
+.search_bar{
+    width: 100%;
+}
+
+.login_btn{
+    display: float;
+    float: right;
+}
