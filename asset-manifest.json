@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/tuka-MVP-prototype/static/css/main.3c105a08.chunk.css",
+    "main.js": "/tuka-MVP-prototype/static/js/main.0e558a3e.chunk.js",
+    "main.js.map": "/tuka-MVP-prototype/static/js/main.0e558a3e.chunk.js.map",
+    "runtime~main.js": "/tuka-MVP-prototype/static/js/runtime~main.8da9173d.js",
+    "runtime~main.js.map": "/tuka-MVP-prototype/static/js/runtime~main.8da9173d.js.map",
+    "static/css/2.2f457836.chunk.css": "/tuka-MVP-prototype/static/css/2.2f457836.chunk.css",
+    "static/js/2.1b0291fb.chunk.js": "/tuka-MVP-prototype/static/js/2.1b0291fb.chunk.js",
+    "static/js/2.1b0291fb.chunk.js.map": "/tuka-MVP-prototype/static/js/2.1b0291fb.chunk.js.map",
+    "index.html": "/tuka-MVP-prototype/index.html",
+    "precache-manifest.e39c7341c01e6b73fb30582efa192495.js": "/tuka-MVP-prototype/precache-manifest.e39c7341c01e6b73fb30582efa192495.js",
+    "service-worker.js": "/tuka-MVP-prototype/service-worker.js",
+    "static/css/2.2f457836.chunk.css.map": "/tuka-MVP-prototype/static/css/2.2f457836.chunk.css.map",
+    "static/css/main.3c105a08.chunk.css.map": "/tuka-MVP-prototype/static/css/main.3c105a08.chunk.css.map",
+    "static/media/IMG_3138.jpg": "/tuka-MVP-prototype/static/media/IMG_3138.c1c05924.jpg",
+    "static/media/artist1.png": "/tuka-MVP-prototype/static/media/artist1.a2d550c7.png",
+    "static/media/artist2.png": "/tuka-MVP-prototype/static/media/artist2.d3702575.png",
+    "static/media/artist3.png": "/tuka-MVP-prototype/static/media/artist3.4d8d839e.png",
+    "static/media/artist4.png": "/tuka-MVP-prototype/static/media/artist4.eb54f39c.png",
+    "static/media/artist5.png": "/tuka-MVP-prototype/static/media/artist5.783a2683.png",
+    "static/media/artist6.png": "/tuka-MVP-prototype/static/media/artist6.326306f2.png",
+    "static/media/icon-1.png": "/tuka-MVP-prototype/static/media/icon-1.689dc886.png",
+    "static/media/icon-2.png": "/tuka-MVP-prototype/static/media/icon-2.fafeac36.png",
+    "static/media/icon-3.png": "/tuka-MVP-prototype/static/media/icon-3.655ef785.png",
+    "static/media/icon-4.png": "/tuka-MVP-prototype/static/media/icon-4.6520cafb.png",
+    "static/media/slick-theme.css": "/tuka-MVP-prototype/static/media/slick.d41f55a7.ttf"
+  }
+}
