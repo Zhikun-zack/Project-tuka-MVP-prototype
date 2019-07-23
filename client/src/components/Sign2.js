@@ -1,7 +1,9 @@
 import React from 'react'
-// import {Dropdown,Menu} from 'semantic-ui-react'
+import {Button} from 'reactstrap';
+
 import Login_Img from "./homepage/img/profile-icon.png";
 import Modal from './Modal';
+import Modal2 from './Modal2';
 import { Link } from 'react-router-dom';
 
 const options = [
@@ -21,17 +23,31 @@ class DropdownSign2 extends React.Component{
         this.state = {
             showMenu: false,
             showWindow: false,
+            showWindow2: false,
         }
 
         this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
         this.showWindow = this.showWindow.bind(this);
         this.closeWindow = this.closeWindow.bind(this);
+        this.showWindow2 = this.showWindow2.bind(this);
+        this.closeWindow2 = this.closeWindow2.bind(this);
     }
     showMenu(event){
         event.preventDefault();
         this.setState({
             showMenu : true,
+        },() => {
+            document.addEventListener('click',this.closeMenu);
         });
+    }
+    closeMenu(event){
+        if(!this.dropdownMenu.contains(event.target)){
+            this.setState({showMenu:false},() => {
+                document.removeEventListener('click',this.closeMenu);
+            });
+        }
+
     }
     showWindow(event){
         event.preventDefault();
@@ -45,7 +61,18 @@ class DropdownSign2 extends React.Component{
             showWindow : false,
         });
     }
-
+    showWindow2(event){
+        event.preventDefault();
+        this.setState({
+            showWindow2 : true,
+        });
+    }
+    closeWindow2(event){
+        event.preventDefault();
+        this.setState({
+            showWindow2 : false,
+        });
+    }
     render() {
         return(
             <div>
@@ -53,8 +80,11 @@ class DropdownSign2 extends React.Component{
                 {
                     this.state.showMenu
                     ?(
-                            <div className="menu">
-                                <button onClick={this.showWindow} >Sign in</button><br/>
+                            <div className="menu"
+                            ref={(element) =>{
+                                this.dropdownMenu = element;
+                            }}>
+                                <Button className="SignBtn" color="danger" onClick={this.showWindow} >Sign in&nbsp;</Button><br/>
                                 {
                                     this.state.showWindow
                                     ?(
@@ -62,7 +92,14 @@ class DropdownSign2 extends React.Component{
                                                show={!this.showWindow}/>
                                         ):(null)
                                 }
-                                <button>Sign up</button>
+                                <Button className="SignBtn" color="danger" onClick={this.showWindow2} >Sign up</Button>
+                                {
+                                    this.state.showWindow2
+                                        ?(
+                                            <Modal2 onClose={this.closeWindow2}
+                                                   show={!this.showWindow2}/>
+                                        ):(null)
+                                }
                             </div>
                         )
                         : (null)

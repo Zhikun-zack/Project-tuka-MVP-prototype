@@ -1,8 +1,8 @@
 import React from 'react';
+import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table} from 'reactstrap';
 import axios from 'axios';
-import Logo_Img from "./homepage/img/placeholder-logo.png";
-import './Modal.css';
+
 const backdropStyle = {
     position:'fixed',
     zIndex:90,
@@ -26,10 +26,8 @@ const modalStyle = {
 
 const headerStyle = {
     position:'absolute',
-    color:'white',
-    top: 5,
-    right:5,
-    marginBottom:50,
+    top: 20,
+    right:20,
 };
 
 const contentStyle = {
@@ -113,15 +111,14 @@ export default  class Modal extends React.Component{
         return (
             <div style={backdropStyle}>
                 <div style={modalStyle}>
+                    <div style={headerStyle}>
+                        <button style={{backgroundColor:'transparent',fontColor:'white'}} onClick={this.props.onClose}>
+                           X
+                        </button>
+                    </div>
                     <div style={contentStyle}>
-                        <div style={headerStyle}><button style={{backgroundColor:'white',fontColor:'black'}} onClick={this.props.onClose}>
-                            X
-                        </button></div>
-                        <div className="logo">
-                            <div><img width="50px" src={Logo_Img} alt="No pict shown" /></div>
-                        </div>
-                        <div style={{marginTop:'20px',textAlign:'center',fontSize:'large'}}>
-                            <b>Sign In</b>
+                        <div style={{textAlign:'center',fontSize:'large'}}>
+                            <b>Sign Up</b>
                         </div>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
@@ -132,6 +129,15 @@ export default  class Modal extends React.Component{
                                     onChange={this.handleChange}
                                     placeholder="Email"/></FormGroup>
                             <FormGroup>
+                                <Label for="ConfirmEmail" />
+                                <Input
+                                    valid={this.state.Email!==""&&this.state.Email===this.state.ConfirmEmail&&this.state.EmailValidate}
+                                    invalid={!this.state.EmailValidate}
+                                    type="email"
+                                    name="ConfirmEmail"
+                                    onChange={this.handleChange}
+                                    placeholder="Confirm Email"/></FormGroup>
+                            <FormGroup>
                                 <Label for="Password" />
                                 <Input
                                     type="password"
@@ -139,11 +145,28 @@ export default  class Modal extends React.Component{
                                     pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" //Minimum eight characters, at least one letter, one number
                                     onChange={this.handleChange}
                                     placeholder="Password(8 characters minimum)"/></FormGroup>
-
-
-
-                            <div style={{textAlign:'center',marginBottom:'100px',marginTop:'50px'}}><Button size="lg" color="danger" onClick={this.SubmitSignUp} block>Sign Ip</Button></div>
-
+                            <FormGroup>
+                                <Label for="ConfirmPassword" />
+                                <Input
+                                    valid={this.state.Password!==""&&this.state.ConfirmPassword===this.state.Password&&this.state.PasswordValidate}
+                                    invalid={!this.state.PasswordValidate}
+                                    type="password"
+                                    name="ConfirmPassword"
+                                    onChange={this.handleChange}
+                                    placeholder="Confirm Password"/></FormGroup>
+                            <Table className="Table1">
+                                <tr className="tr1">
+                                <th className="th1">
+                                    <Recaptcha
+                                        size="default"
+                                        sitekey="6Lco76sUAAAAACdWahIKj_ECwE81xKF-96onh8h2"
+                                        render="explicit"
+                                        verifyCallback={this.verifyCallback}
+                                        onloadCallback={this.recaptchaLoaded}
+                                    />
+                                </th>
+                            <th className="th2"><Button size="lg" color="danger" onClick={this.SubmitSignUp}>Sign Up</Button></th>
+                                </tr></Table>
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />

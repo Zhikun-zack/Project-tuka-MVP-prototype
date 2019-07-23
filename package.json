@@ -25,12 +25,10 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -44,3 +42,4 @@
   },
   "homepage": "https://tukaglobal.github.io/tuka-MVP-prototype/"
 }
+

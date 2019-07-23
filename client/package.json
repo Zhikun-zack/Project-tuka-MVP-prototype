@@ -2,7 +2,7 @@
   "name": "tuka",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3002",
+  "proxy": "https://tukaglobal.github.io/tuka-MVP-prototype/",
   "dependencies": {
     "@kapost/react-component-slider": "^1.0.5",
     "axios": "^0.19.0",
@@ -23,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
