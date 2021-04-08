@@ -1,0 +1,42 @@
+.description{
+    text-align: center;
+    margin: 2%;
+    opacity: 1.0;
+    transition: height 500ms 0ms, opacity 500ms 500ms;
+}
+.description.hide{
+    transition: height 500ms 500ms, opacity 500ms 0ms;
+    opacity: 0.0;
+    height: 0px;
+}
+
+.tuka_pict{
+    display: flex;
+    align-items: flex-start;
+    
+}
+/*#hideMe {*/
+    /*-moz-animation: cssAnimation 0s ease-in 5s forwards;*/
+    /*!* Firefox *!*/
+    /*-webkit-animation: cssAnimation 0s ease-in 5s forwards;*/
+    /*!* Safari and Chrome *!*/
+    /*-o-animation: cssAnimation 0s ease-in 5s forwards;*/
+    /*!* Opera *!*/
+    /*animation: cssAnimation 0s ease-in 5s forwards;*/
+    /*-webkit-animation-fill-mode: forwards;*/
+    /*animation-fill-mode: forwards;*/
+/*}*/
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}

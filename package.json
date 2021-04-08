@@ -1,0 +1,49 @@
+{
+  "name": "tuka",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "https://tukaglobal.github.io/tuka-MVP-prototype/",
+  "dependencies": {
+    "@kapost/react-component-slider": "^1.0.5",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-recaptcha": "^2.3.10",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "react-slick": "^0.24.0",
+    "reactjs-popup": "^1.4.1",
+    "reactstrap": "^8.0.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.1",
+    "slick-carousel": "^1.8.1",
+    "yarn": "^1.16.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "https://tukaglobal.github.io/tuka-MVP-prototype/",
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}
