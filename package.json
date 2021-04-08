@@ -2,7 +2,7 @@
   "name": "tuka",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://tukaglobal.github.io/tuka-MVP-prototype/",
+  
   "dependencies": {
     "@kapost/react-component-slider": "^1.0.5",
     "axios": "^0.19.0",
