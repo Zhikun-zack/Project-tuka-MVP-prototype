@@ -1,5 +1,5 @@
 import React from 'react';
-
+import scrollTo from "./CarouselScrollAnimate";
 import './MusicRow.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,11 +14,12 @@ import singer6 from './img/artist6.png';
 import myImg from './img/IMG_3138.jpg';
 
 class MusicRow extends React.Component {
-
     constructor(props) {
         super(props);
+        /*
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
+        */
     }
     state = {
         //details informations for artists windows
@@ -85,7 +86,6 @@ class MusicRow extends React.Component {
             }],
 
     };
-
     //render all artists windows in each line
     renderSlides(){
         const slides = this.state.artists.map((item, index) => {
@@ -97,13 +97,15 @@ class MusicRow extends React.Component {
         })
         return slides;
     }
-
-    next() {
-        this.slider.slickNext();
+    handleLeftClick = (e) => {
+        console.log(this.scrollLeft);
     }
-    previous() {
-        this.slider.slickPrev();
-    }
+    // next() {
+    //     this.slider.slickNext();
+    // }
+    // previous() {
+    //     this.slider.slickPrev();
+    // }
     render() {
         var settings = {
             dots: false,
@@ -119,7 +121,7 @@ class MusicRow extends React.Component {
             <div className='WholeRow'>
                 {/*div for carousel and left right buttons */}
                 <div className='flex_wraper'>
-                    <button className = "carousel_button carousel_button--left" onClick={this.previous} style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick} style={{ border: "none", backgroundColor: "transparent" }}>
                         <img src="../assets/arrow-left.png" />
                     </button>
                     <div style={{ width: '90%' }}>
