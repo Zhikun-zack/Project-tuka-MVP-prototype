@@ -1,3 +1,25 @@
+.carousel{
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 2% ;}
+    .carousel::-webkit-scrollbar{
+        display: none }
+.carousel_slide{
+    display: inline-block;
+    height: 9rem;
+    padding-top: 1.25rem;
+    transition: all .3s;}
+    .carousel_slide img{
+        border-radius: 20px;
+        height: 100px;
+        width: 100px;
+        cursor: pointer;}
+    .carousel_slide:hover{
+        transform: scale(1.1);}
+    .carousel_slide:not(:first-child){
+        padding-left: 2.5rem;}
+    
 .carousel_button{
     width: 2rem;
     border: none;
@@ -36,6 +58,8 @@
     justify-content: space-between;
     align-content: center;
     align-items: center;
+    margin: auto;
+    width: 95%;
 }
 
 .WholeRow:nth-child(even){

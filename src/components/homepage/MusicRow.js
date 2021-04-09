@@ -1,10 +1,10 @@
 import React from 'react';
 
 import './MusicRow.css';
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+//images path for artists windows
 import singer1 from './img/artist1.png';
 import singer2 from './img/artist2.png';
 import singer3 from './img/artist3.png';
@@ -12,7 +12,6 @@ import singer4 from './img/artist4.png';
 import singer5 from './img/artist5.png';
 import singer6 from './img/artist6.png';
 import myImg from './img/IMG_3138.jpg';
-
 
 class MusicRow extends React.Component {
 
@@ -22,6 +21,7 @@ class MusicRow extends React.Component {
         this.previous = this.previous.bind(this);
     }
     state = {
+        //details informations for artists windows
         artists: [
             {
                 name: "singer1 singer2 singer3gjklsdgnlsfdsgsfdh", id: 1,
@@ -86,6 +86,18 @@ class MusicRow extends React.Component {
 
     };
 
+    //render all artists windows in each line
+    renderSlides(){
+        const slides = this.state.artists.map((item, index) => {
+            return (
+                <div className ="carousel_slide">
+                    <img src = {item.image} alt = "artist pic"></img>
+                </div>
+            );
+        })
+        return slides;
+    }
+
     next() {
         this.slider.slickNext();
     }
@@ -114,29 +126,16 @@ class MusicRow extends React.Component {
                         <div>
                             <h2 className="row_header">{genre}</h2>
                         </div>
-
-                        {/*<div className="ui grid" style={{width: '90%', margin: '0 auto'}} >*/}
-                        <Slider ref={c => (this.slider = c)} {...settings}>
-                            {this.state.artists.map((artist, i) =>
-                                <div key={i} >
-                                    <img className="my_img" src={artist.image} alt="No pict shown" />
-                                    <div className="center_item">{artist.name}</div>
-                                </div>
-                            )}
-                        </Slider>
-                        {/*</div>*/}
-                        {/*<Artist artists={this.state.artists}/>*/}
-
+                        <div className = "carousel">
+                            {this.renderSlides()}
+                        </div>  
                     </div>              
                     <button className = "carousel_button carousel_button--right" onClick={this.previous} style={{ border: "none", backgroundColor: "transparent" }}>
                         <img src="../assets/arrow-right.png" />
                     </button>
                 </div>
-
             </div>
-
         ));
-    };
+    }
 }
-
 export default MusicRow;

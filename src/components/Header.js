@@ -1,14 +1,11 @@
 import React from 'react'
-import Logo_Img from './homepage/img/placeholder-logo.png'
+import Logo_Img from './homepage/img/logo.png'
 import './Header.css'
 import DropdownSign2 from './Sign2'
 
 import Nav_Catgory from './Nav_Catgory'
 
 class Header extends React.Component {
-
-
-
     constructor(props){
         super(props);
         this.state = {
@@ -39,11 +36,8 @@ class Header extends React.Component {
                     <h1 style={{textAlign: "center", color:"#d95457"}}><i> Discover-Share-Connect </i></h1>
                     <form onSubmit={this.handleSubmit} className='ui form'>
                         <div className='ui icon input' style={{width: '100%'}}>
-                            <input onChange={this.handleChange} type="text" placeholder="artist, genre, mood what you are looking for?"/>
+                            <input style={{borderRadius:'5rem'}} onChange={this.handleChange} type="text" placeholder="artist, genre, mood what you are looking for?"/>
                             <i className="search icon"></i> 
-                            <button onClick={this.handleSubmit} className="ui icon button" style={{marginLeft: '2%'}}>
-                                Search
-                            </button>
                         </div>
                     </form>
                     <Nav_Catgory tags={this.state.storedInput}/>
