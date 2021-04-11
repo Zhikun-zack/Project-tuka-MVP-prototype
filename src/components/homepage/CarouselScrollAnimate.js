@@ -1,6 +1,5 @@
 function scrollTo(params) {
   const {element, to, duration, scrollDirection} = params;
-  
   let start = element[scrollDirection];
   let change = to - start;
   let increment = (750/60);
@@ -9,6 +8,7 @@ function scrollTo(params) {
       elapsedTime += increment;
       let position = easeInOut(elapsedTime, start, change, duration);                        
       element[scrollDirection] = position; 
+      console.log("scrollLeft is :" + element[scrollDirection]);
       if (elapsedTime < duration) {
           window.requestAnimationFrame(animateScroll.bind(null, elapsedTime));
       }

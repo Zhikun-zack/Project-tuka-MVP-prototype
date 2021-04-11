@@ -98,7 +98,38 @@ class MusicRow extends React.Component {
         return slides;
     }
     handleLeftClick = (e) => {
-        console.log(this.scrollLeft);
+        //div carouselView
+        console.log(this);
+        const { carouselViewport } = this.refs;
+        console.log( carouselViewport);
+        const numSlidesToScroll = 3;
+        const slideWidth = 85;
+        const newPosition = carouselViewport.scrollLeft - (numSlidesToScroll * slideWidth);
+        console.log("newPosition:" + newPosition);
+        const timePerSlide = 300;
+        const totalScrollTime = timePerSlide * numSlidesToScroll;
+        scrollTo({
+        element: carouselViewport, 
+        to: newPosition, 
+        duration: totalScrollTime, 
+        scrollDirection: 'scrollLeft'});
+    }
+
+
+    handleRightClick = (e) => {
+        console.log('right clicked')
+        const { carouselViewport } = this.refs;
+        const numSlidesToScroll = 3;
+        const slideWidth = 85;
+        const newPosition = carouselViewport.scrollLeft + (numSlidesToScroll * slideWidth);
+        const timePerSlide = 300;
+        const totalScrollTime = timePerSlide * numSlidesToScroll;
+        scrollTo({
+        element: carouselViewport, 
+        to: newPosition, 
+        duration: totalScrollTime, 
+        scrollDirection: 'scrollLeft'});
+        console.log(carouselViewport.scrollLeft);
     }
     // next() {
     //     this.slider.slickNext();
@@ -107,37 +138,28 @@ class MusicRow extends React.Component {
     //     this.slider.slickPrev();
     // }
     render() {
-        var settings = {
-            dots: false,
-            arrows: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 6,
-            slidesToScroll: 6,
-
-        };
-        return this.props.genres.map(genre => (
+        return  (
             //whole div for each row
             <div className='WholeRow'>
+                <div className = "carousel_title">
+                    <h2 className="row_header">{this.props.genres}</h2>
+                </div>
                 {/*div for carousel and left right buttons */}
                 <div className='flex_wraper'>
-                    <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick} style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick}>
                         <img src="../assets/arrow-left.png" />
                     </button>
-                    <div style={{ width: '90%' }}>
-                        <div>
-                            <h2 className="row_header">{genre}</h2>
-                        </div>
-                        <div className = "carousel">
+                    <div className = "carousel_viewport" >
+                        <div className = "carousel" ref="carouselViewport">
                             {this.renderSlides()}
                         </div>  
                     </div>              
-                    <button className = "carousel_button carousel_button--right" onClick={this.previous} style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button className = "carousel_button carousel_button--right" onClick={this.handleRightClick} >
                         <img src="../assets/arrow-right.png" />
                     </button>
                 </div>
             </div>
-        ));
+        );
     }
 }
 export default MusicRow;

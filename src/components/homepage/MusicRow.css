@@ -3,8 +3,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     margin-bottom: 2% ;}
-    .carousel::-webkit-scrollbar{
-        display: none }
+    
 .carousel_slide{
     display: inline-block;
     height: 9rem;
@@ -19,9 +18,11 @@
         transform: scale(1.1);}
     .carousel_slide:not(:first-child){
         padding-left: 2.5rem;}
-    
+.carousel_viewport{
+   width: 80%;
+}
 .carousel_button{
-    width: 2rem;
+    width: 20px;
     border: none;
     background: transparent;
     outline: none;
@@ -33,6 +34,9 @@
     }
     .carousel_button--left{
         margin-left: 2rem;
+    }
+    .carousel_button img{
+        height: 20px;
     }
 
 .row_header{

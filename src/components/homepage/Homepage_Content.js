@@ -11,7 +11,11 @@ class Homepage_Content extends React.Component{
         return (
             <div>
                 <Description />
-                <MusicRow genres={this.state.genres}/>
+                <MusicRow genres={this.state.genres[0]}/>
+                <MusicRow genres={this.state.genres[1]}/>
+                <MusicRow genres={this.state.genres[2]}/>
+                <MusicRow genres={this.state.genres[3]}/>
+                <MusicRow genres={this.state.genres[4]}/>
             </div>
     
         );
