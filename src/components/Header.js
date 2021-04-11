@@ -13,8 +13,6 @@ class Header extends React.Component {
             storedInput: [],
         };
     }
-
-
     handleChange = e => {
         this.setState({input: e.target.value});
         console.log(this.state);
@@ -31,7 +29,7 @@ class Header extends React.Component {
         console.log(this.props);
         return (
             <div className="nav_bar">
-                <div name="tuka_logo"><img width="120px" src={Logo_Img} alt="No pict shown" /></div>
+                <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                 <div style={{width: '40%'}}>
                     <h1 style={{textAlign: "center", color:"#d95457"}}><i> Discover-Share-Connect </i></h1>
                     <form onSubmit={this.handleSubmit} className='ui form'>

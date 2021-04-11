@@ -3,7 +3,9 @@
     overflow-x: auto;
     overflow-y: hidden;
     margin-bottom: 2% ;}
-    
+    .carousel::-webkit-scrollbar{
+        display: none;
+    }
 .carousel_slide{
     display: inline-block;
     height: 9rem;
@@ -40,8 +42,7 @@
     }
 
 .row_header{
-    margin-left: 1%;
-    margin-top: 2% !important;
+    margin-left: 12%;
     font-size: 25px;
 }
 
@@ -66,7 +67,7 @@
     width: 95%;
 }
 
-.WholeRow:nth-child(even){
+.WholeRow:nth-child(odd){
     background-color:#edf2f3;
 }
 .artist_element{

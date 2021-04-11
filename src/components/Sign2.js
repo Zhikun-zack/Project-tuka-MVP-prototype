@@ -1,8 +1,10 @@
 import React from 'react'
 // import {Dropdown,Menu} from 'semantic-ui-react'
 import Login_Img from "./homepage/img/profile-icon.png";
+import Menu_Img from "./homepage/img/hamburger-icon.png";
 import Modal from './Modal';
 import { Link } from 'react-router-dom';
+import "./Sign2.js.css";
 
 const options = [
     { key: 1, text: 'Sign in', as: Link},
@@ -48,27 +50,31 @@ class DropdownSign2 extends React.Component{
 
     render() {
         return(
-            <div>
-                <button onClick={this.showMenu}><img width="50px" src={Login_Img} alt="No pict shown" /></button>
-                {
-                    this.state.showMenu
-                    ?(
-                            <div className="menu">
-                                <button onClick={this.showWindow} >Sign in</button><br/>
-                                {
-                                    this.state.showWindow
-                                    ?(
-                                        <Modal onClose={this.closeWindow}
-                                               show={!this.showWindow}/>
-                                        ):(null)
-                                }
-                                <button>Sign up</button>
-                            </div>
-                        )
-                        : (null)
-                }
-
-            </div>
+                <div className="logindiv" >
+                    <a className="login">
+                        <img className="loginImg" src={Login_Img} alt="loginbutton" onClick={this.showMenu}></img>
+                    </a>
+                    {
+                        this.state.showMenu
+                            ? (
+                                <div className="menu">
+                                    <button onClick={this.showWindow} >Sign in</button><br />
+                                    {
+                                        this.state.showWindow
+                                            ? (
+                                                <Modal onClose={this.closeWindow}
+                                                    show={!this.showWindow} />
+                                            ) : (null)
+                                    }
+                                    <button>Sign up</button>
+                                </div>
+                            )
+                            : (null)
+                    }
+                    <a className="menu">
+                        <img className="menuImg" src={Menu_Img}></img>
+                    </a>
+                </div>
     )
     }
 }

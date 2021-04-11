@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import logo from '../components/homepage/img/placeholder-logo.png';
+import logo from '../components/homepage/img/logo.png';
 import FB from '../components/homepage/img/facebook-icon.png';
 import TW from '../components/homepage/img/twitter-icon.png';
 import IN from '../components/homepage/img/linkedin-icon.png';
@@ -15,7 +15,7 @@ const tukaFAQS = "https://www.tukaglobal.com/faqs/";
                 <div style={{width:'100%',height:'20%'}}></div>
                 <div className="footer_content">
                     {/*<div className="footer_left">*/}
-                        <img height="35px" src={logo} />
+                        <img height="60px" src={logo} />
                         <div><a href={tukaWeb}> About</a></div>
                         <div><a href={tukaFAQS}> FAQs</a></div>
                         <div><a href={tukaWeb}> Contact</a></div>
