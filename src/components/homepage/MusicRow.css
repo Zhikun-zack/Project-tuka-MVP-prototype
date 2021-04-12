@@ -3,23 +3,43 @@
     overflow-x: auto;
     overflow-y: hidden;
     margin-bottom: 2% ;}
-    
+    .carousel::-webkit-scrollbar{
+        display: none;
+    }
 .carousel_slide{
     display: inline-block;
-    height: 9rem;
     padding-top: 1.25rem;
+    height: 150px;
     transition: all .3s;}
     .carousel_slide img{
         border-radius: 20px;
-        height: 100px;
-        width: 100px;
-        cursor: pointer;}
+        height: 115px;
+        width: 115px;
+        cursor: pointer;
+        bottom: 0;}
     .carousel_slide:hover{
         transform: scale(1.1);}
     .carousel_slide:not(:first-child){
-        padding-left: 2.5rem;}
+        padding-left: 50px;}
+    .carousel_window:hover .carousel_mask{
+        display: inline-block;
+    }
+    .carousel_mask{
+        background-color: rgba(255,255,255,30%);
+        display: none;
+        position: absolute;
+        bottom: 15.5px;}
+        .carousel_display{
+            display: inline-block;
+            position: relative;
+
+        }
+        .carousel_display img{
+            width: 40px;
+            height: 40px;
+        }
 .carousel_viewport{
-   width: 80%;
+   width: 90%;
 }
 .carousel_button{
     width: 20px;
@@ -40,8 +60,7 @@
     }
 
 .row_header{
-    margin-left: 1%;
-    margin-top: 2% !important;
+    margin-left: 12%;
     font-size: 25px;
 }
 
@@ -66,7 +85,7 @@
     width: 95%;
 }
 
-.WholeRow:nth-child(even){
+.WholeRow:nth-child(odd){
     background-color:#edf2f3;
 }
 .artist_element{
