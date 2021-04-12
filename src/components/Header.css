@@ -11,6 +11,16 @@
     background: linear-gradient(#5D6373, #121335); /* 标准的语法（必须放在最后） */
 
 }
+.keywords{
+    background-color: #121335;
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
+    border: solid;
+    border-color: white;
+    border-radius: 20px;
+    color: white;
+    }
 
 .search_bar{
     width: 100%;

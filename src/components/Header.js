@@ -37,6 +37,11 @@ class Header extends React.Component {
                             <input style={{borderRadius:'5rem'}} onChange={this.handleChange} type="text" placeholder="artist, genre, mood what you are looking for?"/>
                             <i className="search icon"></i> 
                         </div>
+                        <div>
+                            <div>
+                                <div className = "keywords">KeyWords</div>
+                            </div>
+                        </div>
                     </form>
                     <Nav_Catgory tags={this.state.storedInput}/>
 
