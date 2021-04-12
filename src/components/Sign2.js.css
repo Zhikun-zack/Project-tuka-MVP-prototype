@@ -1,1 +1,13 @@
-
+.logindiv{
+    display: flex;
+    position: relative;}
+    .loginImg{
+        width: 50px;
+        cursor: pointer;
+    }
+    .menuImg{
+        margin-left: 30px;
+        margin-top: 4px;
+        width: 50px;
+        cursor: pointer;
+    }
