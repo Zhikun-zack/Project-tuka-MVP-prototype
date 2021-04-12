@@ -12,6 +12,9 @@ import singer4 from './img/artist4.png';
 import singer5 from './img/artist5.png';
 import singer6 from './img/artist6.png';
 import myImg from './img/IMG_3138.jpg';
+import play from './img/play-button-small.png';
+import stop from "./img/stop-button-small.png";
+import user from "./img/user-profile image example.png";
 
 class MusicRow extends React.Component {
     constructor(props) {
@@ -91,12 +94,26 @@ class MusicRow extends React.Component {
         const slides = this.state.artists.map((item, index) => {
             return (
                 <div className ="carousel_slide">
-                    <img src = {item.image} alt = "artist pic"></img>
+                    <div className = "carousel_window">
+                        <div className = "carousel_mask">
+                            <div className = "carousel_display">
+                                <img className = "play" src = {play}></img>
+                            </div>
+                            <div className = "carousel_display">
+                                <img className = "stop" src = {stop}></img>
+                            </div> 
+                            <div className = "carousel_display">
+                                <img className = "user" src = {user}></img>
+                            </div> 
+                        </div>
+                        <img src = {item.image} alt = "artist pic"></img>    
+                    </div>             
                 </div>
             );
         })
         return slides;
     }
+    //function for click left arrow
     handleLeftClick = (e) => {
         //div carouselView
         console.log(this);
@@ -114,8 +131,7 @@ class MusicRow extends React.Component {
         duration: totalScrollTime, 
         scrollDirection: 'scrollLeft'});
     }
-
-
+    //function for click right arrow
     handleRightClick = (e) => {
         console.log('right clicked')
         const { carouselViewport } = this.refs;
@@ -131,12 +147,15 @@ class MusicRow extends React.Component {
         scrollDirection: 'scrollLeft'});
         console.log(carouselViewport.scrollLeft);
     }
-    // next() {
-    //     this.slider.slickNext();
-    // }
-    // previous() {
-    //     this.slider.slickPrev();
-    // }
+    //When hover on artist windows
+    hoverOnWindows(){
+        console.log("hover")
+    }
+    //When mouse move out of artist windows
+    moveOutWindows(){
+        console.log("move out")
+    }
+
     render() {
         return  (
             //whole div for each row
