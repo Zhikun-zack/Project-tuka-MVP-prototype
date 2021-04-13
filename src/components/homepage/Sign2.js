@@ -1,7 +1,7 @@
 import React from 'react'
 // import {Dropdown,Menu} from 'semantic-ui-react'
-import Login_Img from "./homepage/img/profile-icon.png";
-import Menu_Img from "./homepage/img/hamburger-icon.png";
+import Login_Img from "./img/profile-icon.png";
+import Menu_Img from "./img/hamburger-icon.png";
 import Modal from './Modal';
 import { Link } from 'react-router-dom';
 import "./Sign2.js.css";

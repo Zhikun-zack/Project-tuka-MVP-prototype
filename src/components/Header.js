@@ -1,9 +1,11 @@
 import React from 'react'
 import Logo_Img from './homepage/img/logo.png'
 import './Header.css'
-import DropdownSign2 from './Sign2'
+import DropdownSign2 from './homepage/Sign2'
 
-import Nav_Catgory from './Nav_Catgory'
+import Nav_Catgory from './homepage/Nav_Catgory'
+import Search from "./homepage/Search"
+import { SearchResult } from 'semantic-ui-react'
 
 class Header extends React.Component {
     constructor(props){
@@ -32,17 +34,7 @@ class Header extends React.Component {
                 <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                 <div style={{width: '40%'}}>
                     <h1 style={{textAlign: "center", color:"#d95457"}}><i> Discover-Share-Connect </i></h1>
-                    <form onSubmit={this.handleSubmit} className='ui form'>
-                        <div className='ui icon input' style={{width: '100%'}}>
-                            <input style={{borderRadius:'5rem'}} onChange={this.handleChange} type="text" placeholder="artist, genre, mood what you are looking for?"/>
-                            <i className="search icon"></i> 
-                        </div>
-                        <div>
-                            <div>
-                                <div className = "keywords">KeyWords</div>
-                            </div>
-                        </div>
-                    </form>
+                    <Search></Search>
                     <Nav_Catgory tags={this.state.storedInput}/>
 
                 </div>
