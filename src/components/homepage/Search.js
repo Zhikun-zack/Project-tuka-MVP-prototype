@@ -1,11 +1,36 @@
 import React, { Component } from "react";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
+import PropTypes from "prop-types";
 
 class Search extends Component{
+    //suggestions is the input variable from Header.js
+    //check the type of input
+    static propTypes = {
+        suggestions: PropTypes.instanceOf(Array)
+    }
+    //default value of input variable
+    static defaultProps = {
+        suggestions: []
+    }
+    //initialize Search component combine suggestions with props
+    constructor(props){
+        super(props);
+
+        this.state = {
+            tracks: [],
+            activeSuggesion: 0,
+            filteredSuggestions: [],
+            showSuggesions: false,
+            userInput: ""
+        };
+    }
     //click search button
     onClick = (e) => {
-        console.log("click search button");
+        console.log(this.props);
+    }
+    handleChange = (e) => {
+        console.log(e.currentTarget.value);
     }
 
     render(){

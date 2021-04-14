@@ -27,6 +27,9 @@ class Header extends React.Component {
 
         console.log(this.state);
     };
+    onClickSearch(){
+        console.log("click search bar");
+    }
 
     render() {
         console.log(this.props);
@@ -36,7 +39,29 @@ class Header extends React.Component {
                     <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                     <div style={{ width: '40%' }}>
                         <h1 style={{ textAlign: "center", color: "#d95457" }}><i> Discover-Share-Connect </i></h1>
-                        <Search></Search>
+                        <Search suggestions={[
+                            "Alternative Pop",
+                            "Alternative Rock",
+                            "Blues",
+                            "Brazilian",
+                            "Classic Pop",
+                            "Classic Rock",
+                            "Classical",
+                            "Country",
+                            "Dance",
+                            "Electronic",
+                            "Folk",
+                            "Gospel",
+                            "HipHop",
+                            "Jazz",
+                            "Latin",
+                            "Metal",
+                            "Modern Pop",
+                            "Pop Rock",
+                            "Reggae",
+                            "RnB",
+                            "Spoken"
+                        ]}></Search>
                         <Nav_Catgory tags={this.state.storedInput} />
 
                     </div>
