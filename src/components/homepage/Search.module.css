@@ -1,12 +1,12 @@
 .search{
         margin-top: 1.5rem;
         width: 100%;
-        position: relative;}
+        position: relative;
+        }
     .input{
     width: 100%;
     border-radius: 20px;
     height: 2.5rem;
-    position:absolute;
     overflow: hidden;}
     .search_button{
         position: absolute;
@@ -19,3 +19,4 @@
     .search_button img{
         width: 1.5rem;
     }
+    

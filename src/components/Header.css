@@ -1,6 +1,6 @@
 .nav_bar{
     width: 100%;
-    height: 200px;
+    height: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -11,17 +11,11 @@
     background: linear-gradient(#5D6373, #121335); /* 标准的语法（必须放在最后） */
 
 }
-.keywords{
+.keywordsBar{
     background-color: #121335;
-    width: 100px;
-    height: 30px;
-    margin-top: 20px;
-    border: solid;
-    border-color: white;
-    border-radius: 20px;
-    color: white;
-    }
-
+    text-align: center;
+    height: 3rem;
+}
 .search_bar{
     width: 100%;
 }

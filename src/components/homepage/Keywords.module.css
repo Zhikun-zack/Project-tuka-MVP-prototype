@@ -1,0 +1,24 @@
+.searchKeysDiv{
+    margin: auto;
+
+    background: transparent;
+    border-style: solid;
+    border-color: white;
+    border-radius: 2rem;
+    width: 10rem;
+    height: 1.8rem; 
+    position: relative;}
+    .searchKeysWords{
+        position:absolute;
+        color: white;
+        width: 80%;
+        bottom: 0.05rem;}
+    .searchKeysButton{
+        color: white;
+        position: absolute;
+        right: 0.01rem;
+        bottom: 0.01rem;}
+        .searchKeysButton:hover{
+            cursor: pointer;}
+        .searchKeysButton img{
+            width: 1.4rem;}

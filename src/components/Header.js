@@ -5,6 +5,7 @@ import DropdownSign2 from './homepage/Sign2'
 
 import Nav_Catgory from './homepage/Nav_Catgory'
 import Search from "./homepage/Search"
+import Keywords from "./homepage/Keywords"
 import { SearchResult } from 'semantic-ui-react'
 
 class Header extends React.Component {
@@ -30,23 +31,29 @@ class Header extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <div className="nav_bar">
-                <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
-                <div style={{width: '40%'}}>
-                    <h1 style={{textAlign: "center", color:"#d95457"}}><i> Discover-Share-Connect </i></h1>
-                    <Search></Search>
-                    <Nav_Catgory tags={this.state.storedInput}/>
+            <div className = "header">
+                <div className="nav_bar">
+                    <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
+                    <div style={{ width: '40%' }}>
+                        <h1 style={{ textAlign: "center", color: "#d95457" }}><i> Discover-Share-Connect </i></h1>
+                        <Search></Search>
+                        <Nav_Catgory tags={this.state.storedInput} />
 
-                </div>
-                
-                <div>
-                    <div name="logIn" className="login_btn">
+                    </div>
 
-                        {/*<img width="50px" src={Login_Img} alt="No pict shown" />*/}
-                        <DropdownSign2 />
+                    <div>
+                        <div name="logIn" className="login_btn">
+
+                            {/*<img width="50px" src={Login_Img} alt="No pict shown" />*/}
+                            <DropdownSign2 />
+                        </div>
                     </div>
                 </div>
+                <div className = "keywordsBar">
+                    <Keywords></Keywords>
+                </div>
             </div>
+            
         );
     };
 
