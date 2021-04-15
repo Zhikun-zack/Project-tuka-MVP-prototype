@@ -7,7 +7,7 @@ import DropdownSign2 from './homepage/Sign2'
 
 import Nav_Catgory from './homepage/Nav_Catgory'
 import Search from "./homepage/Search"
-import Keywords from "./homepage/Keywords"
+
 import { SearchResult } from 'semantic-ui-react'
 
 class Header extends React.Component {
@@ -15,7 +15,6 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div className = "header">
                 <div className="nav_bar">
                     <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                     <div style={{ width: '40%' }}>
@@ -53,10 +52,6 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className = "keywordsBar">
-                    <Keywords></Keywords>
-                </div>
-            </div>
             
         );
     };

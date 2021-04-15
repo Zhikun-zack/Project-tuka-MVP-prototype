@@ -9,7 +9,8 @@
     font-size: 1.6rem;
     height: auto;
     outline: none;
-    overflow: hidden;}
+    overflow: hidden;
+    padding-left: 1rem;}
     .search_button{
         position: absolute;
         border: none;
@@ -42,4 +43,8 @@
     .noSuggestion em:hover, .hasSuggestions li:hover{
         cursor: pointer;
         color: #D95457}
+.keywordsBar{
+    background: transparent;
+    text-align: center;
+    height: 3rem;}
     

@@ -3,6 +3,8 @@ import React, { Component, Fragment } from "react";
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
 
+import Keywords from "./Keywords"
+
 class Search extends Component{
     //suggestions is the input variable from Header.js
     //check the type of input
@@ -19,17 +21,17 @@ class Search extends Component{
 
         this.state = {
             tracks: [],
-            activeSuggesion: 0,
+            activeSuggestion: 0,
             //suggested keywords based on the user input
             filteredSuggestions: [],
             //whether we should show the suggesion window
-            showSuggesions: false,
+            showSuggestions: false,
             //words that user input
             userInput: ""
         };
     }
     //click the any results in suggestions window
-    onClick = (e) => {
+    onClick = e => {
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
@@ -52,7 +54,7 @@ class Search extends Component{
         this.setState({
             activeSuggesion:0,
             filteredSuggestions,
-            showSuggesions: true,
+            showSuggestions: true,
             userInput: e.currentTarget.value,
         });
     };
@@ -64,21 +66,30 @@ class Search extends Component{
             onClick,
             onKeyDown,
             state:{
-                activeSuggesion,
+                activeSuggestion,
                 filteredSuggestions,
-                showSuggesions,
+                showSuggestions,
                 userInput
             }
         } = this;
         let suggestionsList;
+        let keywords;
 
-        if(showSuggesions && userInput){
+        if(showSuggestions && userInput){
             if(filteredSuggestions.length){
                 suggestionsList = (
                     <ul className = {searchStyle.hasSuggestions}>
                         {filteredSuggestions.map((suggestion, index) => {
+                            
+                            let className;
+
+                            // Flag the active suggestion with a class
+                            if (index === activeSuggestion) {
+                                className = "search__suggestion-active";
+                            }
+                            
                             return (
-                                <li key={suggestion} onClick = {onClick}>
+                                <li className = {className} key={suggestion} onClick = {onClick}>
                                     {suggestion}
                                 </li>
                             )
@@ -93,6 +104,14 @@ class Search extends Component{
                 )
             }  
         }
+
+        if(userInput){
+            keywords = (
+               
+                    <Keywords keyWord = {userInput}></Keywords>
+
+            )
+        }
         return(
             <div>
                 <form className = "search_form">
@@ -100,15 +119,16 @@ class Search extends Component{
                         <div className={searchStyle.search}>
                             <input
                                 className={searchStyle.input}
-                                onChange={this.onChange}
+                                onChange={onChange}
                                 type="text"
-                                placeholder="artist, genre, mood what you are looking for?"
+                                placeholder="Enter keyword, genre, or artist"
                                 value={userInput}
                                 onKeyDown={onKeyDown}
                             />
                             <button className={searchStyle.search_button} onClick={this.onClick}><img src="../assets/search-icon.png"></img></button>
                         </div>
                         {suggestionsList}
+                        {keywords}
                     </Fragment>
                     
                 </form>

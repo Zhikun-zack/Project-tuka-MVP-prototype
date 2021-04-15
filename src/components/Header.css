@@ -1,10 +1,9 @@
 .nav_bar{
     width: 100%;
-    height: auto;
+    height: 15rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-
     background: -webkit-linear-gradient(#5D6373, #121335); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(#5D6373, #121335); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(#5D6373, #121335); /* Firefox 3.6 - 15 */
