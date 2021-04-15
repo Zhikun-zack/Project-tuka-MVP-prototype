@@ -8,9 +8,9 @@ class Keywords extends Component{
                 <div className = {keyStyle.searchKeysWords}>
                     Country
                 </div>
-                <div className = {keyStyle.searchKeysButton}>
+                <button className = {keyStyle.searchKeysButton}>
                     <img src = "./assets/x-out-symbol.png" ></img>
-                </div>
+                </button>
             </div>
         );
     };
