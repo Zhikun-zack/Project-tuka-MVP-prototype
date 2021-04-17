@@ -26,8 +26,11 @@ class Search extends Component{
             filteredSuggestions: [],
             //whether we should show the suggesion window
             showSuggestions: false,
+            //whether to show the keyword tag
+            showKeywords: false,
             //words that user input
-            userInput: ""
+            userInput: "",
+            keyWord: "",
         };
     }
     //click the any results in suggestions window
@@ -36,9 +39,14 @@ class Search extends Component{
             activeSuggestion: 0,
             filteredSuggestions: [],
             showSuggestions: false,
+            showKeywords: true,
             //input tag's value is userInput so when click on one of the result, input value will also change
-            userInput: e.currentTarget.innerText
+            userInput: e.currentTarget.innerText,
+            keyWord: e.currentTarget.innerText,
         })
+    }
+    onKeyDown = e => {
+        
     }
     onChange = e => {
         const { suggestions } = this.props;
@@ -51,12 +59,15 @@ class Search extends Component{
                 //see whether it is larger than -1
                 suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
+
         this.setState({
             activeSuggesion:0,
             filteredSuggestions,
             showSuggestions: true,
+            showKeywords:false,
             userInput: e.currentTarget.value,
-        });
+        })
+        
     };
 
 
@@ -69,12 +80,13 @@ class Search extends Component{
                 activeSuggestion,
                 filteredSuggestions,
                 showSuggestions,
+                showKeywords,
                 userInput
             }
         } = this;
         let suggestionsList;
         let keywords;
-
+        //result suggestion element shows when input correct name
         if(showSuggestions && userInput){
             if(filteredSuggestions.length){
                 suggestionsList = (
@@ -104,12 +116,12 @@ class Search extends Component{
                 )
             }  
         }
-
-        if(userInput){
+        //shows the keyword div based on the input
+        if(showKeywords && userInput){
             keywords = (
-               
+                <div className = {searchStyle.keyTags}>
                     <Keywords keyWord = {userInput}></Keywords>
-
+                </div>  
             )
         }
         return(

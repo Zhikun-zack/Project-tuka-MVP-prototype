@@ -1,19 +1,24 @@
 .searchKeysDiv{
-    margin: auto;
+    margin-top: 1%;
+    margin-left: 40%;
     background: transparent;
     border-style: solid;
     border-color: #ffffff;
     border-radius: 5rem;
     border-width: 2px;
-    width: 10rem;
+    width: 11rem;
     height: 2rem;
     line-height: 1.8rem;
-    position: relative;
+    position: absolute;
+    left:0 ;
+    right: 0;
     display: inline-block;}
     .searchKeysWords{
+        text-align: center;
+        display: inline-block;
         position:absolute;
         color: white;
-        width: 80%;
+        width: 75%;
         bottom: 0.05rem;}
     .searchKeysButton{
         border: none;
