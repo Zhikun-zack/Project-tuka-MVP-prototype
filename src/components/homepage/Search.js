@@ -31,22 +31,31 @@ class Search extends Component{
             //words that user input
             userInput: "",
             keyWord: "",
+            //store the genre keywords that we selected, add one element when click, delete when click on the delet button in keyword div
+            keyWordsList: [],
         };
     }
     //click the any results in suggestions window
     onClick = e => {
+        const userInput = e.currentTarget.innerText;
+        const keyWordsList = this.state.keyWordsList;
+        keyWordsList.push(userInput);
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
             showSuggestions: false,
             showKeywords: true,
             //input tag's value is userInput so when click on one of the result, input value will also change
-            userInput: e.currentTarget.innerText,
+            userInput: userInput,
             keyWord: e.currentTarget.innerText,
+            keyWordsList: keyWordsList,
+            selectedKeyword: null,
         })
+        //console.log("User Input value after click:"+ e.currentTarget.innerText);
+        //console.log("keywords list:" + this.state.keyWordsList);
     }
-    onKeyDown = e => {
-        
+    onKeyDown = keyword => {
+        this.setState({selectedKeyword: keyword});
     }
     onChange = e => {
         const { suggestions } = this.props;
@@ -59,7 +68,6 @@ class Search extends Component{
                 //see whether it is larger than -1
                 suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
-
         this.setState({
             activeSuggesion:0,
             filteredSuggestions,
@@ -67,6 +75,7 @@ class Search extends Component{
             showKeywords:false,
             userInput: e.currentTarget.value,
         })
+        //console.log(userInput);
         
     };
 
@@ -81,7 +90,9 @@ class Search extends Component{
                 filteredSuggestions,
                 showSuggestions,
                 showKeywords,
-                userInput
+                userInput,
+                keyWordsList,
+                selectedKeyword,
             }
         } = this;
         let suggestionsList;
@@ -120,9 +131,22 @@ class Search extends Component{
         if(showKeywords && userInput){
             keywords = (
                 <div className = {searchStyle.keyTags}>
-                    <Keywords keyWord = {userInput}></Keywords>
+                    {keyWordsList.map((keyword) => {
+                        return(
+                                <Keywords 
+                                    // keywords that the user has selected, input into component
+                                    keyWord = {keyword}
+                                    onChange = {onKeyDown}
+                                    display = {keyword === selectedKeyword? false: false}
+                                ></Keywords>
+                        )
+                    })}
+                    
                 </div>  
             )
+            keyWordsList.map((keyword) => {
+                console.log(keyword);
+            })
         }
         return(
             <div>
@@ -135,7 +159,6 @@ class Search extends Component{
                                 type="text"
                                 placeholder="Enter keyword, genre, or artist"
                                 value={userInput}
-                                onKeyDown={onKeyDown}
                             />
                             <button className={searchStyle.search_button} onClick={this.onClick}><img src="../assets/search-icon.png"></img></button>
                         </div>

@@ -22,13 +22,13 @@ class Keywords extends Component{
         this.setState = {
             display: false 
         }
+        this.state.onChange(this.props.keyWord);
     }
     render(){
         const keyWord = this.props.keyWord;
         return(
-            <div className = {keyStyle.searchKeysDiv} >
+            <div className = {keyStyle.searchKeysDiv} style = {{display: this.state.display}}>
                 {
-                    this.state.display? (
                         <Fragment>
                             <div className={keyStyle.searchKeysWords}>
                                 {keyWord}
@@ -39,7 +39,6 @@ class Keywords extends Component{
                                 <img src="./assets/x-out-symbol.png" ></img>
                             </button>
                         </Fragment>
-                    ): null
                 }
             </div>
         );
