@@ -76,10 +76,7 @@ class Search extends Component{
             userInput: e.currentTarget.value,
         })
         //console.log(userInput);
-        
-    };
-
-
+    } 
     render(){
         const{
             onChange,
