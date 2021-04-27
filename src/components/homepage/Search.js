@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
@@ -133,8 +134,8 @@ class Search extends Component{
                                 <Keywords 
                                     // keywords that the user has selected, input into component
                                     keyWord = {keyword}
-                                    //onChange = {onKeyDown}
-                                    //display = {keyword === selectedKeyword? false: false}
+                                    onChange = {onKeyDown}
+                                    display = {keyword === selectedKeyword? false: false}
                                 ></Keywords>
                         )
                     })}
@@ -157,7 +158,10 @@ class Search extends Component{
                                 placeholder="Enter keyword, genre, or artist"
                                 value={userInput}
                             />
-                            <button className={searchStyle.search_button} onClick={this.onClick}><img src="../assets/search-icon.png"></img></button>
+                            <button className={searchStyle.search_button} onClick={this.onClick}>
+                                
+                                <Link to="/alertManagement"><img src="../assets/search-icon.png"></img></Link>
+                            </button>
                         </div>
                         {suggestionsList}
                         {keywords}

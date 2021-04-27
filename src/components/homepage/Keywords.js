@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import keyStyle from "./Keywords.module.css";
 import NavItem from "reactstrap/lib/NavItem";
@@ -37,8 +38,9 @@ class Keywords extends Component{
                             </div>
                             <button
                                 className={keyStyle.searchKeysButton}
+                                onClick = {this.onClick}
                                 >
-                                <img src="./assets/x-out-symbol.png" ></img>
+                                <Link to="/"><img src="./assets/x-out-symbol.png" ></img></Link>
                             </button>
                         </Fragment>
                 }
