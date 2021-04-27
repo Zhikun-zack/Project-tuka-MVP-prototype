@@ -51,8 +51,6 @@ class Search extends Component{
             keyWordsList: keyWordsList,
             selectedKeyword: null,
         })
-        //console.log("User Input value after click:"+ e.currentTarget.innerText);
-        //console.log("keywords list:" + this.state.keyWordsList);
     }
     onKeyDown = keyword => {
         this.setState({selectedKeyword: keyword});
@@ -75,8 +73,10 @@ class Search extends Component{
             showKeywords:false,
             userInput: e.currentTarget.value,
         })
-        //console.log(userInput);
     } 
+    removeKey(genre){
+        
+    }
     render(){
         const{
             onChange,
@@ -133,8 +133,8 @@ class Search extends Component{
                                 <Keywords 
                                     // keywords that the user has selected, input into component
                                     keyWord = {keyword}
-                                    onChange = {onKeyDown}
-                                    display = {keyword === selectedKeyword? false: false}
+                                    //onChange = {onKeyDown}
+                                    //display = {keyword === selectedKeyword? false: false}
                                 ></Keywords>
                         )
                     })}
@@ -142,7 +142,7 @@ class Search extends Component{
                 </div>  
             )
             keyWordsList.map((keyword) => {
-                console.log(keyword);
+                //console.log(keyword);
             })
         }
         return(

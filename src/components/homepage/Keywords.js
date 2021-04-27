@@ -19,10 +19,12 @@ class Keywords extends Component{
     }
     //click close button and close the keyword elements
     onClick = e => {
-        this.setState = {
-            display: false 
-        }
-        this.state.onChange(this.props.keyWord);
+        // this.setState = {
+        //     display: true
+        // }
+        console.log("hello ");
+        //this.state.onChange(this.props.keyWord);
+        
     }
     render(){
         const keyWord = this.props.keyWord;
@@ -35,7 +37,7 @@ class Keywords extends Component{
                             </div>
                             <button
                                 className={keyStyle.searchKeysButton}
-                                onClick={this.onClick}>
+                                >
                                 <img src="./assets/x-out-symbol.png" ></img>
                             </button>
                         </Fragment>
