@@ -11,6 +11,9 @@
     outline: none;
     overflow: hidden;
     padding-left: 1rem;}
+    .input::-webkit-input-placeholder{
+        color:#C0C0C0;
+    }
     .search_button{
         position: absolute;
         border: none;

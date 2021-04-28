@@ -35,12 +35,17 @@ class Search extends Component{
             //store the genre keywords that we selected, add one element when click, delete when click on the delet button in keyword div
             keyWordsList: [],
         };
+        //this.removeKey = this.removeKey.bind(this);
     }
     //click the any results in suggestions window
     onClick = e => {
         const userInput = e.currentTarget.innerText;
         const keyWordsList = this.state.keyWordsList;
-        keyWordsList.push(userInput);
+        //Check whether the input genre has already existed in the list
+        if(!keyWordsList.some((element) => element === userInput)){
+            keyWordsList.push(userInput);
+        }
+
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
@@ -50,11 +55,9 @@ class Search extends Component{
             userInput: userInput,
             keyWord: e.currentTarget.innerText,
             keyWordsList: keyWordsList,
-            selectedKeyword: null,
         })
     }
     onKeyDown = keyword => {
-        this.setState({selectedKeyword: keyword});
     }
     onChange = e => {
         const { suggestions } = this.props;
@@ -75,7 +78,27 @@ class Search extends Component{
             userInput: e.currentTarget.value,
         })
     } 
-    removeKey(genre){
+
+    //remove certain genre from the keywords list
+    removeKey = (genre) => {
+        //copy the state var to new var
+        const list = this.state.keyWordsList.slice();
+
+        //some function will traverse all elements in list
+        list.some((element, i) => {
+            //if the element is equal to the input item delete it from list
+            if(element == genre){
+                //delete 1 element at position i
+                list.splice(i, 1);
+                return true;
+            }
+        });
+        this.setState({
+            keyWordsList: list,
+        });
+    }
+
+    checkRepeat = () => {
         
     }
     render(){
@@ -83,6 +106,7 @@ class Search extends Component{
             onChange,
             onClick,
             onKeyDown,
+            removeKey,
             state:{
                 activeSuggestion,
                 filteredSuggestions,
@@ -90,7 +114,6 @@ class Search extends Component{
                 showKeywords,
                 userInput,
                 keyWordsList,
-                selectedKeyword,
             }
         } = this;
         let suggestionsList;
@@ -135,16 +158,13 @@ class Search extends Component{
                                     // keywords that the user has selected, input into component
                                     keyWord = {keyword}
                                     onChange = {onKeyDown}
-                                    display = {keyword === selectedKeyword? false: false}
+                                    delete = {removeKey}
                                 ></Keywords>
                         )
                     })}
                     
                 </div>  
             )
-            keyWordsList.map((keyword) => {
-                //console.log(keyword);
-            })
         }
         return(
             <div>
@@ -160,7 +180,7 @@ class Search extends Component{
                             />
                             <button className={searchStyle.search_button} onClick={this.onClick}>
                                 
-                                <Link to="/alertManagement"><img src="../assets/search-icon.png"></img></Link>
+                                <Link to="/"><img src="../assets/search-icon.png"></img></Link>
                             </button>
                         </div>
                         {suggestionsList}
