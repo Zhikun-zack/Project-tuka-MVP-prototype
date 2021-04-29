@@ -4,17 +4,30 @@ import Homepage_Content from './homepage/Homepage_Content'
 import Header from './Header'
 import Footer from './Footer'
 
-const App = () => {
-    return (<div>
-        <BrowserRouter>
+class App extends React.Component{
+    state = {
+        tValue: [],
+    }
+    HeaderValue = (headerValue) => {
+        this.setState({
+            tValue: headerValue,
+        }); 
+    }
+    render(){
+        console.log("in app.js file"+this.state.tValue);
+        return (
             <div>
-                <Header />
-                <Route path='/' exact component={Homepage_Content} />
-                <Footer />
-
-            </div>
-        </BrowserRouter>
-    </div>);
-};
+            <BrowserRouter>
+                <div>
+                    <Header />
+                    <Route path='/' exact component={Homepage_Content} header = {(headerValue) => this.HeaderValue(headerValue)}/>
+                    <Footer />
+    
+                </div>
+            </BrowserRouter>
+        </div>
+        );
+    }
+}
 
 export default App;

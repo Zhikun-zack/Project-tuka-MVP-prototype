@@ -42,13 +42,14 @@ class Search extends Component{
         const userInput = e.currentTarget.innerText;
         const keyWordsList = this.state.keyWordsList;
         const len = keyWordsList.length;
-        //Check whether the input genre has already existed in the list
+        //Check whether the input genre has already existed in the list and the number should up to 5
         if(!keyWordsList.some((element) => element === userInput) && len < 5){
             keyWordsList.push(userInput);
-        }else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
+        }
+        //if the size larger than five, pop the first element and push the newest input to the end
+        else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
             keyWordsList.shift();
             keyWordsList.push(userInput);
-            console.log("OK");
         }
         this.setState({
             activeSuggestion: 0,
@@ -60,6 +61,7 @@ class Search extends Component{
             keyWord: e.currentTarget.innerText,
             keyWordsList: keyWordsList,
         })
+        this.props.tValue(keyWordsList);
     }
     onKeyDown = keyword => {
     }
@@ -100,10 +102,6 @@ class Search extends Component{
         this.setState({
             keyWordsList: list,
         });
-    }
-
-    checkRepeat = () => {
-        
     }
     render(){
         const{

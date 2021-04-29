@@ -11,15 +11,28 @@ import Search from "./homepage/Search"
 import { SearchResult } from 'semantic-ui-react'
 
 class Header extends React.Component {
-
+    state = {
+        value : [],
+    }
+    transportValue = (childValue) => {
+        this.setState({
+            value: childValue,
+        })
+    }
+    handleClick = () => {
+        console.log("in header.js" + this.state.value);
+        this.props.header(this.state.value);
+    }
 
     render() {
+        console.log("in header.js render" + this.state.value);
         return (
                 <div className="nav_bar">
                     <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                     <div style={{ width: '40%' }}>
                         <h1 className="navbar__linklist" > Discover-Share-Connect</h1>
                         <Search 
+                        tValue = {(childValue) => this.transportValue(childValue)}
                         suggestions={[
                             "Alternative Pop",
                             "Alternative Rock",
@@ -42,7 +55,8 @@ class Header extends React.Component {
                             "Reggae",
                             "RnB",
                             "Spoken"
-                        ]}></Search>
+                        ]}
+                        onChange = {this.handleClick}></Search>
                     </div>
 
                     <div>
