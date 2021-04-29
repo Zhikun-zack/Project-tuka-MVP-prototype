@@ -18,7 +18,7 @@ class Header extends React.Component {
                 <div className="nav_bar">
                     <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
                     <div style={{ width: '40%' }}>
-                        <h1 style={{ textAlign: "center", color: "#d95457" }}><i> Discover-Share-Connect </i></h1>
+                        <h1 className="navbar__linklist" > Discover-Share-Connect</h1>
                         <Search 
                         suggestions={[
                             "Alternative Pop",

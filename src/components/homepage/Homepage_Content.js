@@ -1,5 +1,4 @@
 import React from 'react'
-import Description from './Description'
 import MusicRow from './MusicRow'
 
 class Homepage_Content extends React.Component{

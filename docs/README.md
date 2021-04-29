@@ -1,13 +1,18 @@
 # Tuka
 
 ## Components
-
+|--App.js
+    |--Header
+        |-- Search.js
+            |--Key.js
+            |--MusicRow.js
+    |--Homepage
+        |--MusicRow
+    |--Footer
 ### Navbar
 ### SearchBar
 #### Structure
-|-- Search.js
-    |--Key.js
-    |--MusicRow.js
+
 #### Function
 For search bar, implement several functions:
     1. display search bar

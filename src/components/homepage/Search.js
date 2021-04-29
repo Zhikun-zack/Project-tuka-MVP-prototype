@@ -41,11 +41,15 @@ class Search extends Component{
     onClick = e => {
         const userInput = e.currentTarget.innerText;
         const keyWordsList = this.state.keyWordsList;
+        const len = keyWordsList.length;
         //Check whether the input genre has already existed in the list
-        if(!keyWordsList.some((element) => element === userInput)){
+        if(!keyWordsList.some((element) => element === userInput) && len < 5){
             keyWordsList.push(userInput);
+        }else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
+            keyWordsList.shift();
+            keyWordsList.push(userInput);
+            console.log("OK");
         }
-
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
@@ -111,7 +115,6 @@ class Search extends Component{
                 activeSuggestion,
                 filteredSuggestions,
                 showSuggestions,
-                showKeywords,
                 userInput,
                 keyWordsList,
             }
@@ -148,8 +151,8 @@ class Search extends Component{
                 )
             }  
         }
-        //shows the keyword div based on the input
-        if(showKeywords && userInput){
+        //If keyWordsList is not empty, show key divs
+        if(keyWordsList){
             keywords = (
                 <div className = {searchStyle.keyTags}>
                     {keyWordsList.map((keyword) => {
@@ -175,7 +178,7 @@ class Search extends Component{
                                 className={searchStyle.input}
                                 onChange={onChange}
                                 type="text"
-                                placeholder="Enter keyword, genre, or artist"
+                                placeholder="Enter keyword, genre, or artist(Up to five)"
                                 value={userInput}
                             />
                             <button className={searchStyle.search_button} onClick={this.onClick}>

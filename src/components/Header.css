@@ -23,3 +23,12 @@
     display: float;
     float: right;
 }
+
+.navbar__linklist{
+    font-size: 2.5rem;
+    font-style: italic;
+    color: #F56C6C;
+    margin-top: 2.5rem;
+    padding-right: 1rem; 
+    text-align: center;
+}
