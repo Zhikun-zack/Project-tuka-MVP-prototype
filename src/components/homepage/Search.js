@@ -63,6 +63,7 @@ class Search extends Component{
             keyWordsList: keyWordsList,
         })
         this.props.tValue(keyWordsList);
+        this.props.addKeyList(keyWordsList);
     }
     onKeyDown = keyword => {
     }
@@ -105,9 +106,9 @@ class Search extends Component{
         });
     }
     render(){
-        const { store } = this.context;
+        const { store } = this.props;
         //const state = store.getState();
-        console.log("this is state:" + this.context.store);
+        console.log("this is state:" + this.props.try);
         console.log(this.props);
         const{
             onChange,
@@ -204,4 +205,17 @@ class Search extends Component{
     
 }
 
-export default connect()(Search);
+function mapStateToProps(state) {
+    console.log("Search see below");
+    console.log(state);
+    return {try: state.keyWordsList};
+}
+function mapDispatchToProps(dispatch){
+    return {addKeyList: (keyWordsList) => dispatch(addKeyAction(keyWordsList))};
+}
+const addKeyAction = (keyWordsList) => {
+    return {type: "keywords",
+            keyWordsList: keyWordsList};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

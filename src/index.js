@@ -6,11 +6,11 @@ import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const reducer = () => {
-    return "try";
+    
+    return {keyWordsList: []};
 }
 const store = createStore(reducer);
-
-console.log(store.getState());
+console.log("In index.js" + store.getState().keyWordsList);
 
 ReactDOM.render(
     <Provider store = {store}>

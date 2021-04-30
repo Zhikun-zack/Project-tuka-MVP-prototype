@@ -1,5 +1,6 @@
-import React from 'react'
-import MusicRow from './MusicRow'
+import React from 'react';
+import { connect } from "react-redux";
+import MusicRow from './MusicRow';
 
 class Homepage_Content extends React.Component{
     state = {
@@ -7,6 +8,7 @@ class Homepage_Content extends React.Component{
     };
 
     render () {
+        console.log(this.props);
         return (
             <div> 
                 <MusicRow genres={this.state.genres[0]}/>
@@ -21,4 +23,9 @@ class Homepage_Content extends React.Component{
 
 };
 
-export default Homepage_Content;
+function mapStateToProps(state){
+    console.log("Homepage see below")
+    console.log(state);
+    return {genres: state.keyWordsList};
+}
+export default connect(mapStateToProps)(Homepage_Content);
