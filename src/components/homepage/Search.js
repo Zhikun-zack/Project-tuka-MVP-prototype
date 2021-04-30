@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
@@ -17,8 +18,8 @@ class Search extends Component{
         suggestions: []
     }
     //initialize Search component combine suggestions with props
-    constructor(props){
-        super(props);
+    constructor(props, context){
+        super(props, context);
 
         this.state = {
             tracks: [],
@@ -104,6 +105,10 @@ class Search extends Component{
         });
     }
     render(){
+        const { store } = this.context;
+        //const state = store.getState();
+        console.log("this is state:" + this.context.store);
+        console.log(this.props);
         const{
             onChange,
             onClick,
@@ -199,4 +204,4 @@ class Search extends Component{
     
 }
 
-export default Search;
+export default connect()(Search);
