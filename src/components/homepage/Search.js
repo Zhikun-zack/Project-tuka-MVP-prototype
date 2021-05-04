@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
@@ -38,8 +38,10 @@ class Search extends Component{
         };
         //this.removeKey = this.removeKey.bind(this);
     }
+    
     //click the any results in suggestions window
     onClick = e => {
+        
         const userInput = e.currentTarget.innerText;
         const keyWordsList = this.state.keyWordsList;
         const len = keyWordsList.length;
@@ -62,8 +64,7 @@ class Search extends Component{
             keyWord: e.currentTarget.innerText,
             keyWordsList: keyWordsList,
         })
-        this.props.tValue(keyWordsList);
-        this.props.addKeyList(keyWordsList);
+
     }
     onKeyDown = keyword => {
     }
@@ -107,6 +108,7 @@ class Search extends Component{
     }
     render(){
         const { store } = this.props;
+        const dispatch = useDispatch();
         //const state = store.getState();
         console.log("this is state:" + this.props.try);
         console.log(this.props);
@@ -140,7 +142,11 @@ class Search extends Component{
                             }
                             
                             return (
-                                <li className = {className} key={suggestion} onClick = {onClick}>
+                                <li className = {className} key={suggestion} onClick={(e) => {
+                                    
+                                    onClick(e);
+                                    dispatch(keyWordsList);
+                                }}>
                                     {suggestion}
                                 </li>
                             )
@@ -185,7 +191,12 @@ class Search extends Component{
                                 placeholder="Enter keyword, genre, or artist(Up to five)"
                                 value={userInput}
                             />
-                            <button className={searchStyle.search_button} onClick={this.onClick}>
+                            <button className={searchStyle.search_button}
+                                onClick={(e) => {
+                                    //console.log("button click:" + e.this.value);
+                                    onClick(e);
+                                    
+                                }}>
                                 
                                 <Link to="/"><img src="../assets/search-icon.png"></img></Link>
                             </button>
@@ -206,16 +217,13 @@ class Search extends Component{
 }
 
 function mapStateToProps(state) {
-    console.log("Search see below");
-    console.log(state);
     return {try: state.keyWordsList};
 }
-function mapDispatchToProps(dispatch){
-    return {addKeyList: (keyWordsList) => dispatch(addKeyAction(keyWordsList))};
-}
-const addKeyAction = (keyWordsList) => {
-    return {type: "keywords",
-            keyWordsList: keyWordsList};
-}
+// function mapDispatchToProps(dispatch){
+//     return {addKeyList: (keyWordsList) => dispatch(addKeyAction(keyWordsList))};
+// }
+// const addKeyAction = (keyWordsList) => {
+//     return {};
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps)(Search);

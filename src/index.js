@@ -5,12 +5,19 @@ import { createStore } from 'redux';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const reducer = () => {
+const reducer = (state, action) => {
+    if(action.type = "keywords"){
+        console.log("delivered keys" + action.keyWordsList);
+        console.log(action.keyWordsList)
+        return {keyWordsList: action.keyWordsList};
+        //return "the action dispatched on is try";
+    }
+    else{
+        return {keyWordsList: ["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]};
+    }
     
-    return {keyWordsList: []};
 }
 const store = createStore(reducer);
-console.log("In index.js" + store.getState().keyWordsList);
 
 ReactDOM.render(
     <Provider store = {store}>

@@ -8,7 +8,8 @@ class Homepage_Content extends React.Component{
     };
 
     render () {
-        console.log(this.props);
+        console.log("In homepage content: ");
+        console.log(this.props.genres.keyWordsList);
         return (
             <div> 
                 <MusicRow genres={this.state.genres[0]}/>
@@ -24,8 +25,6 @@ class Homepage_Content extends React.Component{
 };
 
 function mapStateToProps(state){
-    console.log("Homepage see below")
-    console.log(state);
-    return {genres: state.keyWordsList};
+    return {genres: state};
 }
 export default connect(mapStateToProps)(Homepage_Content);
