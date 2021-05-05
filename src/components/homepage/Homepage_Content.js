@@ -4,15 +4,14 @@ import MusicRow from './MusicRow';
 
 class Homepage_Content extends React.Component{
     state = {
-        genres:["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]
+        genres: ["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]
     };
+    
 
     render () {
-        console.log("In homepage content: ");
-        console.log(this.props.genres.keyWordsList);
         return (
             <div> 
-                <MusicRow genres={this.state.genres[0]}/>
+                <MusicRow genres={this.props.homePageGenres.keyWordsList[0]}/>
                 <MusicRow genres={this.state.genres[1]}/>
                 <MusicRow genres={this.state.genres[2]}/>
                 <MusicRow genres={this.state.genres[3]}/>
@@ -24,7 +23,8 @@ class Homepage_Content extends React.Component{
 
 };
 
+//Set state into props, so that this component can visit state through this.props.homePageGenres
 function mapStateToProps(state){
-    return {genres: state};
+    return {homePageGenres: state};
 }
 export default connect(mapStateToProps)(Homepage_Content);

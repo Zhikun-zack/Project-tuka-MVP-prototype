@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
 
 import Keywords from "./Keywords"
+
 
 class Search extends Component{
     //suggestions is the input variable from Header.js
@@ -65,6 +66,9 @@ class Search extends Component{
             keyWordsList: keyWordsList,
         })
 
+        //dispatch a new action when onClick function is triggered 
+        this.props.addKeys(keyWordsList);
+
     }
     onKeyDown = keyword => {
     }
@@ -107,11 +111,6 @@ class Search extends Component{
         });
     }
     render(){
-        const { store } = this.props;
-        const dispatch = useDispatch();
-        //const state = store.getState();
-        console.log("this is state:" + this.props.try);
-        console.log(this.props);
         const{
             onChange,
             onClick,
@@ -145,7 +144,7 @@ class Search extends Component{
                                 <li className = {className} key={suggestion} onClick={(e) => {
                                     
                                     onClick(e);
-                                    dispatch(keyWordsList);
+                                    
                                 }}>
                                     {suggestion}
                                 </li>
@@ -216,14 +215,14 @@ class Search extends Component{
     
 }
 
-function mapStateToProps(state) {
-    return {try: state.keyWordsList};
+function mapDispatchToProps(dispatch){
+    return {
+        addKeys: (keys) => dispatch({
+            type: "addKeywords",  
+            //add keyWordsList into state 
+            keyWordsList: keys
+        })
+    }
 }
-// function mapDispatchToProps(dispatch){
-//     return {addKeyList: (keyWordsList) => dispatch(addKeyAction(keyWordsList))};
-// }
-// const addKeyAction = (keyWordsList) => {
-//     return {};
-// }
-
-export default connect(mapStateToProps)(Search);
+//Add null first before mapDispatchToProps
+export default connect(null, mapDispatchToProps)(Search);

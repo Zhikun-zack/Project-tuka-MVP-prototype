@@ -1,22 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const reducer = (state, action) => {
-    if(action.type = "keywords"){
-        console.log("delivered keys" + action.keyWordsList);
-        console.log(action.keyWordsList)
-        return {keyWordsList: action.keyWordsList};
-        //return "the action dispatched on is try";
-    }
-    else{
-        return {keyWordsList: ["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]};
-    }
-    
+//Redux Set default state
+const initialState = {keyWordsList:["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]};
+
+const reducer = (state = initialState, action) => {
+    switch (action.type){
+        //when action is addKeywords, replace old state
+        case "addKeywords":
+            return {keyWordsList: action.keyWordsList};
+        default:
+            return state
+    } 
 }
+
 const store = createStore(reducer);
 
 ReactDOM.render(
