@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Logo_Img from './homepage/img/logo.png'
 import './Header.css'
@@ -28,7 +29,7 @@ class Header extends React.Component {
         console.log("in header.js render" + this.state.value);
         return (
                 <div className="nav_bar">
-                    <div name="tuka_logo"><img width="200px" src={Logo_Img} alt="Tuka logo" /></div>
+                    <div name="tuka_logo"><Link to = "/" ><img width="200px" src={Logo_Img} alt="Tuka logo" /></Link></div>
                     <div style={{ width: '40%' }}>
                         <h1 className="navbar__linklist" > Discover-Share-Connect</h1>
                         <Search 
@@ -72,7 +73,6 @@ class Header extends React.Component {
 
 
 }
-
 
 export default Header;
 

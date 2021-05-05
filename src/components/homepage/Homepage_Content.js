@@ -3,19 +3,26 @@ import { connect } from "react-redux";
 import MusicRow from './MusicRow';
 
 class Homepage_Content extends React.Component{
-    state = {
-        genres: ["Trending Now","Pop","Hip-Hop / R&B","Rock","Country Western"]
-    };
-    
-
     render () {
+        let keyWordsList = this.props.homePageGenres.keyWordsList;
+        const oldGenreList =  ['Trending Now']; 
+        
+        let len = keyWordsList.length;
+        console.log("in home page" + len)
+        if(len == 0){
+            keyWordsList = keyWordsList.concat(["Pop","Hip-Hop / R&B","Rock","Country Western"]);
+            console.log(keyWordsList);
+        }
+
+        const newGenreList = oldGenreList.concat(keyWordsList);
         return (
             <div> 
-                <MusicRow genres={this.props.homePageGenres.keyWordsList[0]}/>
-                <MusicRow genres={this.state.genres[1]}/>
-                <MusicRow genres={this.state.genres[2]}/>
-                <MusicRow genres={this.state.genres[3]}/>
-                <MusicRow genres={this.state.genres[4]}/>
+                {
+                    newGenreList.map((key) => {
+                        return <MusicRow genres = {key}></MusicRow>
+                    })
+                }
+                
             </div>
     
         );

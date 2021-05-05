@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import scrollTo from "./CarouselScrollAnimate";
 import './MusicRow.css';
 import "slick-carousel/slick/slick.css";
@@ -103,7 +104,10 @@ class MusicRow extends React.Component {
                                 <img className = "stop" src = {stop}></img>
                             </div> 
                             <div className = "carousel_display">
-                                <img className = "user" src = {user}></img>
+                                <Link to = '/details'> 
+                                    <img className = "user" src = {user}></img>
+                                </Link>
+                                
                             </div> 
                         </div>
                         <img src = {item.image} alt = "artist pic"></img>    
@@ -161,6 +165,11 @@ class MusicRow extends React.Component {
             //whole div for each row
             <div className='WholeRow'>
                 <div className = "carousel_title">
+                    <div className = "carousel_closeButton">
+                        <button className="accordion__button">
+                            <img src="../../assets/accordion-up.png"></img>
+                        </button>
+                    </div>
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
                 {/*div for carousel and left right buttons */}

@@ -1,8 +1,9 @@
-import React from 'react'
-import { BrowserRouter , Route } from 'react-router-dom'
-import Homepage_Content from './homepage/Homepage_Content'
-import Header from './Header'
-import Footer from './Footer'
+import React from 'react';
+import { BrowserRouter , Route } from 'react-router-dom';
+import Homepage_Content from './homepage/Homepage_Content';
+import Header from './Header';
+import Footer from './Footer';
+import Detail_Content from './Detailpage/Detail';
 
 class App extends React.Component{
     state = {
@@ -21,6 +22,7 @@ class App extends React.Component{
                 <div>
                     <Header />
                     <Route path='/' exact component={Homepage_Content} header = {(headerValue) => this.HeaderValue(headerValue)}/>
+                    <Route path = '/details' exact component = {Detail_Content}></Route>
                     <Footer />
     
                 </div>

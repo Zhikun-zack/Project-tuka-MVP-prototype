@@ -67,7 +67,7 @@ class Search extends Component{
         })
 
         //dispatch a new action when onClick function is triggered 
-        this.props.addKeys(keyWordsList);
+        this.props.updateKeys(keyWordsList);
 
     }
     onKeyDown = keyword => {
@@ -109,6 +109,7 @@ class Search extends Component{
         this.setState({
             keyWordsList: list,
         });
+        this.props.updateKeys(list);
     }
     render(){
         const{
@@ -169,7 +170,6 @@ class Search extends Component{
                                 <Keywords 
                                     // keywords that the user has selected, input into component
                                     keyWord = {keyword}
-                                    onChange = {onKeyDown}
                                     delete = {removeKey}
                                 ></Keywords>
                         )
@@ -217,7 +217,7 @@ class Search extends Component{
 
 function mapDispatchToProps(dispatch){
     return {
-        addKeys: (keys) => dispatch({
+        updateKeys: (keys) => dispatch({
             type: "addKeywords",  
             //add keyWordsList into state 
             keyWordsList: keys

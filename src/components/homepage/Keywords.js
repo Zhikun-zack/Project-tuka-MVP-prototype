@@ -39,7 +39,8 @@ class Keywords extends Component{
                             </div>
                             <button
                                 className={keyStyle.searchKeysButton}
-                                onClick = {() => this.props.delete(keyWord)}
+                                onClick = {() => {this.props.delete(keyWord);
+                                console.log(keyWord)}}
                                 >
                                 <Link to="/"><img id = {keyWord} src="./assets/x-out-symbol.png" ></img></Link>
                             </button>
