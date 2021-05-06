@@ -8,7 +8,6 @@
     background: -o-linear-gradient(#5D6373, #121335); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(#5D6373, #121335); /* Firefox 3.6 - 15 */
     background: linear-gradient(#5D6373, #121335); /* 标准的语法（必须放在最后） */
-
 }
 .keywordsBar{
     background-color: #121335;
@@ -22,6 +21,9 @@
 .login_btn{
     display: float;
     float: right;
+    position: relative;
+    bottom: 1.9rem;
+    right: 6rem;
 }
 
 .navbar__linklist{
@@ -31,4 +33,13 @@
     margin-top: 2.5rem;
     padding-right: 1rem; 
     text-align: center;
+}
+.nav_logo{
+    position: relative;
+    left: 6rem;
+    margin-bottom: 5%;
+    margin-right: 0;
+}
+.nav_logo img{
+    width: 100%;
 }

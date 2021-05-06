@@ -29,9 +29,9 @@ class Header extends React.Component {
         console.log("in header.js render" + this.state.value);
         return (
                 <div className="nav_bar">
-                    <div name="tuka_logo"><Link to = "/" ><img width="200px" src={Logo_Img} alt="Tuka logo" /></Link></div>
+                    <div className = "nav_logo" name="tuka_logo"><Link to = "/" ><img width="200px" src={Logo_Img} alt="Tuka logo" /></Link></div>
                     <div style={{ width: '40%' }}>
-                        <h1 className="navbar__linklist" > Discover-Share-Connect</h1>
+                        <h1 className="navbar__linklist" > Discover • Share • Connect</h1>
                         <Search 
                         tValue = {(childValue) => this.transportValue(childValue)}
                         suggestions={[

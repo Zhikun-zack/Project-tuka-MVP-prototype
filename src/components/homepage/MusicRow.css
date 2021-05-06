@@ -2,7 +2,9 @@
     white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-    margin-bottom: 2% ;}
+    margin-bottom: 2% ;
+    transition: opacity .5s;
+    transition-delay: .1s;}
     .carousel::-webkit-scrollbar{
         display: none;
     }
@@ -39,10 +41,16 @@
             height: 40px;
         }
 .carousel_viewport{
-   width: 90%;}
+    opacity: 1;
+    transition: opacity .5s;
+    transition-delay: .1s;
+    width: 90%;}
+    .carousel_viewport_hide{
+        opacity: 0;
+    }
    
 .carousel_button{
-    width: 20px;
+
     border: none;
     background: transparent;
     outline: none;
@@ -69,11 +77,14 @@
     margin-left: 4%;
     bottom: 0.3rem;
     }
-    .carouselCloseButton img{
-        width: 1.5rem;
-    }
+    .carouselCloseButtonImg{
+        transition: transform .3s;
+        transform: rotate(360deg);
+        width: 1.5rem;}
+        .carouselCloseButtonImgRotate{
+            transition: transform .3s;
+            transform: rotate(180deg);}
 .row_header{
-
     width: 100%;
     margin-left: 1%;
     font-size: 25px;
@@ -93,20 +104,21 @@
 }
 
 .flex_wraper{
-   
+    position: relative;
+    transition: height .3s;
     display: flex;
     justify-content: space-between;
     align-content: center;
     align-items: center;
     margin: auto;
+    height: 13rem;
     width: 95%;
 }
 .flex_wrapper_hide {
-    margin: -1;
+    transition: height .3s;
     position:relative;
     opacity: 0;
-    height: 20vh;
-    z-index:1;
+    height: 2rem;
 }
 
 .WholeRow:nth-child(odd){

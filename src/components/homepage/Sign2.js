@@ -29,10 +29,10 @@ class DropdownSign2 extends React.Component{
         this.showWindow = this.showWindow.bind(this);
         this.closeWindow = this.closeWindow.bind(this);
     }
-    showMenu(event){
-        event.preventDefault();
+    showMenu = (event) => {
+        const menu = this.state.showMenu;
         this.setState({
-            showMenu : true,
+            showMenu : !menu,
         });
     }
     showWindow(event){
@@ -54,11 +54,10 @@ class DropdownSign2 extends React.Component{
                     <a className="login">
                         <img className="loginImg" src={Login_Img} alt="loginbutton" onClick={this.showMenu}></img>
                     </a>
-                    {
-                        this.state.showMenu
-                            ? (
-                                <div className="menu">
-                                    <button onClick={this.showWindow} >Sign in</button><br />
+                    
+                                {/* <div className={this.state.showMenu? "logInPopUp": "logInPopUp logInPopUpHide"}>
+                                <div className = {this.state.showMenu? "logInPopUpSqure": "logInPopUp logInPopUpSqureHide"}> */}
+                                    {/* <button onClick={this.showWindow} >Sign in</button><br />
                                     {
                                         this.state.showWindow
                                             ? (
@@ -66,11 +65,10 @@ class DropdownSign2 extends React.Component{
                                                     show={!this.showWindow} />
                                             ) : (null)
                                     }
-                                    <button>Sign up</button>
-                                </div>
-                            )
-                            : (null)
-                    }
+                                    <button>Sign up</button> */}
+                                {/* </div> */}
+                            
+                    
                     <a className="menu">
                         <img className="menuImg" src={Menu_Img}></img>
                     </a>

@@ -160,30 +160,33 @@ class MusicRow extends React.Component {
     moveOutWindows(){
         console.log("move out")
     }
-
+    //When click "close carousel" button
     toggleClass = () => {
         const currState = this.state.active;
         this.setState({
             active: !currState
         })
+
     }
 
     render() {
         return  (
             //whole div for each row
             <div className='WholeRow'>
-                <div className = {this.state.active? "carouselHide" : "carouselUp"}>
+                <div className = "#">
                     <button className="carouselCloseButton" onClick = {this.toggleClass}>
-                        <img src="../../assets/accordion-up.png"></img>
+                        {/* When the carousel is closed, rotate the img 180 degrees, clock wise with animation */}
+                        <img src="../../assets/accordian-down.png" className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
                     </button>
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
                 {/*div for carousel and left right buttons */}
-                <div className={this.state.active? 'flex_wraper' : 'flex_wrapper_hide'}>
+                <div className={this.state.active? 'flex_wraper' : 'flex_wraper flex_wrapper_hide'}>
                     <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick}>
                         <img src="../assets/arrow-left.png" />
                     </button>
-                    <div className = "carousel_viewport">
+                    {/* When carousel closed renderSlides disappear with animation */}
+                    <div className = {this.state.active? "carousel_viewport" : "carousel_viewport_hide"}>
                         <div className = "carousel" ref="carouselViewport">
                             {this.renderSlides()}
                         </div>  

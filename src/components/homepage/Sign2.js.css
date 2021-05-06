@@ -2,12 +2,55 @@
     display: flex;
     position: relative;}
     .loginImg{
-        width: 50px;
+        width: 50%;
         cursor: pointer;
     }
+    
     .menuImg{
-        margin-left: 30px;
-        margin-top: 4px;
-        width: 50px;
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+        margin-top: 5%;
+        margin-left: 40%;
+        width: 50%;
         cursor: pointer;
+    }
+    .logInPopUp{
+        position: relative;
+        top: 3.5rem;
+        right: 54.7%;
+        border-top: transparent 0px solid;
+        border-bottom: rgb(160, 159, 159) 18px solid;
+        border-right: transparent 18px solid;
+        border-left: transparent 18px solid;
+        width: 0;
+        height: 0;
+        transform: translateX(30px);
+ }
+        .logInPopUp :after{
+            position: absolute;
+            content: "";
+            border-top: transparent 0px solid;
+            border-bottom: rgb(235, 234, 234) 18px solid;
+            border-right: transparent 18px solid;
+            border-left: transparent 18px solid;
+            width: 0;
+            height: 0;
+            transform: translate(-18px,2px);    
+       }
+    .logInPopUpHide{
+        opacity: 0;
+    }
+    .logInPopUpSqure{
+        float: left;
+        position: relative;
+        top: 100px;
+        width: 200px;
+     height: 150px;
+     border: 1px solid rgb(160, 159, 159);
+     background: rgb(235, 234, 234);
+     border-radius: 5px;
+    }
+    .logInPopUpSqureHide{
+        opacity: 0;
     }
