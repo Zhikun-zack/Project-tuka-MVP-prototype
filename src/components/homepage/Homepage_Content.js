@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import MusicRow from './MusicRow';
 
 class Homepage_Content extends React.Component{
+    
     render () {
         let keyWordsList = this.props.homePageGenres.keyWordsList;
         const oldGenreList =  ['Trending Now']; 

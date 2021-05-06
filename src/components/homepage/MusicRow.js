@@ -26,6 +26,7 @@ class MusicRow extends React.Component {
         */
     }
     state = {
+        active: true,
         //details informations for artists windows
         artists: [
             {
@@ -160,24 +161,29 @@ class MusicRow extends React.Component {
         console.log("move out")
     }
 
+    toggleClass = () => {
+        const currState = this.state.active;
+        this.setState({
+            active: !currState
+        })
+    }
+
     render() {
         return  (
             //whole div for each row
             <div className='WholeRow'>
-                <div className = "carousel_title">
-                    <div className = "carousel_closeButton">
-                        <button className="accordion__button">
-                            <img src="../../assets/accordion-up.png"></img>
-                        </button>
-                    </div>
+                <div className = {this.state.active? "carouselHide" : "carouselUp"}>
+                    <button className="carouselCloseButton" onClick = {this.toggleClass}>
+                        <img src="../../assets/accordion-up.png"></img>
+                    </button>
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
                 {/*div for carousel and left right buttons */}
-                <div className='flex_wraper'>
+                <div className={this.state.active? 'flex_wraper' : 'flex_wrapper_hide'}>
                     <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick}>
                         <img src="../assets/arrow-left.png" />
                     </button>
-                    <div className = "carousel_viewport" >
+                    <div className = "carousel_viewport">
                         <div className = "carousel" ref="carouselViewport">
                             {this.renderSlides()}
                         </div>  

@@ -39,8 +39,8 @@
             height: 40px;
         }
 .carousel_viewport{
-   width: 90%;
-}
+   width: 90%;}
+   
 .carousel_button{
     width: 20px;
     border: none;
@@ -58,10 +58,26 @@
     .carousel_button img{
         height: 20px;
     }
-
+.carouselUp{
+    position: absolute;
+    }
+.carouselCloseButton{
+    position: relative;
+    background:transparent;
+    border: none;
+    margin-bottom: 1rem;
+    margin-left: 4%;
+    bottom: 0.3rem;
+    }
+    .carouselCloseButton img{
+        width: 1.5rem;
+    }
 .row_header{
-    margin-left: 12%;
+
+    width: 100%;
+    margin-left: 1%;
     font-size: 25px;
+    display: inline;
 }
 
 .outer_container{
@@ -77,12 +93,20 @@
 }
 
 .flex_wraper{
+   
     display: flex;
     justify-content: space-between;
     align-content: center;
     align-items: center;
     margin: auto;
     width: 95%;
+}
+.flex_wrapper_hide {
+    margin: -1;
+    position:relative;
+    opacity: 0;
+    height: 20vh;
+    z-index:1;
 }
 
 .WholeRow:nth-child(odd){
