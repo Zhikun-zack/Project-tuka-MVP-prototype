@@ -17,7 +17,6 @@
     padding-top: 1.25rem;
     height: 150px;
     transition: all .3s;
-    
     }
     .carousel_slide img{
         position: relative;
@@ -25,10 +24,9 @@
         top: -38%;
         height: 120%;
         width: 120%;
-        object-fit: cover;
+        /* object-fit: cover; */
         cursor: pointer;
         bottom: 0;
-        
         overflow: hidden;
         clip:rect(100px 10px 10px 10px)}
   
@@ -49,7 +47,7 @@
 
     .carousel_window:hover .carousel_mask{
         opacity: 1;
-        transition: opacity 0.3s;
+        /* transition: opacity 0.3s; */
     }
     
     .carousel_mask{
@@ -58,7 +56,7 @@
         top: 6rem;
         bottom: .1rem;
         left: .7rem;
-        transition: opacity 0.5s;
+        /* transition: opacity 0.5s; */
         z-index: 1;
         }
         .carousel_mask:hover{
@@ -69,7 +67,7 @@
             display: inline-block;
             position: relative;
             
-            transition: all .3s;
+            /* transition: all .3s; */
         }
         .carousel_display:hover{
             transform: scale(1.1);
@@ -154,7 +152,7 @@
     width: 95%;
 }
 .flex_wrapper_hide {
-    transition: height .3s;
+    /* transition: height .3s; */
     position:relative;
     opacity: 0;
     height: 2rem;

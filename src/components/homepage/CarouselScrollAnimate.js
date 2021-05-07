@@ -8,7 +8,7 @@ function scrollTo(params) {
       elapsedTime += increment;
       let position = easeInOut(elapsedTime, start, change, duration);                        
       element[scrollDirection] = position; 
-      console.log("scrollLeft is :" + element[scrollDirection]);
+      //console.log("scrollLeft is :" + element[scrollDirection]);
       if (elapsedTime < duration) {
           window.requestAnimationFrame(animateScroll.bind(null, elapsedTime));
       }

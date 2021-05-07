@@ -50,17 +50,18 @@ class Search extends Component{
         const keyWordsList = this.state.keyWordsList;
         const len = keyWordsList.length;
         //Prevent when user click search without input anything
-        if(filtered != ""){
+        if((filtered != "") && (!keyWordsList.some((element) => element === userInput))){
             //When users click search button instead of clicking suggestion window, set the first suggestion as the selected genre
-            if(userInput == "" && filtered[0] != undefined){
+            if(userInput == "" && (filtered[0] != "" || undefined )&& (!keyWordsList.some((element) => element === filtered[0]))){
+                console.log(filtered[0]);
                 keyWordsList.push(filtered[0]);
             }
             //Check whether the input genre has already existed in the list and the number should up to 5
-            else if(!keyWordsList.some((element) => element === userInput) && len < 5){
+            else if(userInput != "" && len < 5){
                 keyWordsList.push(userInput);
             }
             //if the size larger than five, pop the first element and push the newest input to the end
-            else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
+            else if(userInput != "" && len >= 5){
                 keyWordsList.shift();
                 keyWordsList.push(userInput);
             }
