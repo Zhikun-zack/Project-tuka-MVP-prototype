@@ -121,13 +121,10 @@ class MusicRow extends React.Component {
     //function for click left arrow
     handleLeftClick = (e) => {
         //div carouselView
-        console.log(this);
         const { carouselViewport } = this.refs;
-        console.log( carouselViewport);
         const numSlidesToScroll = 3;
         const slideWidth = 85;
         const newPosition = carouselViewport.scrollLeft - (numSlidesToScroll * slideWidth);
-        console.log("newPosition:" + newPosition);
         const timePerSlide = 300;
         const totalScrollTime = timePerSlide * numSlidesToScroll;
         scrollTo({
@@ -138,7 +135,6 @@ class MusicRow extends React.Component {
     }
     //function for click right arrow
     handleRightClick = (e) => {
-        console.log('right clicked')
         const { carouselViewport } = this.refs;
         const numSlidesToScroll = 3;
         const slideWidth = 85;
@@ -150,15 +146,12 @@ class MusicRow extends React.Component {
         to: newPosition, 
         duration: totalScrollTime, 
         scrollDirection: 'scrollLeft'});
-        console.log(carouselViewport.scrollLeft);
     }
     //When hover on artist windows
     hoverOnWindows(){
-        console.log("hover")
     }
     //When mouse move out of artist windows
     moveOutWindows(){
-        console.log("move out")
     }
     //When click "close carousel" button
     toggleClass = () => {
@@ -170,7 +163,6 @@ class MusicRow extends React.Component {
     }
 
     render() {
-        console.log(this.props.genres);
         let closeButton;
         if(this.props.genres != "Trending Now"){ 
             closeButton = (

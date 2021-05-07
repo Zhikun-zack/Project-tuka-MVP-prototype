@@ -42,19 +42,30 @@ class Search extends Component{
     
     //click the any results in suggestions window
     onClick = e => {
-        
+        //the suggestion genre that the user selected
         const userInput = e.currentTarget.innerText;
+        //the suggestion genres show on the suggestion window
+        const filtered = this.state.filteredSuggestions;
+        //the genres that has been selected in the past search
         const keyWordsList = this.state.keyWordsList;
         const len = keyWordsList.length;
-        //Check whether the input genre has already existed in the list and the number should up to 5
-        if(!keyWordsList.some((element) => element === userInput) && len < 5){
-            keyWordsList.push(userInput);
+        //Prevent when user click search without input anything
+        if(filtered != ""){
+            //When users click search button instead of clicking suggestion window, set the first suggestion as the selected genre
+            if(userInput == "" && filtered[0] != undefined){
+                keyWordsList.push(filtered[0]);
+            }
+            //Check whether the input genre has already existed in the list and the number should up to 5
+            else if(!keyWordsList.some((element) => element === userInput) && len < 5){
+                keyWordsList.push(userInput);
+            }
+            //if the size larger than five, pop the first element and push the newest input to the end
+            else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
+                keyWordsList.shift();
+                keyWordsList.push(userInput);
+            }
         }
-        //if the size larger than five, pop the first element and push the newest input to the end
-        else if(!keyWordsList.some((element) => element === userInput) && len >= 5){
-            keyWordsList.shift();
-            keyWordsList.push(userInput);
-        }
+        
         this.setState({
             activeSuggestion: 0,
             filteredSuggestions: [],
@@ -143,9 +154,7 @@ class Search extends Component{
                             
                             return (
                                 <li className = {className} key={suggestion} onClick={(e) => {
-                                    
                                     onClick(e);
-                                    
                                 }}>
                                     {suggestion}
                                 </li>
@@ -182,6 +191,7 @@ class Search extends Component{
             <div>
                 <form className = "search_form">
                     <Fragment>
+                        <Link to="/">
                         <div className={searchStyle.search}>
                             <input
                                 className={searchStyle.input}
@@ -197,11 +207,12 @@ class Search extends Component{
                                     
                                 }}>
                                 
-                                <Link to="/"><img src="../assets/search-icon.png"></img></Link>
+                               <img src="../assets/search-icon.png"></img>
                             </button>
                         </div>
                         {suggestionsList}
                         {keywords}
+                        </Link>
                     </Fragment>
                     
                 </form>

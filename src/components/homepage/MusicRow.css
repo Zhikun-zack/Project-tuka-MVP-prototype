@@ -28,7 +28,7 @@
         object-fit: cover;
         cursor: pointer;
         bottom: 0;
-        box-shadow: 0.1rem 0.1rem 0.5rem gray;
+        
         overflow: hidden;
         clip:rect(100px 10px 10px 10px)}
   
@@ -41,7 +41,7 @@
         overflow: hidden;
         border-radius: 20px;
         transition: all .5s;
-        
+        box-shadow: 0.1rem 0.1rem 0.6rem gray;
     }
     .carousel_window:hover{
         transform: scale(1.1);
