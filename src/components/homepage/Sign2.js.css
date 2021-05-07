@@ -1,6 +1,8 @@
 .logindiv{
     display: flex;
-    position: relative;}
+    position: relative;
+    /* transition: opacity 0.3s; */
+    }
     .loginImg{
         width: 50%;
         cursor: pointer;
@@ -16,6 +18,8 @@
         cursor: pointer;
     }
     .popUp{
+        opacity: 1;
+        /* transition: all 0.3s; */
         visibility: visible;
         position: relative;
         background-color: white;
@@ -34,7 +38,9 @@
             border-style: solid;
             border-color: transparent transparent white transparent;}
     .popUpHide{
-        visibility: hidden;}
+        /* transition: opacity 0.5s; */
+        visibility: hidden;
+        opacity: 0;}
     .logInPopUp{
         width: 160%;
         height: 260%;

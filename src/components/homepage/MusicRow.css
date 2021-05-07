@@ -8,33 +8,71 @@
     .carousel::-webkit-scrollbar{
         display: none;
     }
+.carouselRow{
+    position: relative;
+    top: 1rem;
+}
 .carousel_slide{
     display: inline-block;
     padding-top: 1.25rem;
     height: 150px;
-    transition: all .3s;}
-    .carousel_slide img{
-        border-radius: 20px;
-        height: 115px;
-        width: 115px;
-        cursor: pointer;
-        bottom: 0;}
-    .carousel_slide:hover{
-        transform: scale(1.1);}
-    .carousel_slide:not(:first-child){
-        padding-left: 50px;}
-    .carousel_window:hover .carousel_mask{
-        display: inline-block;
+    transition: all .3s;
+    
     }
+    .carousel_slide img{
+        position: relative;
+        left: -10%;
+        top: -38%;
+        height: 120%;
+        width: 120%;
+        object-fit: cover;
+        cursor: pointer;
+        bottom: 0;
+        box-shadow: 0.1rem 0.1rem 0.5rem gray;
+        overflow: hidden;
+        clip:rect(100px 10px 10px 10px)}
+  
+    .carousel_slide:not(:first-child){
+        padding-left: 5%;}
+    .carousel_window{
+        margin-left: 10%;
+        width: 9rem;
+        height: 9rem;
+        overflow: hidden;
+        border-radius: 20px;
+        transition: all .5s;
+        
+    }
+    .carousel_window:hover{
+        transform: scale(1.1);
+        }
+
+    .carousel_window:hover .carousel_mask{
+        opacity: 1;
+        transition: opacity 0.3s;
+    }
+    
     .carousel_mask{
-        background-color: rgba(255,255,255,30%);
-        display: none;
-        position: absolute;
-        bottom: 15.5px;}
+        opacity: 0;
+        position: relative;
+        top: 6rem;
+        bottom: .1rem;
+        left: .7rem;
+        transition: opacity 0.5s;
+        z-index: 1;
+        }
+        .carousel_mask:hover{
+            
+
+        }
         .carousel_display{
             display: inline-block;
             position: relative;
-
+            
+            transition: all .3s;
+        }
+        .carousel_display:hover{
+            transform: scale(1.1);
         }
         .carousel_display img{
             width: 40px;
@@ -86,8 +124,9 @@
             transform: rotate(180deg);}
 .row_header{
     width: 100%;
-    margin-left: 1%;
+    margin-left: 2%;
     font-size: 25px;
+    font-weight: bold;
     display: inline;
 }
 
@@ -120,7 +159,9 @@
     opacity: 0;
     height: 2rem;
 }
-
+.WholeRow{
+    width: 100%
+}
 .WholeRow:nth-child(odd){
     background-color:#edf2f3;
 }

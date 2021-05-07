@@ -170,14 +170,30 @@ class MusicRow extends React.Component {
     }
 
     render() {
+        console.log(this.props.genres);
+        let closeButton;
+        if(this.props.genres != "Trending Now"){ 
+            closeButton = (
+                <button className="carouselCloseButton" onClick = {this.toggleClass}>
+                    {/* When the carousel is closed, rotate the img 180 degrees, clock wise with animation */}
+                    <img src="../../assets/accordian-down.png" className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
+                </button>
+            )
+        }else {
+            closeButton = (
+                <button className="carouselCloseButton">
+                </button>
+            )
+        }
+
         return  (
             //whole div for each row
             <div className='WholeRow'>
-                <div className = "#">
-                    <button className="carouselCloseButton" onClick = {this.toggleClass}>
-                        {/* When the carousel is closed, rotate the img 180 degrees, clock wise with animation */}
-                        <img src="../../assets/accordian-down.png" className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
-                    </button>
+                <div className = "carouselRow">
+                    {
+                        closeButton
+                    }
+                    
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
                 {/*div for carousel and left right buttons */}

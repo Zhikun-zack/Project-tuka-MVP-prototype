@@ -7,7 +7,7 @@
     background: -webkit-linear-gradient(#5D6373, #121335); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(#5D6373, #121335); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(#5D6373, #121335); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#5D6373, #121335); /* 标准的语法（必须放在最后） */
+    background: linear-gradient(#41485c, #121335); /* 标准的语法（必须放在最后） */
 }
 .keywordsBar{
     background-color: #121335;
@@ -23,13 +23,13 @@
     float: right;
     position: relative;
     bottom: 1.9rem;
-    right: 6rem;
+    right: 2rem;
 }
 
 .navbar__linklist{
     font-size: 2.5rem;
     font-style: italic;
-    color: #F56C6C;
+    color: #f56c6cd8;
     margin-top: 2.5rem;
     padding-right: 1rem; 
     text-align: center;

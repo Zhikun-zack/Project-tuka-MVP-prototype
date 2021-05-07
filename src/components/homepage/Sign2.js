@@ -51,6 +51,8 @@ class DropdownSign2 extends React.Component{
             showMenu : menu,
             clickedTarget: currClassName,
         });    
+        //stop the action bubble up to document
+        event.nativeEvent.stopImmediatePropagation()
     }
     showWindow(event){
         event.preventDefault();
@@ -67,7 +69,15 @@ class DropdownSign2 extends React.Component{
 
     render() {
         let popUpWindow;
+        //add a event listener to detect the click action except img element.
+        //when click other place except login and menu tags, close pop up window
+        document.addEventListener("click",() => {
+            this.setState({
+                showMenu: false,
+            })
+        })
 
+        //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.clickedTarget == "loginImg"){
             popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}></div>);
         }else{
