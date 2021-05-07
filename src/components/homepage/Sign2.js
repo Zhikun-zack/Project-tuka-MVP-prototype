@@ -21,19 +21,36 @@ class DropdownSign2 extends React.Component{
     constructor(){
         super();
         this.state = {
+            //whether show the menu popup window
             showMenu: false,
             showWindow: false,
+            //the target className we clicked
+            clickedTarget: "",
         }
 
         this.showMenu = this.showMenu.bind(this);
         this.showWindow = this.showWindow.bind(this);
         this.closeWindow = this.closeWindow.bind(this);
+
+        
     }
+    //for singup and menu buttons on the top right
+    /*
+    When click on one button, its popup window appears
+    Click on one button, not close its window, then click on another one, close the first opened window and open the window of the clicked button
+    Click on one button and close its window, then click on another one, open the clicked button's window
+    */
     showMenu = (event) => {
-        const menu = this.state.showMenu;
+        const currClassName = event.currentTarget.className;
+        const clickedTarget = this.state.clickedTarget;
+        let menu = this.state.showMenu;
+        if((clickedTarget == "")||(clickedTarget != "" && currClassName == clickedTarget)||(clickedTarget != "" && currClassName != clickedTarget && menu == false)){
+            menu = !menu;
+        }
         this.setState({
-            showMenu : !menu,
-        });
+            showMenu : menu,
+            clickedTarget: currClassName,
+        });    
     }
     showWindow(event){
         event.preventDefault();
@@ -49,14 +66,22 @@ class DropdownSign2 extends React.Component{
     }
 
     render() {
+        let popUpWindow;
+
+        if(this.state.clickedTarget == "loginImg"){
+            popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}></div>);
+        }else{
+            popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}></div>);
+        }
+
         return(
                 <div className="logindiv" >
                     <a className="login">
                         <img className="loginImg" src={Login_Img} alt="loginbutton" onClick={this.showMenu}></img>
                     </a>
                     
-                                {/* <div className={this.state.showMenu? "logInPopUp": "logInPopUp logInPopUpHide"}>
-                                <div className = {this.state.showMenu? "logInPopUpSqure": "logInPopUp logInPopUpSqureHide"}> */}
+                                
+                                {/* <div className = {this.state.showMenu? "logInPopUpSqure": "logInPopUp logInPopUpSqureHide"}> */}
                                     {/* <button onClick={this.showWindow} >Sign in</button><br />
                                     {
                                         this.state.showWindow
@@ -67,11 +92,17 @@ class DropdownSign2 extends React.Component{
                                     }
                                     <button>Sign up</button> */}
                                 {/* </div> */}
+                                
                             
                     
                     <a className="menu">
-                        <img className="menuImg" src={Menu_Img}></img>
+                        <img className="menuImg" src={Menu_Img} onClick={this.showMenu}></img>
                     </a>
+                    {
+                        popUpWindow
+                    }
+                    
+                    
                 </div>
     )
     }
