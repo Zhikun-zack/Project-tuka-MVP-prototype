@@ -4,13 +4,15 @@
     position: relative;
     display: inline-block;}
     .input{
+    position: relative;
     width: 100%;
     border-radius: 5rem;
     font-size: 1.6rem;
     height: auto;
     outline: none;
     overflow: hidden;
-    padding-left: 1rem;}
+    padding-left: 1rem;
+    }
     .input::-webkit-input-placeholder{
         color:#C0C0C0;
     }

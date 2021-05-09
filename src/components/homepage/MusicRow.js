@@ -111,7 +111,7 @@ class MusicRow extends React.Component {
                                 
                             </div> 
                         </div>
-                        <img src = {item.image} alt = "artist pic"></img>    
+                        {/* <img src = {item.image} alt = "artist pic"></img>     */}
                     </div>             
                 </div>
             );

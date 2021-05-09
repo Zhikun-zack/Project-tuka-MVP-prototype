@@ -1,7 +1,6 @@
 # Tuka
-
 ## Components
-### Structure
+### Components Structure
 |--index.js
     |--App.js
         |--Header

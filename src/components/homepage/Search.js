@@ -72,14 +72,16 @@ class Search extends Component{
             filteredSuggestions: [],
             showSuggestions: false,
             showKeywords: true,
-            //input tag's value is userInput so when click on one of the result, input value will also change
-            userInput: userInput,
+            //after click one of the suggestion genres, input content will be deleted so the user will know they can input another one
+            userInput: "",
             keyWord: e.currentTarget.innerText,
             keyWordsList: keyWordsList,
         })
 
         //dispatch a new action when onClick function is triggered 
         this.props.updateKeys(keyWordsList);
+
+
 
     }
     onKeyDown = keyword => {
@@ -192,8 +194,9 @@ class Search extends Component{
             <div>
                 <form className = "search_form">
                     <Fragment>
-                        <Link to="/">
+                        
                         <div className={searchStyle.search}>
+                        
                             <input
                                 className={searchStyle.input}
                                 onChange={onChange}
@@ -201,6 +204,7 @@ class Search extends Component{
                                 placeholder="Enter keyword, genre, or artist(Up to five)"
                                 value={userInput}
                             />
+                            <Link to="/" >
                             <button className={searchStyle.search_button}
                                 onClick={(e) => {
                                     //console.log("button click:" + e.this.value);
@@ -210,10 +214,11 @@ class Search extends Component{
                                 
                                <img src="../assets/search-icon.png"></img>
                             </button>
+                            </Link>
                         </div>
                         {suggestionsList}
                         {keywords}
-                        </Link>
+                        
                     </Fragment>
                     
                 </form>
