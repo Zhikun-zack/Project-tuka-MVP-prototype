@@ -8,6 +8,13 @@ import PropTypes from "prop-types";
 
 import Keywords from "./Keywords"
 
+const getSuggestions = value = {
+
+};
+
+const getSuggestionValue = () => ();
+
+const renderSuggestion = () => ();
 
 class Search extends Component{
     //suggestions is the input variable from Header.js
@@ -153,22 +160,7 @@ class Search extends Component{
         this.props.updateKeys(list);
     }
 
-    getSuggestions = value => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
     
-        return inputLength === 0 ? [] : languages.filter(lang =>
-            lang.name.toLowerCase().slice(0, inputLength) === inputValue
-        );
-    }
-    
-    getSuggestionValue = suggestion => suggestion;
-    
-    renderSuggestion = suggestion => (
-        <div>
-            {suggestion}
-        </div>
-    )
 
     onSuggestionsFetchRequired = ({value}) => {
         this.setState({
@@ -201,40 +193,45 @@ class Search extends Component{
         let suggestionsList;
         let keywords;
         
-        //result suggestion element shows when input correct name
-        if(showSuggestions && userInput){
-            if(filteredSuggestions.length){
-                suggestionsList = (
-                    <ul className = {searchStyle.hasSuggestions}>
-                        {filteredSuggestions.map((suggestion, index) => {
-                            
-                            let className;
+        const inputProps = {}
 
-                            // Flag the active suggestion with a class
-                            console.log("this is index: " + index + "this is activeSuggestion:" + activeSuggestion);
-                            // if (index === activeSuggestion) {
-                            //     className = {searchStyle.hasSuggestions};
-                            //     console.log(index + " equals")
-                            // }
+        //result suggestion element shows when input correct name
+        // if(showSuggestions && userInput){
+        //     if(filteredSuggestions.length){
+        //         suggestionsList = (
+        //             <ul className = {searchStyle.hasSuggestions}>
+        //                 {filteredSuggestions.map((suggestion, index) => {
                             
-                            return (
-                                <li className = {index === activeSuggestion? searchStyle.search__suggestionactive: null} id = {index} key={suggestion} onClick={(e) => {
-                                    onClick(e);
-                                }}>
-                                    {suggestion}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )
-            }else{
-                suggestionsList = (
-                    <div className = {searchStyle.noSuggestion}>
-                        <em>No suggestions, try a genre!</em>
-                    </div>
-                )
-            }  
-        }
+        //                     let className;
+
+        //                     // Flag the active suggestion with a class
+        //                     console.log("this is index: " + index + "this is activeSuggestion:" + activeSuggestion);
+        //                     // if (index === activeSuggestion) {
+        //                     //     className = {searchStyle.hasSuggestions};
+        //                     //     console.log(index + " equals")
+        //                     // }
+                            
+        //                     return (
+        //                         <li className = {index === activeSuggestion? searchStyle.search__suggestionactive: null} id = {index} key={suggestion} onClick={(e) => {
+        //                             onClick(e);
+        //                         }}>
+        //                             {suggestion}
+        //                         </li>
+        //                     )
+        //                 })}
+        //             </ul>
+        //         )
+        //     }else{
+        //         suggestionsList = (
+        //             <div className = {searchStyle.noSuggestion}>
+        //                 <em>No suggestions, try a genre!</em>
+        //             </div>
+        //         )
+        //     }  
+        // }
+
+
+        
         //If keyWordsList is not empty, show key divs
         if(keyWordsList){
             keywords = (
@@ -257,7 +254,7 @@ class Search extends Component{
                 <form className = "search_form">
                     <Fragment>
                         
-                        <div className={searchStyle.search}>
+                        {/* <div className={searchStyle.search}>
                         
                             <input
                                 className={searchStyle.input}
@@ -279,7 +276,16 @@ class Search extends Component{
                             </button>
                             </Link>
                         </div>
-                        {suggestionsList}
+                        {suggestionsList} */}
+
+                        <Autosuggestion 
+                            suggestions= {}
+                            onSuggestionsFetchRequested = {}
+                            onSuggestionsClearRequested = {}
+                            getSuggestionValue = {}
+                            renderSuggestion = {}
+                            inputProps = {}
+                        />
                         {keywords}
                         
                     </Fragment>
