@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Autosuggestion from "react-autosuggest";
 //Using CSS in Module
 import searchStyle from "./Search.module.css";
 import PropTypes from "prop-types";
@@ -151,6 +152,38 @@ class Search extends Component{
         });
         this.props.updateKeys(list);
     }
+
+    getSuggestions = value => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+    
+        return inputLength === 0 ? [] : languages.filter(lang =>
+            lang.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
+    }
+    
+    getSuggestionValue = suggestion => suggestion;
+    
+    renderSuggestion = suggestion => (
+        <div>
+            {suggestion}
+        </div>
+    )
+
+    onSuggestionsFetchRequired = ({value}) => {
+        this.setState({
+            suggestions: getSuggestions(value),
+        })
+    }
+
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: []
+        })
+    }
+
+    
+
     render(){
         const{
             onChange,
