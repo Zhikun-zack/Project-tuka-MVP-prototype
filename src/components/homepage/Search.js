@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 //Using CSS in Module
@@ -24,6 +24,7 @@ class Search extends Component{
 
         this.state = {
             tracks: [],
+            //keep tract of position in the suggestion list
             activeSuggestion: 0,
             //suggested keywords based on the user input
             filteredSuggestions: [],
@@ -33,9 +34,9 @@ class Search extends Component{
             showKeywords: false,
             //words that user input
             userInput: "",
-            keyWord: "",
             //store the genre keywords that we selected, add one element when click, delete when click on the delet button in keyword div
             keyWordsList: [],
+            myRef: React.createRef(),
         };
         //this.removeKey = this.removeKey.bind(this);
     }
@@ -84,7 +85,32 @@ class Search extends Component{
 
 
     }
-    onKeyDown = keyword => {
+    onKeyDown = e => {
+        const { activeSuggestion } = this.state;
+
+        console.log(this.refs);
+        
+        //press down
+        // arrow up/down button should select next/previous list element
+        console.log(e.keyCode);
+        
+        if (e.keyCode === 38 && activeSuggestion > 0) {
+            this.setState( prevState => ({
+                activeSuggestion: prevState.activeSuggestion - 1
+            }))
+            document.getElementById(this.state.activeSuggestion).scrollIntoView(true, {behavior: "smooth", block: "nearest"});
+            console.log("press up")
+            console.log(this.state.activeSuggestion);
+        } else if (e.keyCode === 40 && activeSuggestion < this.props.suggestions.length - 1) {
+            this.setState( prevState => ({
+                activeSuggestion: prevState.activeSuggestion + 1
+            }))
+            document.getElementById(this.state.activeSuggestion).scrollIntoView();
+            console.log(this.state.activeSuggestion);
+            console.log("press down")
+        }
+        console.log(document.getElementById(this.state.activeSuggestion))
+        
     }
     onChange = e => {
         const { suggestions } = this.props;
@@ -141,6 +167,7 @@ class Search extends Component{
         } = this;
         let suggestionsList;
         let keywords;
+        
         //result suggestion element shows when input correct name
         if(showSuggestions && userInput){
             if(filteredSuggestions.length){
@@ -151,12 +178,14 @@ class Search extends Component{
                             let className;
 
                             // Flag the active suggestion with a class
-                            if (index === activeSuggestion) {
-                                className = "search__suggestion-active";
-                            }
+                            console.log("this is index: " + index + "this is activeSuggestion:" + activeSuggestion);
+                            // if (index === activeSuggestion) {
+                            //     className = {searchStyle.hasSuggestions};
+                            //     console.log(index + " equals")
+                            // }
                             
                             return (
-                                <li className = {className} key={suggestion} onClick={(e) => {
+                                <li className = {index === activeSuggestion? searchStyle.search__suggestionactive: null} id = {index} key={suggestion} onClick={(e) => {
                                     onClick(e);
                                 }}>
                                     {suggestion}
@@ -200,6 +229,7 @@ class Search extends Component{
                             <input
                                 className={searchStyle.input}
                                 onChange={onChange}
+                                onKeyDown = {onKeyDown}
                                 type="text"
                                 placeholder="Enter keyword, genre, or artist(Up to five)"
                                 value={userInput}

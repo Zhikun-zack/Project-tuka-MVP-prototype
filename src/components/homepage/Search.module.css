@@ -30,6 +30,9 @@
     .search_button img{
         width: 1.5rem;
     }
+.search__suggestionactive{
+    color: #D95457
+}
 .noSuggestion, .hasSuggestions{
     width: 37%;
     background-color: white;
