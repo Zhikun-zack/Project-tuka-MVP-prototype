@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import keyStyle from "./Keywords.module.css";
 import NavItem from "reactstrap/lib/NavItem";
 import { Item } from "semantic-ui-react";
+import keyClose from "./img/x-out-symbol.png";
 
 class Keywords extends Component{
     static propTypes = {
@@ -42,7 +43,7 @@ class Keywords extends Component{
                                 onClick = {() => {this.props.delete(keyWord);
                                 console.log(keyWord)}}
                                 >
-                                <Link to="/"><img id = {keyWord} src="./assets/x-out-symbol.png" ></img></Link>
+                                <Link to="/"><img id = {keyWord} src={keyClose} ></img></Link>
                             </button>
                         </Fragment>
                 }

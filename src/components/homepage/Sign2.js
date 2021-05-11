@@ -79,9 +79,27 @@ class DropdownSign2 extends React.Component{
 
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.clickedTarget == "loginImg"){
-            popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}></div>);
+            popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
+                                <div className = "popUpLogIn1">Log In</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Sign Up</div>
+                            </div>);
         }else{
-            popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}></div>);
+            popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
+                                <div className = "popUpLogIn1">About</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Blog</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">FAQs</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Contact</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Terms</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Privacy</div>
+                                <hr className = "popUpLine"color="#D95457" ></hr>
+                                <div className = "popUpLogIn2">Copyright</div>
+                            </div>);
         }
 
         return(

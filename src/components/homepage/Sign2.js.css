@@ -51,12 +51,32 @@
             margin-left: -5.5rem;}
     .menuPopUp{
         width: 160%;
-        height: 1000%;
+        height: 950%;
         left: -35%;
         }
         .menuPopUp::after{
             left: 50%;
             margin-left: 3.5rem;}
-
+    .popUpLogIn1{
+        position:relative;
+        color: #5D6373;
+        top: .6rem;
+        left: -4rem;
+        font-size: 1.5rem;
+    }
+    .popUpLogIn2{
+        position: relative;
+        color: #5D6373;
+        top: .8rem;
+        left: -3.6rem;
+        font-size: 1.5rem;
+    }
+    .popUpLine{
+        position: relative;
+        top: .8rem;
+        width: 80%;
+        height: .2rem;
+        size: 1;
+    }
 
    

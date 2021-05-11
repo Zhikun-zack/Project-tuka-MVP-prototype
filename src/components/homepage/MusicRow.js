@@ -5,6 +5,10 @@ import './MusicRow.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import leftIcon from "./img/arrow-left.png";
+import rightIcon from "./img/arrow-right.png";
+import closeIcon from "./img/accordion-up.png";
+
 //images path for artists windows
 import singer1 from './img/artist1.png';
 import singer2 from './img/artist2.png';
@@ -111,7 +115,7 @@ class MusicRow extends React.Component {
                                 
                             </div> 
                         </div>
-                        {/* <img src = {item.image} alt = "artist pic"></img>     */}
+                        <img src = {item.image} alt = "artist pic"></img>
                     </div>             
                 </div>
             );
@@ -168,7 +172,7 @@ class MusicRow extends React.Component {
             closeButton = (
                 <button className="carouselCloseButton" onClick = {this.toggleClass}>
                     {/* When the carousel is closed, rotate the img 180 degrees, clock wise with animation */}
-                    <img src="../../assets/accordian-down.png" className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
+                    <img src= {closeIcon} className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
                 </button>
             )
         }else {
@@ -191,7 +195,7 @@ class MusicRow extends React.Component {
                 {/*div for carousel and left right buttons */}
                 <div className={this.state.active? 'flex_wraper' : 'flex_wraper flex_wrapper_hide'}>
                     <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick}>
-                        <img src="../assets/arrow-left.png" />
+                        <img src= {leftIcon} />
                     </button>
                     {/* When carousel closed renderSlides disappear with animation */}
                     <div className = {this.state.active? "carousel_viewport" : "carousel_viewport_hide"}>
@@ -200,7 +204,7 @@ class MusicRow extends React.Component {
                         </div>  
                     </div>              
                     <button className = "carousel_button carousel_button--right" onClick={this.handleRightClick} >
-                        <img src="../assets/arrow-right.png" />
+                        <img src= {rightIcon} />
                     </button>
                 </div>
             </div>

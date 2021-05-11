@@ -7,8 +7,17 @@ import IN from '../components/homepage/img/linkedin-icon.png';
 
 const tukaWeb = "http://www.tukaglobal.com";
 const tukaFAQS = "https://www.tukaglobal.com/faqs/";
-    class Footer extends React.Component{
-
+class Footer extends React.Component{
+    state = {
+        showIntro: false,
+    }
+    onClick = () => {
+        const showIntro = !this.state.showIntro;
+        console.log(showIntro);
+        this.setState({
+            showIntro: showIntro,
+        })
+    }
     render() {
         return (
             <div className='footer_bg'>
@@ -16,9 +25,9 @@ const tukaFAQS = "https://www.tukaglobal.com/faqs/";
                 <div className="footer_content">
                     {/*<div className="footer_left">*/}
                         <img height="60px" src={logo} />
-                        <div><a href={tukaWeb}> About</a></div>
-                        <div><a href={tukaFAQS}> FAQs</a></div>
-                        <div><a href={tukaWeb}> Contact</a></div>
+                        <div><a onClick = {this.onClick}> About</a></div>
+                        <div><a onClick = {this.onClick}> FAQs</a></div>
+                        <div><a onClick = {this.onClick}> Contact</a></div>
                         <div> Privacy</div>
                         <div> Copyright&Licensing</div>
                         <div> Terms of Service</div>
