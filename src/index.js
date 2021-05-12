@@ -6,7 +6,7 @@ import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 
 //Redux Set default state
-const initialState = {keyWordsList:["Pop","Hip-Hop / R&B","Rock","Country Western"]};
+const initialState = {keyWordsList:["Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]};
 
 const reducer = (state = initialState, action) => {
     switch (action.type){

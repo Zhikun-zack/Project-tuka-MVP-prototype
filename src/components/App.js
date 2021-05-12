@@ -13,6 +13,7 @@ class App extends React.Component{
         this.setState({
             tValue: headerValue,
         }); 
+        console.log(this.state.tValue);
     }
     render(){
         console.log("in app.js file"+this.state.tValue);

@@ -57,6 +57,9 @@
 .react-autosuggest__suggestion--highlighted {
     color: #D95457;
   }
+.react-autosuggest-highlight{
+    font-weight: 900;
+}
 .noSuggestion {
     width: 40%;
     background-color: white;
@@ -80,7 +83,7 @@
         border: none;
         background: transparent;
         top: .5rem;
-        left: 92%;
+        right: .5rem;
         }
         .search_button:hover{
             cursor: pointer;}

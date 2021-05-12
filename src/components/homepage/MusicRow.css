@@ -1,4 +1,5 @@
 .carousel{
+    position: absolute;
     white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -14,8 +15,9 @@
 }
 .carousel_slide{
     display: inline-block;
+    position: relative;
     padding-top: 1.25rem;
-    height: 150px;
+    height: 14rem;
     transition: all .3s;
     }
     .carousel_slide img{
@@ -29,9 +31,17 @@
         bottom: 0;
         overflow: hidden;
         clip:rect(100px 10px 10px 10px)}
-  
     .carousel_slide:not(:first-child){
-        padding-left: 5%;}
+        padding-left: 5rem;}
+        .carousel_slide:first-child .carousel_artists{
+            left: 3rem}
+    .carousel_artists{
+        position:absolute;
+        display:block;
+        top: 11rem;
+        left: 55%;
+        color:#6e6e6e;
+    }
     .carousel_window{
         margin-left: 10%;
         width: 9rem;
@@ -42,7 +52,11 @@
         box-shadow: 0.1rem 0.1rem 0.6rem gray;
     }
     .carousel_window:hover{
-        transform: scale(1.1);
+        transform: scale(1.05);
+        }
+        .carousel_window:hover .carousel_artists{
+            position:absolute;
+            top: 25rem;
         }
 
     .carousel_window:hover .carousel_mask{
@@ -80,6 +94,7 @@
     opacity: 1;
     transition: opacity .5s;
     transition-delay: .1s;
+    height: 12rem;
     width: 90%;}
     .carousel_viewport_hide{
         opacity: 0;
@@ -158,7 +173,8 @@
     height: 2rem;
 }
 .WholeRow{
-    width: 100%
+    width: 100%;
+    height: 17rem;
 }
 .WholeRow:nth-child(odd){
     background-color:#edf2f3;

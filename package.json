@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@kapost/react-component-slider": "^1.0.5",
+    "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "react": "^16.14.0",

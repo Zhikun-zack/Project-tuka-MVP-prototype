@@ -3,19 +3,44 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Autosuggestion from "react-autosuggest";
 import searchIcon from './img/search-icon.png';
-
+//For high light the matched text in search bar 
+import AutosuggestHighlightMatch from "autosuggest-highlight/umd/match";
+import AutosuggestHighlightParse from "autosuggest-highlight/umd/parse";
 import PropTypes from "prop-types";
 
 import Keywords from "./Keywords"
 import "./Search.css";
 
+var match = require('autosuggest-highlight/match');
+
 //Autosuggest: Implement it to teach Autosuggest what should be the input value when suggestion is clicked.
 const getSuggestionValue = suggestion => suggestion;
 
+
+
 //Autosuggest: how suggestions are rendered
-const renderSuggestion = (suggestion) => (
-    <span>{suggestion}</span>
-);
+const renderSuggestion = (suggestion, {query}) => {
+    //highlight: Calculates the characters to highlight in text based on query.
+    const matches = AutosuggestHighlightMatch(suggestion, query);
+    //highlight: Breaks the given text to parts based on matches, highlighted text will have value true, no need to highlighted text will have false
+    const parts = AutosuggestHighlightParse(suggestion, matches);
+    console.log(parts)
+    return (<span>
+                {parts.map((part, index) => {
+                    const className = part.highlight ? "react-autosuggest-highlight" : null;
+                    return (
+                        <span className = {className} key= {index}>
+                            {part.text}
+                        </span>
+                    );
+                })}
+            </span>)
+};
+
+//Autosuggest: remove special characters in user input
+const escapeRegexCharacters = (str) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 class Search extends Component{
     //suggestions is the input variable from Header.js
@@ -100,7 +125,6 @@ class Search extends Component{
             showKeywords:false,
             userInput: userInput,
         })
-        console.log(userInput)
     } 
 
     //remove certain genre from the keywords list
@@ -125,12 +149,14 @@ class Search extends Component{
 
     //Autosuggest: How to filter the suggestion
     getSuggestions = (value) => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-        let res = []
-        res = inputLength === 0 ? [] : this.props.suggestions.filter(sug =>
-            sug.toLowerCase().slice(0, inputLength) === inputValue
-        );
+        const escapedValue = escapeRegexCharacters(value.trim());
+        let res = [];
+        if (escapedValue === '') {
+            return res;
+        }
+        const regex = new RegExp('^' + escapedValue, 'i');
+        res = this.props.suggestions.filter(sug => regex.test(sug));
+
         if(res.length === 0){
             res = ["No suggestions, try a genre!"]
         }

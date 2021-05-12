@@ -116,7 +116,10 @@ class MusicRow extends React.Component {
                             </div> 
                         </div>
                         <img src = {item.image} alt = "artist pic"></img>
-                    </div>             
+                        {/* Artist and band's name for each elements in Carousel */}
+                        
+                    </div>  
+                    <div className = "carousel_artists">Artist/Band</div>      
                 </div>
             );
         })
@@ -189,7 +192,6 @@ class MusicRow extends React.Component {
                     {
                         closeButton
                     }
-                    
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
                 {/*div for carousel and left right buttons */}
