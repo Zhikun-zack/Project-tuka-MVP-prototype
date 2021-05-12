@@ -22,7 +22,7 @@ const getSuggestionValue = suggestion => suggestion;
 const renderSuggestion = (suggestion, {query}) => {
     //highlight: Calculates the characters to highlight in text based on query.
     const matches = AutosuggestHighlightMatch(suggestion, query);
-    //highlight: Breaks the given text to parts based on matches, highlighted text will have value true, no need to highlighted text will have false
+    //highlight: Breaks the given text to parts based on matches,  highlighted text will have value true, no need to highlighted text will have false
     const parts = AutosuggestHighlightParse(suggestion, matches);
     console.log(parts)
     return (<span>
@@ -75,7 +75,7 @@ class Search extends Component{
     }
     
     //click the any results in suggestions window
-    // onClick = e => {
+    onClick = (e) => {
     //     //the suggestion genre that the user selected
     //     const userInput = e.currentTarget.innerText;
     //     console.log(e.currentTarget);
@@ -114,7 +114,26 @@ class Search extends Component{
 
     //     //dispatch a new action when onClick function is triggered 
     //     // this.props.updateKeys(keyWordsList);
-    // }
+        
+        //Suggested genres shows in suggestion windows 
+        const genreSuggest = this.state.stateSuggestions;
+        const userInput = this.state.userInput;
+        const keyWordsList = this.state.keyWordsList;
+
+        //If user input nothing, not execute any code
+        //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
+        if(userInput != "" && genreSuggest.length != 0 && genreSuggest.length != 0){
+            //value pushed into the keywordslist show not equal to any values in keywordslist
+            if(!(genreSuggest.some((element) => element === userInput)) && !(keyWordsList.some((element) => element === genreSuggest[0]))){
+                console.log(genreSuggest[0]);
+                keyWordsList.push(genreSuggest[0])
+            }
+            this.setState({
+                userInput: "",
+                keyWordsList: keyWordsList,
+            })
+        }
+    }
     //
     
     //Autosuggest: required by inputProps, when value changed set new state
@@ -196,6 +215,7 @@ class Search extends Component{
         }
     }
 
+
     render(){
         const{
             onChange,
@@ -251,7 +271,8 @@ class Search extends Component{
                                     //console.log("button click:" + e.this.value);
                                     onClick(e);
                                     
-                                }}>
+                                }}
+                                >
                                 
                                <img src={searchIcon}></img>
                             </button>

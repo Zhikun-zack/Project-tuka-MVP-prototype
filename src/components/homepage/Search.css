@@ -94,12 +94,13 @@
         width: 1.5rem;
     }
 .keyTags{
-    position: absolute;
+    position: relative;
     background: transparent;
     float: left;
-    top: 3.5rem;
-    margin-left: -3%;
+    top: 1rem;
+    right: 1rem;
+    margin-left: -20%;
     margin-right: 1%;
     text-align: center;
-    width: 100%;
+    width: 150%;
     height: 3rem;}

@@ -61,7 +61,7 @@
 
     .carousel_window:hover .carousel_mask{
         opacity: 1;
-        /* transition: opacity 0.3s; */
+        transition: opacity 0.3s;
     }
     
     .carousel_mask{
@@ -70,7 +70,7 @@
         top: 6rem;
         bottom: .1rem;
         left: .7rem;
-        /* transition: opacity 0.5s; */
+        transition: opacity 0.5s;
         z-index: 1;
         }
         .carousel_mask:hover{
@@ -81,7 +81,7 @@
             display: inline-block;
             position: relative;
             
-            /* transition: all .3s; */
+            transition: all .3s;
         }
         .carousel_display:hover{
             transform: scale(1.1);

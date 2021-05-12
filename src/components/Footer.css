@@ -18,3 +18,12 @@
     align-items: center;
     margin: 0 5%;
 }
+.background{
+    display: none;
+    background-color: rgba(141, 141, 141, 0.7);
+    position: absolute;
+    z-index: 1;
+}
+.background-show{
+    display: block;
+}
