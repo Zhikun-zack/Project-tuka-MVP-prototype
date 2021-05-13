@@ -27,3 +27,39 @@
 .background-show{
     display: block;
 }
+.popup-content{
+    position: relative;
+    border-radius: 1rem;
+    text-align: center;
+}
+.popUp-body{
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}
+.pop-close-button-border{
+    position: absolute;
+    width: 3.2rem;
+    height: 3.2rem;
+    top: -1.5rem;
+    right: -1.4rem;
+    border-radius: 1.5rem;
+    border-style:solid;
+    border: 2px solid rgb(88, 88, 88);
+}
+.pop-close-button{
+    position: absolute;
+    top: -.15rem;
+    right: -.57rem;
+    background: transparent;
+    border: none;
+
+}
+.pop-close-button img{
+    width: 3.2rem;
+}
+.header{
+    background-color: black;
+
+}
+

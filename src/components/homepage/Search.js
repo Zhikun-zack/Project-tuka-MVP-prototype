@@ -134,7 +134,6 @@ class Search extends Component{
             })
         }
     }
-    //
     
     //Autosuggest: required by inputProps, when value changed set new state
     onChange = (e,{newValue}) => {
