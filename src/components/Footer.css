@@ -29,14 +29,16 @@
 }
 .popup-content{
     position: relative;
+    font-family: Open Sans;
     border-radius: 1rem;
-    text-align: center;
-    width: 80% !important;
+    text-align: left;
+    width: 70% !important;
 }
 .popUp-body{
     width: 100%;
-    height: auto;
+    height: 40rem;
     border-radius: 1rem;
+    overflow-y: scroll;
 }
 .pop-close-button-border{
     position: absolute;
@@ -60,7 +62,34 @@
     width: 3.2rem;
 }
 .header{
-    background-color: black;
+    color: white;
+    background-color: #D95457;
+    font-size: 28px;
+    font-weight: bolder;
 
+    /* float: left; */
+}
+.popup-content{
+    font-size: 20px;
+    color:#5e5853;
+    height: auto;
+}
+.second-subhead{
+    font-weight: bolder;
+    font-size: 22px;
+    color: #363535;
+}
+.secondHeader{
+    color: #D95457;
+    font-family: Open Sans;
+    font-size:26px;
+    position: relative;
+    width: 90%;
+
+}
+.secondContent{
+    
+    position: relative;
+    bottom: 1rem;
 }
 
