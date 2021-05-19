@@ -6,17 +6,6 @@ import Modal from './Modal';
 import { Link } from 'react-router-dom';
 import "./Sign2.js.css";
 
-const options = [
-    { key: 1, text: 'Sign in', as: Link},
-    { key: 2, text: 'Sign up', as: Link},
-];
-
-const optionsIn = [
-    { key: 3, text: 'Profile', as: Link, to: '/Profile'},
-    { key: 4, text: 'Log out', as: Link, to: '/Log_out'},
-]
-
-
 class DropdownSign2 extends React.Component{
     constructor(){
         super();
@@ -26,6 +15,7 @@ class DropdownSign2 extends React.Component{
             showWindow: false,
             //the target className we clicked
             clickedTarget: "",
+            showLogin: false,
         }
 
         this.showMenu = this.showMenu.bind(this);
@@ -44,15 +34,26 @@ class DropdownSign2 extends React.Component{
         const currClassName = event.currentTarget.className;
         const clickedTarget = this.state.clickedTarget;
         let menu = this.state.showMenu;
-        if((clickedTarget == "")||(clickedTarget != "" && currClassName == clickedTarget)||(clickedTarget != "" && currClassName != clickedTarget && menu == false)){
+        let showLogin = this.state.showLogin;
+        //Click same button twice close the popUp window
+        if((clickedTarget == "")
+        ||(clickedTarget != "" && currClassName == clickedTarget)
+        ||(clickedTarget != "" && currClassName != clickedTarget && menu == false)){
             menu = !menu;
+        }
+        console.log(clickedTarget);
+        console.log(currClassName);
+        if(currClassName === "popUpLogIn1"){
+            showLogin = true;
         }
         this.setState({
             showMenu : menu,
+            showLogin: showLogin,
             clickedTarget: currClassName,
         });    
         //stop the action bubble up to document
         event.nativeEvent.stopImmediatePropagation()
+        console.log(this.state.showLogin);
     }
     showWindow(event){
         event.preventDefault();
@@ -67,22 +68,34 @@ class DropdownSign2 extends React.Component{
         });
     }
 
+    
+
     render() {
         let popUpWindow;
+        let showLoginWindow;
         //add a event listener to detect the click action except img element.
         //when click other place except login and menu tags, close pop up window
         document.addEventListener("click",() => {
+            
             this.setState({
                 showMenu: false,
+                //showLogin: false
             })
         })
+        if(this.state.showLogin === true){
+            showLoginWindow = (
+                <Modal className = "###" onClick = {this.showMenu}></Modal>
+            )
+        }
 
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.clickedTarget == "loginImg"){
             popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
-                                <div className = "popUpLogIn1">Log In</div>
+                                <div className = "popUpLogIn1" onClick = {this.showMenu}>Log In</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
                                 <div className = "popUpLogIn2">Sign Up</div>
+                                <hr></hr>
+                                
                             </div>);
         }else{
             popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
@@ -129,7 +142,7 @@ class DropdownSign2 extends React.Component{
                     {
                         popUpWindow
                     }
-                    
+                    {showLoginWindow}
                     
                 </div>
     )
