@@ -44,7 +44,7 @@ export default  class Modal extends React.Component{
             ConfirmEmail:'',
             Password:'',
             ConfirmPassword:'',
-            show: true
+            show: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -58,7 +58,6 @@ export default  class Modal extends React.Component{
             show: false
         })
         console.log("close")
-        e.nativeEvent.stopImmediatePropagation()
     }
 
     handleChange = e => {
@@ -91,6 +90,15 @@ export default  class Modal extends React.Component{
     }
 
     render() {
+        console.log("In modeljs" + this.props.show)
+        let show = this.state.show
+        // if(this.state.show === false){
+        //     this.setState({
+        //         show: this.props.show
+        //     })
+        // }
+        
+
         if(!this.state.show){
             return null;
         }
@@ -98,7 +106,7 @@ export default  class Modal extends React.Component{
             <div style={backdropStyle}>
                 <div style={modalStyle}>
                     <div style={headerStyle}>
-                        <button onClick={this.closeWindow}>
+                        <button onClick={this.closeWindow()}>
                            X
                         </button>
                     </div>

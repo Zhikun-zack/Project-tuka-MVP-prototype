@@ -90,7 +90,13 @@ class DropdownSign2 extends React.Component{
             showMenu: false,
             showSignUp: true
         })
+        console.log(this.state.showSignUp)
         e.nativeEvent.stopImmediatePropagation()
+    }
+    closeSignUp = (e) => {
+        this.setState({
+            showSignUp: false
+        })
     }
     showWindow(event){
         event.preventDefault();
@@ -113,19 +119,15 @@ class DropdownSign2 extends React.Component{
         let showLoginWindow;
         //add a event listener to detect the click action except img element.
         //when click other place except login and menu tags, close pop up window
-        // document
-        // .addEventListener("click",() => {
+        document
+        .addEventListener("click",() => {
             
-        //     this.setState({
-        //         showMenu: false,
-        //         //showSignUp: false
-        //     })
-        // })
-        if(this.state.showSignUp === true){
-            showLoginWindow = (
-                <Modal className = "###" ></Modal>
-            )
-        }
+            this.setState({
+                showMenu: false,
+                //showSignUp: false
+            })
+        })
+        console.log("In singjs" + this.state.showSignUp)
 
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.formerClickedTarget == "loginImg"){
@@ -181,7 +183,7 @@ class DropdownSign2 extends React.Component{
                     {
                         popUpWindow
                     }
-                    {showLoginWindow}
+                    <Modal className = "###" show = {this.state.showSignUp}></Modal>
                     
                 </div>
     )
