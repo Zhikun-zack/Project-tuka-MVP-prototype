@@ -18,3 +18,21 @@ exports.signup = (req, res) => {
         res.send({message: "User was registered successfully!"});
     })
 }
+
+//When user log in, check whether they are authorized
+exports.logIn = (req, res) => {
+    User.findOne({
+        name: req.body.username
+    }).exec((err, user) => {
+        if(err){
+            res.status(500).send({message: err});
+            return;
+        }
+
+        if(!user){
+            res.status(404).send({message: "User not found"});
+        }
+
+        var passwordIsValid = 
+    })
+}
