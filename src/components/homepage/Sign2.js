@@ -40,38 +40,57 @@ class DropdownSign2 extends React.Component{
         let showLogin = this.state.showLogin;
         let showSingUp = this.state.showSignUp;
         //Click same button twice close the popUp window
-        switch( currClassName ){
-            case "loginImg":
-                if(formerClickedClassName === ""){
-                    showLogin = true;
-                }else if(formerClickedClassName === "loginImg"){
-                    showLogin = !showLogin;
-                }else if(formerClickedClassName === "menuImg" && showMenu === true){
-                    showLogin = true;
-                    showMenu = false;
-                }
-                break;
-            case "menuImg":
-                if(formerClickedClassName === ""){
-                    showMenu = true;
-                }else if(formerClickedClassName === "menuImg"){
-                    showMenu = !showMenu;
-                }else if(formerClickedClassName === "loginImg" && showLogin === true){
-                    showLogin = false;
-                    showMenu = true;
-                }
-                break;
+        // switch( currClassName ){
+        //     case "loginImg":
+        //         if(formerClickedClassName === ""){
+        //             showLogin = true;
+        //         }else if(formerClickedClassName === "loginImg"){
+        //             showLogin = !showLogin;
+        //         }else if(formerClickedClassName === "menuImg" && showMenu === true){
+        //             showLogin = true;
+        //             showMenu = false;
+        //         }
+        //         break;
+        //     case "menuImg":
+        //         if(formerClickedClassName === ""){
+        //             showMenu = true;
+        //         }else if(formerClickedClassName === "menuImg"){
+        //             showMenu = !showMenu;
+        //         }else if(formerClickedClassName === "loginImg" && showLogin === true){
+        //             showLogin = false;
+        //             showMenu = true;
+        //         }
+        //         break;
+        // }
+        
+        if((formerClickedClassName == "")||(formerClickedClassName != "" && currClassName == formerClickedClassName)||(formerClickedClassName != "" && currClassName != formerClickedClassName && showMenu == false)){
+            showMenu = !showMenu;
         }
-
         this.setState({
             showMenu : showMenu,
-            showLogin: showLogin,
-            //showSignUp: showSignUp,
-            clickedTarget: currClassName,
-        });    
+            formerClickedTarget: currClassName,
+        }); 
+        // this.setState({
+        //     showMenu : showMenu,
+        //     showLogin: showLogin,
+        //     //showSignUp: showSignUp,
+        //     clickedTarget: currClassName,
+        // });    
         //stop the action bubble up to document
         event.nativeEvent.stopImmediatePropagation()
         console.log(this.state.showLogin);
+    }
+
+    showSignUp = (e) => {
+        console.log(e.currentTarget.className)
+        let showSignUp = this.state.showSignUp;
+        let showMenu = this.state.showMenu;
+
+        this.setState({
+            showMenu: false,
+            showSignUp: true
+        })
+        e.nativeEvent.stopImmediatePropagation()
     }
     showWindow(event){
         event.preventDefault();
@@ -84,6 +103,7 @@ class DropdownSign2 extends React.Component{
         this.setState({
             showWindow : false,
         });
+        
     }
 
     
@@ -93,23 +113,24 @@ class DropdownSign2 extends React.Component{
         let showLoginWindow;
         //add a event listener to detect the click action except img element.
         //when click other place except login and menu tags, close pop up window
-        document.addEventListener("click",() => {
+        // document
+        // .addEventListener("click",() => {
             
-            this.setState({
-                showMenu: false,
-                //showLogin: false
-            })
-        })
+        //     this.setState({
+        //         showMenu: false,
+        //         //showSignUp: false
+        //     })
+        // })
         if(this.state.showSignUp === true){
             showLoginWindow = (
-                <Modal className = "###" onClick = {this.showMenu}></Modal>
+                <Modal className = "###" ></Modal>
             )
         }
 
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.formerClickedTarget == "loginImg"){
-            popUpWindow = (<div className={this.state.showLogin? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
-                                <div className = "popUpLogIn1" onClick = {this.showMenu}>Log In</div>
+            popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
+                                <div className = "popUpLogIn1" onClick = {this.showSignUp}>Log In</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
                                 <div className = "popUpLogIn2">Sign Up</div>
                                 <hr></hr>

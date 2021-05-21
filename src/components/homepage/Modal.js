@@ -43,13 +43,22 @@ export default  class Modal extends React.Component{
             Email:'',
             ConfirmEmail:'',
             Password:'',
-            ConfirmPassword:''
+            ConfirmPassword:'',
+            show: true
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
+    }
+
+    closeWindow = e =>{
+        this.setState({
+            show: false
+        })
+        console.log("close")
+        e.nativeEvent.stopImmediatePropagation()
     }
 
     handleChange = e => {
@@ -82,14 +91,14 @@ export default  class Modal extends React.Component{
     }
 
     render() {
-        if(this.props.show){
+        if(!this.state.show){
             return null;
         }
         return (
             <div style={backdropStyle}>
                 <div style={modalStyle}>
                     <div style={headerStyle}>
-                        <button onClick={this.props.onClose}>
+                        <button onClick={this.closeWindow}>
                            X
                         </button>
                     </div>
