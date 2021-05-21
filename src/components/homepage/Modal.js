@@ -53,11 +53,9 @@ export default  class Modal extends React.Component{
         this.verifyCallback = this.verifyCallback.bind(this);
     }
 
-    closeWindow = e =>{
-        this.setState({
-            show: false
-        })
-        console.log("close")
+    //Click close button and set false back to the Sign2.js state
+    onClick = (e) => {
+        this.props.closeSignUp(false);
     }
 
     handleChange = e => {
@@ -90,23 +88,17 @@ export default  class Modal extends React.Component{
     }
 
     render() {
-        console.log("In modeljs" + this.props.show)
-        let show = this.state.show
-        // if(this.state.show === false){
-        //     this.setState({
-        //         show: this.props.show
-        //     })
-        // }
-        
-
-        if(!this.state.show){
+        //if show value sent from Sign2.js is false, return nothing
+        if(!this.props.show){
             return null;
         }
+        //if show is true, render the signUp window
         return (
             <div style={backdropStyle}>
                 <div style={modalStyle}>
                     <div style={headerStyle}>
-                        <button onClick={this.closeWindow()}>
+                        {/* When click this button, change the Sign2.js's state */}
+                        <button onClick={ e => this.onClick(e)}>
                            X
                         </button>
                     </div>
