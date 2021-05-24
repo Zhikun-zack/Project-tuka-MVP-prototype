@@ -27,6 +27,14 @@
 .background-show{
     display: block;
 }
+p{
+    margin-top: 0;
+    margin-bottom: 1.6rem
+}
+h5{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
 .popup-content{
     position: relative;
     font-family: Open Sans;
@@ -37,7 +45,6 @@
 .popUp-body{
     width: 100%;
     height: 40rem;
-    border-radius: 1rem;
     overflow-y: scroll;
 }
 .pop-close-button-border{
@@ -62,8 +69,7 @@
     width: 3.2rem;
 }
 .header{
-    color: white;
-    background-color: #D95457;
+    color: #993300;
     font-size: 28px;
     font-weight: bolder;
 
@@ -74,13 +80,20 @@
     color:#5e5853;
     height: auto;
 }
+.pop-allcontent{
+    position: relative;
+    width: 80%;
+    left: 10%;
+
+}
 .second-subhead{
     font-weight: bolder;
     font-size: 22px;
-    color: #363535;
+    color: #636363;
 }
 .secondHeader{
-    color: #D95457;
+    color: #993300;
+    font-weight: bolder;
     font-family: Open Sans;
     font-size:26px;
     position: relative;
@@ -88,8 +101,9 @@
 
 }
 .secondContent{
-    
-    position: relative;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding-left: 30px;
     bottom: 1rem;
 }
 
