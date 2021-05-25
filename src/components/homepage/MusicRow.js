@@ -10,13 +10,13 @@ import rightIcon from "./img/arrow-right.png";
 import closeIcon from "./img/accordion-up.png";
 
 //images path for artists windows
-import singer1 from './img/artist1.png';
-import singer2 from './img/artist2.png';
-import singer3 from './img/artist3.png';
-import singer4 from './img/artist4.png';
-import singer5 from './img/artist5.png';
-import singer6 from './img/artist6.png';
-import myImg from './img/IMG_3138.jpg';
+import singer1 from './img/artist1-min.png';
+import singer2 from './img/artist2-min.png';
+import singer3 from './img/artist3-min.png';
+import singer4 from './img/artist4-min.png';
+import singer5 from './img/artist5-min.png';
+import singer6 from './img/artist6-min.png';
+import myImg from './img/IMG_3138-min.jpg';
 import play from './img/play-button-small.png';
 import stop from "./img/stop-button-small.png";
 import user from "./img/user-profile image example.png";
