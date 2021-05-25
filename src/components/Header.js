@@ -35,6 +35,13 @@ class Header extends React.Component {
                         <Search 
                         tValue = {(childValue) => this.transportValue(childValue)}
                         suggestions={[
+                            'rock ',
+                            'hiphop/rap ',
+                            'pop ',
+                            'country ',
+                            'latin ',
+                            'jazz ',
+                            'classical ',
                             'classic rock ',
                             'blues ',
                             '80s ',
