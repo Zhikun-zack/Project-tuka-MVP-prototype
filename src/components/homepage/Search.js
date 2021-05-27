@@ -2,21 +2,24 @@ import React, { Component, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Autosuggestion from "react-autosuggest";
-import searchIcon from './img/search-icon.png';
 //For high light the matched text in search bar 
 import AutosuggestHighlightMatch from "autosuggest-highlight/umd/match";
 import AutosuggestHighlightParse from "autosuggest-highlight/umd/parse";
+//Fuzzy search
+import Fuse from "fuse.js";
+
 import PropTypes from "prop-types";
 
+import searchIcon from './img/search-icon.png';
+
 import Keywords from "./Keywords"
+
 import "./Search.css";
 
 var match = require('autosuggest-highlight/match');
 
 //Autosuggest: Implement it to teach Autosuggest what should be the input value when suggestion is clicked.
 const getSuggestionValue = suggestion => suggestion;
-
-
 
 //Autosuggest: how suggestions are rendered
 const renderSuggestion = (suggestion, {query}) => {
@@ -166,19 +169,36 @@ class Search extends Component{
     }
 
     //Autosuggest: How to filter the suggestion
+    //param value: user input in search bar
+    //return list of suggestion genres
     getSuggestions = (value) => {
-        const escapedValue = escapeRegexCharacters(value.trim());
+        //value is the user input
+        
+        //store suggestions
         let res = [];
-        if (escapedValue === '') {
-            return res;
+        //remove special characters in input
+        const escapedValue = escapeRegexCharacters(value.trim());
+        //all suggestion genres
+        const searchList = this.props.suggestions;
+        //Fuse needed parameter
+        const option = {
+            //keep the match score in result, range [0,1], closer to 0 means more match 
+            includeScore: true
         }
-        const regex = new RegExp('^' + escapedValue, 'i');
-        res = this.props.suggestions.filter(sug => regex.test(sug));
+        //Fuse class 
+        const fuse = new Fuse(searchList, option);
+        //results is a object, with "item"(matched genre name), "score"(match score)
+        const fuseResults = fuse.search(escapedValue)
 
-        if(res.length === 0){
+        //add elements in fuseResults to res list
+        let i
+        for (i = 0; i < fuseResults.length; i++){
+            res.push(fuseResults[i].item)
+        }
+        //if no matches return this
+        if( res.length == 0) {
             res = ["No suggestions, try a genre!"]
         }
-        
         return res;
     };
 
@@ -186,7 +206,6 @@ class Search extends Component{
     onSuggestionsFetchRequired = ({value}) => {
         this.setState({
             stateSuggestions: this.getSuggestions(value),
-            
         })
     }
     //Autosuggest: when need to clean the suggestion
