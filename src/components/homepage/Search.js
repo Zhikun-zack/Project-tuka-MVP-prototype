@@ -27,7 +27,7 @@ const renderSuggestion = (suggestion, {query}) => {
     const matches = AutosuggestHighlightMatch(suggestion, query);
     //highlight: Breaks the given text to parts based on matches,  highlighted text will have value true, no need to highlighted text will have false
     const parts = AutosuggestHighlightParse(suggestion, matches);
-    console.log(parts)
+    
     return (<span>
                 {parts.map((part, index) => {
                     const className = part.highlight ? "react-autosuggest-highlight" : null;
@@ -119,6 +119,9 @@ class Search extends Component{
     //     // this.props.updateKeys(keyWordsList);
         
         //Suggested genres shows in suggestion windows 
+        this.props.updateKeys(["try",'try2']);
+        console.log(this.state.reduxKeyWordsList);
+
         const genreSuggest = this.state.stateSuggestions;
         const userInput = this.state.userInput;
         const keyWordsList = this.state.keyWordsList;
@@ -217,8 +220,11 @@ class Search extends Component{
 
     //Autosuggest: Change keyWordsList here and update redux store (old onClick)
     onSuggestionSelected = (e, {suggestion}) => {
+        let primaryGenre = ["Rock", "Hip-Hop / Rap", "Pop", "Country", "Latin", "Jazz" ,"Classical"];
+
         if(suggestion != "No suggestions, try a genre!"){
             const keyWordsList = this.state.keyWordsList;
+            console.log(keyWordsList)
             if(!keyWordsList.some((element) => element === suggestion) && keyWordsList.length < 5){
                 keyWordsList.push(suggestion);
             }else if (!keyWordsList.some((element) => element === suggestion) && keyWordsList.length >= 5){
@@ -226,6 +232,19 @@ class Search extends Component{
                 keyWordsList.push(suggestion);
             }
             
+            let n = keyWordsList.length;
+            let primaryIndex = primaryGenre.indexOf(keyWordsList[n-1]);
+            console.log(keyWordsList[n-1])
+            console.log("Jazz" == keyWordsList[n-1])
+            console.log(primaryIndex)
+            //whether the userinput is one of the primary genre
+            if( primaryIndex != -1){
+                console.log("this is repeat" + keyWordsList[n])
+                primaryGenre.splice(primaryIndex, 1)
+                primaryGenre.unshift(keyWordsList[n-1])
+            }
+            this.props.updateKeys(primaryGenre)
+            console.log(primaryGenre)
             this.setState({
                 userInput: "",
             })
@@ -282,6 +301,7 @@ class Search extends Component{
                             renderSuggestion = {renderSuggestion}
                             inputProps = {inputProps}
                             onSuggestionSelected = {this.onSuggestionSelected}
+                            
                         />
                         <Link to="/">
                         <button className= "search_button"
@@ -307,9 +327,10 @@ class Search extends Component{
 
 function mapDispatchToProps(dispatch){
     return {
+        //add keyWordsList into state for Homepage_Content.js
         updateKeys: (keys) => dispatch({
             type: "addKeywords",  
-            //add keyWordsList into state 
+            
             keyWordsList: keys
         })
     }
