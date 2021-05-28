@@ -1,5 +1,5 @@
 //fake music data for demo
-[
+module.exports = fake = [
     {
         "title": "Old Town Road",
         "price": ".99",
