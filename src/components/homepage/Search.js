@@ -83,6 +83,7 @@ class Search extends Component{
         const genreSuggest = this.state.stateSuggestions;
 
         const userInput = this.state.userInput;
+        let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
 
         const suggestionGenres = this.getSuggestions(userInput)
         const keyWordsList = this.state.keyWordsList;
@@ -98,7 +99,34 @@ class Search extends Component{
                 userInput: "",
                 keyWordsList: keyWordsList,
             })
+
+            let n = keyWordsList.length;
+                //console.log(keyWordsList[n-1])
+            let i
+            //location of last selected genre, no match is -1
+            let primaryIndex = -1
+            for(i = 0; i<primaryGenre.length; i++){ 
+                    //console.log(primaryGenre[i].name)
+                if(primaryGenre[i].name == keyWordsList[n-1]){
+                    primaryIndex = i
+                    break
+                }
+            }
+            console.log("primary:" + primaryIndex)
+            //whether the userinput is one of the primary genre
+            if( primaryIndex != -1){
+                //get the object at the primaryIndex
+                let insertKey = primaryGenre[primaryIndex]
+                insertKey.flag = false
+                //remove that object
+                primaryGenre.splice(primaryIndex, 1)
+                //insert to head
+                primaryGenre.unshift(insertKey)
+                //update redux
+                this.props.updateKeys(primaryGenre)
+            }
         }
+
     }
     
     //Autosuggest: required by inputProps, when value changed set new state
