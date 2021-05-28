@@ -19,6 +19,9 @@ app.get('/', (req, res) => res.send('API Running'));
 
 require("./routes/authUser")(app);
 
+
+
+
 //Define Routes
 // app.use('/api/users', require('./routes/api/users'));
 // app.use('/api/auth', require('./routes/api/auth'));

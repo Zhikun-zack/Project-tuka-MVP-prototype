@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
 const key = require('./keys.js');
-
+require('../models/Song');
+const fake = require("../public/fakeMusicData")
 
 const connectDB = async () => {
     try {
@@ -15,6 +14,9 @@ const connectDB = async () => {
         console.error(error.message);
         process.exit(1);
     }
+    console.log(fake[0])
+    //input fake data into the mongodb
+    //Song.insertMany(fakeMusics, (err) => {console.log(err)})
 }
 
 

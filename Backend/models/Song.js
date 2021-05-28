@@ -5,24 +5,27 @@ const SongSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     userID: {
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    tag: {
-        type: Array
-    },
-    shared: {
+    songID: {
         type: String,
         required: true
-    }
+    },
+    uploadDate: {
+        type: String,
+    },
+    tags: {
+        type: Array
+    },
+    // shared: {
+    //     type: String,
+    //     required: true
+    // }
 
 });
 

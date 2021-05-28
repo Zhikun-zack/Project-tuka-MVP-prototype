@@ -79,45 +79,6 @@ class Search extends Component{
     
     //click the any results in suggestions window
     onClick = (e) => {
-    //     //the suggestion genre that the user selected
-    //     const userInput = e.currentTarget.innerText;
-    //     console.log(e.currentTarget);
-    //     //the suggestion genres show on the suggestion window
-    //     const filtered = this.state.filteredSuggestions;
-    //     //the genres that has been selected in the past search
-    //     const keyWordsList = this.state.keyWordsList;
-    //     const len = keyWordsList.length;
-    //     //Prevent when user click search without input anything
-    //     if((filtered != "") && (!keyWordsList.some((element) => element === userInput))){
-    //         //When users click search button instead of clicking suggestion window, set the first suggestion as the selected genre
-    //         if(userInput == "" && (filtered[0] != "" || undefined )&& (!keyWordsList.some((element) => element === filtered[0]))){
-    //             console.log(filtered[0]);
-    //             keyWordsList.push(filtered[0]);
-    //         }
-    //         //Check whether the input genre has already existed in the list and the number should up to 5
-    //         else if(userInput != "" && len < 5){
-    //             keyWordsList.push(userInput);
-    //         }
-    //         //if the size larger than five, pop the first element and push the newest input to the end
-    //         else if(userInput != "" && len >= 5){
-    //             keyWordsList.shift();
-    //             keyWordsList.push(userInput);
-    //         }
-    //     }
-        
-    //     this.setState({
-    //         activeSuggestion: 0,
-    //         filteredSuggestions: [],
-    //         showKeywords: true,
-    //         //after click one of the suggestion genres, input content will be deleted so the user will know they can input another one
-    //         userInput: userInput,
-    //         keyWord: e.currentTarget.innerText,
-    //         keyWordsList: keyWordsList,
-    //     })
-
-    //     //dispatch a new action when onClick function is triggered 
-    //     // this.props.updateKeys(keyWordsList);
-        
         //Suggested genres shows in suggestion windows 
         const genreSuggest = this.state.stateSuggestions;
 
@@ -129,7 +90,10 @@ class Search extends Component{
         //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
         if(userInput != ""){
             //value pushed into the keywordslist show not equal to any values in keywordslist
-            keyWordsList.push(suggestionGenres[0])
+            if(!keyWordsList.some((element) => element === suggestionGenres[0])){
+                keyWordsList.push(suggestionGenres[0])
+            }
+            
             this.setState({
                 userInput: "",
                 keyWordsList: keyWordsList,
