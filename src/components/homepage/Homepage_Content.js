@@ -5,22 +5,27 @@ import MusicRow from './MusicRow';
 class Homepage_Content extends React.Component{
     
     render () {
+        //primary genres stored in redux(list of objects)
         let keyWordsList = this.props.homePageGenres.keyWordsList;
-        const oldGenreList =  ['Trending Now']; 
-        console.log("homepagegenres:" + keyWordsList);
+        //carousels will use this list to display
+        const GenreList =  ['Trending Now']; 
+
         let len = keyWordsList.length;
-        console.log("in home page" + len)
+        //if empty, give default values
         if(len == 0){
             keyWordsList = keyWordsList.concat(["Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]);
             console.log(keyWordsList);
         }
+        //extract primary genres' name from keyWordsList and add to GenreList
+        let i 
+        for(i = 0; i < len; i++){
+            GenreList.push(keyWordsList[i].name)
+        }
 
-        const newGenreList = oldGenreList.concat(keyWordsList);
-        console.log(keyWordsList);
         return (
             <div> 
                 {
-                    newGenreList.map((key) => {
+                    GenreList.map((key) => {
                         return <MusicRow genres = {key}></MusicRow>
                     })
                 }
@@ -32,7 +37,7 @@ class Homepage_Content extends React.Component{
 
 };
 
-//Set state into props, so that this component can visit state through this.props.homePageGenres
+//Set redux state into props, so that this component can visit redux state through this.props.homePageGenres
 function mapStateToProps(state){
     return {homePageGenres: state};
 }

@@ -36,7 +36,7 @@ class Header extends React.Component {
                         tValue = {(childValue) => this.transportValue(childValue)}
                         suggestions={[
                             'Rock',
-                            'Hiphop/rap',
+                            'Hip-Hop / Rap',
                             'Pop',
                             'Country',
                             'Latin',

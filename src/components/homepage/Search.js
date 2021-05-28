@@ -119,21 +119,17 @@ class Search extends Component{
     //     // this.props.updateKeys(keyWordsList);
         
         //Suggested genres shows in suggestion windows 
-        this.props.updateKeys(["try",'try2']);
-        console.log(this.state.reduxKeyWordsList);
-
         const genreSuggest = this.state.stateSuggestions;
-        const userInput = this.state.userInput;
-        const keyWordsList = this.state.keyWordsList;
 
+        const userInput = this.state.userInput;
+
+        const suggestionGenres = this.getSuggestions(userInput)
+        const keyWordsList = this.state.keyWordsList;
         //If user input nothing, not execute any code
         //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
-        if(userInput != "" && genreSuggest.length != 0 && genreSuggest.length != 0){
+        if(userInput != ""){
             //value pushed into the keywordslist show not equal to any values in keywordslist
-            if(!(genreSuggest.some((element) => element === userInput)) && !(keyWordsList.some((element) => element === genreSuggest[0]))){
-                console.log(genreSuggest[0]);
-                keyWordsList.push(genreSuggest[0])
-            }
+            keyWordsList.push(suggestionGenres[0])
             this.setState({
                 userInput: "",
                 keyWordsList: keyWordsList,
@@ -152,11 +148,18 @@ class Search extends Component{
     } 
 
     //remove certain genre from the keywords list
+    /*
+    param genre: the keyword the user want to remove
+    return: updated chose keywords
+            update keywords in redux store
+    */
     removeKey = (genre) => {
-        //copy the state var to new var
+        //list of selected keywords
         const list = this.state.keyWordsList.slice();
+        //list of primary genres in certain order
+        let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
 
-        //some function will traverse all elements in list
+        //remove "genre" from "list"
         list.some((element, i) => {
             //if the element is equal to the input item delete it from list
             if(element == genre){
@@ -168,7 +171,35 @@ class Search extends Component{
         this.setState({
             keyWordsList: list,
         });
-        this.props.updateKeys(list);
+
+        //update the order of primary genres based on removed genre
+        let primaryIndex = -1
+        let i
+        for(i = 0; i < primaryGenre.length; i++){
+            if(primaryGenre[i].name == genre){
+                primaryIndex = i
+                break
+            } 
+        }
+        if(primaryIndex != -1){
+            let deleteKey = primaryGenre[primaryIndex];
+            let deleteKeyIndex = deleteKey.index;
+            primaryGenre.splice(primaryIndex, 1);
+
+            //insert the deleted genre back to the primary genre based on index
+            let insertIndex
+            for (i = 0; i < primaryGenre.length; i++){
+                if(primaryGenre[i].flag && primaryGenre[i].index > deleteKeyIndex){
+                    console.log("Insert")
+                    primaryGenre.splice(i, 0, deleteKey);
+                    break
+                }
+            }
+            //console.log(primaryGenre)
+            this.props.updateKeys(primaryGenre);
+        }
+
+        console.log(primaryGenre)
     }
 
     //Autosuggest: How to filter the suggestion
@@ -207,8 +238,9 @@ class Search extends Component{
 
     //Autosuggest: call this function when every time we need to update suggestions
     onSuggestionsFetchRequired = ({value}) => {
+        const stateSuggestions = this.getSuggestions(value)
         this.setState({
-            stateSuggestions: this.getSuggestions(value),
+            stateSuggestions: stateSuggestions,
         })
     }
     //Autosuggest: when need to clean the suggestion
@@ -220,11 +252,11 @@ class Search extends Component{
 
     //Autosuggest: Change keyWordsList here and update redux store (old onClick)
     onSuggestionSelected = (e, {suggestion}) => {
-        let primaryGenre = ["Rock", "Hip-Hop / Rap", "Pop", "Country", "Latin", "Jazz" ,"Classical"];
+        let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
+        console.log(primaryGenre)
 
         if(suggestion != "No suggestions, try a genre!"){
             const keyWordsList = this.state.keyWordsList;
-            console.log(keyWordsList)
             if(!keyWordsList.some((element) => element === suggestion) && keyWordsList.length < 5){
                 keyWordsList.push(suggestion);
             }else if (!keyWordsList.some((element) => element === suggestion) && keyWordsList.length >= 5){
@@ -233,18 +265,31 @@ class Search extends Component{
             }
             
             let n = keyWordsList.length;
-            let primaryIndex = primaryGenre.indexOf(keyWordsList[n-1]);
-            console.log(keyWordsList[n-1])
-            console.log("Jazz" == keyWordsList[n-1])
-            console.log(primaryIndex)
+                //console.log(keyWordsList[n-1])
+            let i
+            //location of last selected genre, no match is -1
+            let primaryIndex = -1
+            for(i = 0; i<primaryGenre.length; i++){ 
+                    //console.log(primaryGenre[i].name)
+                if(primaryGenre[i].name == keyWordsList[n-1]){
+                    primaryIndex = i
+                    break
+                }
+            }
+            console.log("primary:" + primaryIndex)
             //whether the userinput is one of the primary genre
             if( primaryIndex != -1){
-                console.log("this is repeat" + keyWordsList[n])
+                //get the object at the primaryIndex
+                let insertKey = primaryGenre[primaryIndex]
+                insertKey.flag = false
+                //remove that object
                 primaryGenre.splice(primaryIndex, 1)
-                primaryGenre.unshift(keyWordsList[n-1])
+                //insert to head
+                primaryGenre.unshift(insertKey)
+                //update redux
+                this.props.updateKeys(primaryGenre)
             }
-            this.props.updateKeys(primaryGenre)
-            console.log(primaryGenre)
+
             this.setState({
                 userInput: "",
             })
@@ -335,5 +380,11 @@ function mapDispatchToProps(dispatch){
         })
     }
 }
+
+function mapStateToProps(state){
+    return{
+        searchPrimaryGenre: state
+    }
+}
 //Add null first before mapDispatchToProps
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
