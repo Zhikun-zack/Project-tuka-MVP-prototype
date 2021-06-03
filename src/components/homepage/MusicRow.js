@@ -194,9 +194,9 @@ class MusicRow extends React.Component {
                     }
                     <h2 className="row_header">{this.props.genres}</h2>
                 </div>
-                {/*div for carousel and left right buttons */}
-                <div className={this.state.active? 'flex_wraper' : 'flex_wraper flex_wrapper_hide'}>
-                    <button className = "carousel_button carousel_button--left" onClick={this.handleLeftClick}>
+                {/*div for carousel and left right buttons; when carousel closed, height of carousel container will be changed with animation*/}
+                <div className={this.state.active? 'flex_wraper' : 'flex_wraper flex_wraper_hide'}>
+                    <button className = {this.state.active? "carousel_button carousel_button--left" : "carousel_button_hide"} onClick={this.handleLeftClick}>
                         <img src= {leftIcon} />
                     </button>
                     {/* When carousel closed renderSlides disappear with animation */}

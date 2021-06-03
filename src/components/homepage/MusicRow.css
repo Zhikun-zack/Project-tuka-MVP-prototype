@@ -4,8 +4,9 @@
     overflow-x: auto;
     overflow-y: hidden;
     margin-bottom: 2% ;
-    transition: opacity .5s;
-    transition-delay: .1s;}
+    /* transition: opacity .5s; */
+    /* transition-delay: .1s; */
+    }
     .carousel::-webkit-scrollbar{
         display: none;
     }
@@ -18,7 +19,6 @@
     position: relative;
     padding-top: 1.25rem;
     height: 14rem;
-    transition: all .3s;
     }
     .carousel_slide img{
         position: relative;
@@ -49,11 +49,11 @@
         height: 9rem;
         overflow: hidden;
         border-radius: 20px;
-        transition: all .5s;
+        transition: transform .5s;
         box-shadow: 0.1rem 0.1rem 0.6rem gray;
     }
     .carousel_window:hover{
-        transform: scale(1.05);
+        transform: scale(1.1);
         }
         .carousel_window:hover .carousel_artists{
             position:absolute;
@@ -62,7 +62,6 @@
 
     .carousel_window:hover .carousel_mask{
         opacity: 1;
-        transition: opacity 0.3s;
     }
     
     .carousel_mask{
@@ -75,14 +74,12 @@
         z-index: 1;
         }
         .carousel_mask:hover{
-            
-
         }
         .carousel_display{
             display: inline-block;
             position: relative;
             
-            transition: all .3s;
+            /* transition: all .3s; */
         }
         .carousel_display:hover{
             transform: scale(1.1);
@@ -98,6 +95,7 @@
     height: 12rem;
     width: 90%;}
     .carousel_viewport_hide{
+
         opacity: 0;
     }
    
@@ -107,7 +105,7 @@
     background: transparent;
     outline: none;
     cursor: pointer;
-    transition: all .2s; 
+    /* transition: all .2s;  */
 }
     .carousel_button--right{
         margin-right: 2rem;
@@ -117,6 +115,11 @@
     }
     .carousel_button img{
         height: 20px;
+    }
+    .carousel_button_hide{
+        position: relative;
+        left: 5rem;
+        opacity: 0;
     }
 .carouselUp{
     position: absolute;
@@ -158,6 +161,9 @@
 
 .flex_wraper{
     position: relative;
+
+/* 
+    transition: transform .3s linear; */
     transition: height .3s;
     display: flex;
     justify-content: space-between;
@@ -167,11 +173,13 @@
     height: 13rem;
     width: 95%;
     padding-bottom: 1rem;
+    /* transition: transform .3s; */
 }
-.flex_wrapper_hide {
-    /* transition: height .3s; */
-    position:relative;
-    opacity: 0;
+.flex_wraper_hide {
+    /* transform: scaleY(.5);
+    transition: transform .3s linear;  */    
+    /* transform: scaleY(0.1); */
+    
     height: 2rem;
 }
 .WholeRow{
@@ -180,7 +188,7 @@
     
 }
 .WholeRow_hide{
-    height: 2rem;
+    height: auto;
 }
 .WholeRow:nth-child(odd){
     background-color:#edf2f3;
