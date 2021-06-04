@@ -7,6 +7,10 @@ var bcrypt = require("bcryptjs");
 
 //Create controller function for singUp authentication and authorisation
 exports.signup = (req, res) => {
+    res.header(
+        "Access-Control-Allow-Origin",
+        "http://localhost:3000"
+      );
     //get request input and use them to create a user 
     const user = new User({
         name: req.body.name,

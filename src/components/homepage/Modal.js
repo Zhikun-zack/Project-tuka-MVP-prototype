@@ -3,6 +3,8 @@ import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table} from 'reactstrap';
 import axios from 'axios';
 
+import AuthService from "../../services/auth.service";
+
 const backdropStyle = {
     position:'fixed',
     zIndex:90,
@@ -62,17 +64,22 @@ export default  class Modal extends React.Component{
         this.setState({[e.target.name]: e.target.value})
     };
 
-    async handleSubmit(e){
+    handleSubmit(e){
         e.preventDefault()
 
         const { Email,ConfirmEmail,Password,ConfirmPassword} = this.state;
 
-        const form = await axios.post('/api/auth/userSignUp',{
-            name : "name",
-            Email,
-            Password,
-        })
-        console.log(form)
+        AuthService.register(
+            "name",
+            "xxxx@gmail.com",
+            "ppppppppppp"
+        ).then(
+            response => {
+                console.log("sent")
+                console.log(response)
+            }
+        )
+
     }
 
     recaptchaLoaded(){
