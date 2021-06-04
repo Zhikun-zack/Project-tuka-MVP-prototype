@@ -67,12 +67,12 @@ export default  class Modal extends React.Component{
 
         const { Email,ConfirmEmail,Password,ConfirmPassword} = this.state;
 
-        const form = await axios.post('/api/form',{
+        const form = await axios.post('/api/auth/userSignUp',{
+            name : "name",
             Email,
-            ConfirmEmail,
             Password,
-            ConfirmPassword
         })
+        console.log(form)
     }
 
     recaptchaLoaded(){
@@ -128,7 +128,7 @@ export default  class Modal extends React.Component{
                                 <Input
                                     type="password"
                                     name="Password"
-                                    pattern={{value: '^[A-Za-z0-9]{8}+$'}}
+                                    //pattern={{value: '^[A-Za-z0-9]{8}+$'}}
                                     onChange={this.handleChange}
                                     placeholder="Password(8 characters minimum)"/></FormGroup>
                             <FormGroup>
