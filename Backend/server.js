@@ -10,6 +10,13 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
+//fixed CORS problem for axios
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type,Accept");
+    next();
+});
+
 app.get('/', (req, res) => res.send('API Running'));
 
 

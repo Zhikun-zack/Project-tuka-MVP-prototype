@@ -49,7 +49,7 @@ const verifyEmail = status => {
 }
 
 
-export default  class Modal extends React.Component{
+export default  class logIn extends React.Component{
     constructor(props){
         super(props);
         this.state = {

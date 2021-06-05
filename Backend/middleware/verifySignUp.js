@@ -25,12 +25,12 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
         }).exec((err, user) => {
             //get the error info
             if(err){
-                res.status(500).send({message: err});
+                res.status(500).send({message: err + "please input correct value"});
                 return;
             }
             //send back the user info
             if(user){
-                res.status(400).send({message: err});
+                res.status(400).send({message: err + "The user has already exist"});
                 return;
             }
             next();
