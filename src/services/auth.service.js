@@ -11,6 +11,15 @@ class AuthService {
                 password: password
             });
     }
+
+    logIn(username, password) {
+        return API.post("/api/auth/userLogIn", {
+            name: username,
+            password: password
+        }).then(response => {
+            console.log(response.data)
+        })
+    }
 }
 
 export default new AuthService();

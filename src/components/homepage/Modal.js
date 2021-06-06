@@ -92,7 +92,7 @@ export default  class Modal extends React.Component{
             "xxxx@gmail.com",
             "ppppppppppp"
         ).catch(error => {
-            console.log(error.response)
+            // console.log(error.response)
             this.setState({
                 error: error.response.status
             })

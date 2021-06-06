@@ -49,7 +49,7 @@ const verifyEmail = status => {
 }
 
 
-export default  class logIn extends React.Component{
+export default  class LogInWin extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -84,42 +84,15 @@ export default  class logIn extends React.Component{
 
     handleSubmit(e){
         e.preventDefault()
-
-        const { Email,ConfirmEmail,Password,ConfirmPassword} = this.state;
-        console.log(Email)
-        AuthService.register(
-            "name",
-            "xxxx@gmail.com",
-            "ppppppppppp"
-        ).catch(error => {
-            console.log(error.response)
+        AuthService.logIn(
+            "Zack3",
+            "password"
+        ).catch(err => {
+            console.log(err.response)
             this.setState({
-                error: error.response.status
+                error: err.response.status
             })
-        }).then(
-            response => {
-                if(response === "undefinded"){
-                    this.setState({
-                        message: response.data.message,
-                        successful: true
-                    });
-                }
-                
-            },
-            error => {
-                const resMessage = 
-                    (error.response && 
-                      error.response.data &&
-                      error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.setState({
-                    successful: false,
-                    message: resMessage
-                });
-            }
-        )
-        console.log(this.state.message) 
+        })
     }
 
     recaptchaLoaded(){
@@ -145,8 +118,6 @@ export default  class logIn extends React.Component{
                 email = (
                     <FormGroup>
                                 <Label for="Email" />
-
-
                                 <Input
                                     type="email"
                                     name="Email"
@@ -155,7 +126,8 @@ export default  class logIn extends React.Component{
                             </FormGroup>  
                 )
                     
-            }else if (this.state.error === 400){
+            }else if (this.state.error === 404){
+                console.log(400)
                 email = (
                     <FormGroup>
                                 <Label for="Email" />
@@ -167,9 +139,24 @@ export default  class logIn extends React.Component{
                         name="Email"
                         onChange={this.handleChange}
                         placeholder="Email"/>
-                    <FormFeedback>Oh noes! that name is already taken</FormFeedback>
+                    <FormFeedback>Please input correct email</FormFeedback>
                             </FormGroup>  
                     
+                )
+            }else{
+                email = (
+                    <FormGroup>
+                                <Label for="Email" />
+
+
+                                <Input
+                        invalid
+                        type="email"
+                        name="Email"
+                        onChange={this.handleChange}
+                        placeholder="Email"/>
+                    <FormFeedback>Please input correct password</FormFeedback>
+                            </FormGroup>  
                 )
             }
         
@@ -188,21 +175,10 @@ export default  class logIn extends React.Component{
                     </div>
                     <div style={contentStyle}>
                         <div style={{textAlign:'center',fontSize:'large'}}>
-                            <b>Sign Up</b>
+                            <b>Log In</b>
                         </div>
                         <Form onSubmit={this.handleSubmit}>
                             {email}
-
-                            <FormGroup>
-                                <Label for="ConfirmEmail" />
-                                <Input
-                                    valid={this.state.Email!==""&&this.state.Email===this.state.ConfirmEmail}
-                                    // invalid={this.state.Email!==this.state.ConfirmEmail}
-                                    type="email"
-                                    name="ConfirmEmail"
-                                    onChange={this.handleChange}
-                                    
-                                    placeholder="Confirm Email"/></FormGroup>
                             <FormGroup>
                                 <Label for="Password" />
                                 <Input
@@ -211,32 +187,17 @@ export default  class logIn extends React.Component{
                                     //pattern={{value: '^[A-Za-z0-9]{8}+$'}}
                                     onChange={this.handleChange}
                                     placeholder="Password(8 characters minimum)"/></FormGroup>
-                            <FormGroup>
-                                <Label for="ConfirmPassword" />
-                                <Input
-                                    valid={this.state.Password!==""&&this.state.ConfirmPassword===this.state.Password}
-                                    // invalid={this.state.Password!==this.state.ConfirmPassword}
-                                    type="password"
-                                    name="ConfirmPassword"
-                                    onChange={this.handleChange}
-                                    placeholder="Confirm Password"/></FormGroup>
                             <Table className="Table1">
                                 <tr className="tr1">
                                 <th className="th1">
-                                    <Recaptcha
-                                        size="default"
-                                        sitekey="6Lco76sUAAAAACdWahIKj_ECwE81xKF-96onh8h2"
-                                        render="explicit"
-                                        verifyCallback={this.verifyCallback}
-                                        onloadCallback={this.recaptchaLoaded}
-                                    />
+                                   
                                 </th>
                             <th className="th2"><Button size="lg" color="danger">Sign Up</Button></th>
                                 </tr></Table>
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Already have an account? <a style={{color:'blue'}}>Log In</a></div>
+                            <div style={{textAlign:'center',fontSize:'large'}}>Create account<a style={{color:'blue'}}>Sign Up</a></div>
                         </Form>
                     </div>
                 </div>

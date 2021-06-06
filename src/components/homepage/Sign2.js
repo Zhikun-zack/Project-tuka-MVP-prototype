@@ -3,7 +3,7 @@ import React from 'react'
 import Login_Img from "./img/profile-icon.png";
 import Menu_Img from "./img/hamburger-icon.png";
 import Modal from './Modal';
-import logIn from "./logIn";
+import LogIn from "./logInWindow";
 import { Link } from 'react-router-dom';
 import "./Sign2.js.css";
 
@@ -34,6 +34,7 @@ class DropdownSign2 extends React.Component{
     Click on one button, not close its window, then click on another one, close the first opened window and open the window of the clicked button
     Click on one button and close its window, then click on another one, open the clicked button's window
     */
+   
     showMenu = (event) => {
         //The current className that you click
         const currClassName = event.currentTarget.className;
@@ -51,7 +52,7 @@ class DropdownSign2 extends React.Component{
  
         //stop the action bubble up to document
         event.nativeEvent.stopImmediatePropagation()
-        console.log(this.state.showLogin);
+       
         //add eventlistener so that when click other place except the popup menu, the menu will close
         document
         .addEventListener("click",() => {
@@ -67,14 +68,17 @@ class DropdownSign2 extends React.Component{
             showMenu: false,
             showSignUp: true
         })
+        console.log(this.state.showSignUp)
         e.nativeEvent.stopImmediatePropagation()
     }
     //when click login button
     showLogin = (e) => {
+        
         this.setState({
             showMenu: false,
             showLogin: true
         })
+        console.log(this.state.showLogin)
         e.nativeEvent.stopImmediatePropagation()
     }
     //Take the false value from Modal.js component(child component) and set to state
@@ -167,8 +171,9 @@ class DropdownSign2 extends React.Component{
                         popUpWindow
                     }
                     {/* Send showSignUp as a attribute to the Modal.js component and using the button in this component to close signUp window*/}
+                    <LogIn className = "###" closeSignUp = {this.closeSignUp} show = {this.state.showLogin}></LogIn> 
                     <Modal className = "###" closeSignUp = {this.closeSignUp} show = {this.state.showSignUp}></Modal>
-                    <logIn className = "###" closeLogIn = {this.closeSignUp} show = {this.state.showLogin}></logIn>
+                    
                     
                 </div>
     )

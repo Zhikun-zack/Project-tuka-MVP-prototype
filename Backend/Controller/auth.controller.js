@@ -12,7 +12,7 @@ exports.signup = (req, res) => {
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: bcrypt.hashSync(req.body.password, 8)
     });
     //save user model to linked database
     user.save((err, user) => {
@@ -37,10 +37,11 @@ exports.logIn = (req, res) => {
             return;
         }
         
-        if(!user){
-            res.status(404).send({message: "User not found"});
+        if(user == null){
+            return res.status(404).send({message: "User not found"});
         }
-
+        console.log("user is "+ user)
+        console.log("request password is "+ req.body.password)
         //check whether the input password is same as stored
         var passwordIsValid = bcrypt.compareSync(
             //password user input 
@@ -48,9 +49,6 @@ exports.logIn = (req, res) => {
             //password get from database
             user.password
         )
-        console.log(user.password)
-        console.log(req.body.password)
-        
         //send user information that password is invalid
         if(!passwordIsValid){
             return res.status(401).send({
