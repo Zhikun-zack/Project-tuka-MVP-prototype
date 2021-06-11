@@ -12,7 +12,8 @@ import PropTypes from "prop-types";
 
 import searchIcon from './img/search-icon.png';
 
-import Keywords from "./Keywords"
+import Keywords from "./Keywords";
+import KeyWordsWarning from "./PopUpWarning";
 
 import "./Search.css";
 
@@ -353,7 +354,7 @@ class Search extends Component{
                             </button>
                             </Link>
                         {keywords}
-                        
+                        <KeyWordsWarning></KeyWordsWarning>
                     </Fragment>
                     
                 </form>
