@@ -60,6 +60,9 @@ class Search extends Component{
     constructor(props, context){
         super(props, context);
 
+        //create a ref to calling PopUpWarning Component functions
+        this.changeKeyPopUp = React.createRef();
+
         this.state = {
             tracks: [],
             //keep tract of position in the suggestion list
@@ -76,8 +79,6 @@ class Search extends Component{
             myRef: React.createRef(),
             //body content of keywords popup window
             modelBody: "",
-            //whether the keywords popup window show
-            display: false
         };
         //this.removeKey = this.removeKey.bind(this);
     }
@@ -132,10 +133,11 @@ class Search extends Component{
             }
         }else{
             this.setState({
-                display: true,
                 modelBody: "Please input a genre"
             })
-            console.log(this.state.display)
+            //invoking handleOpen function in PopUpWarning Component by ref
+            this.changeKeyPopUp.current.handleOpen()
+            
         }
 
     }
@@ -310,7 +312,6 @@ class Search extends Component{
                 userInput,
                 keyWordsList,
                 stateSuggestions,
-                display,
             }
         } = this;
         let keywords;
@@ -365,7 +366,7 @@ class Search extends Component{
                             </button>
                             </Link>
                         {keywords}
-                        <KeyWordsWarning modelBody = {this.state.modelBody} display = {display}></KeyWordsWarning>
+                        <KeyWordsWarning ref = {this.changeKeyPopUp} modelBody = {this.state.modelBody}></KeyWordsWarning>
                     </Fragment>
                     
                 </form>

@@ -2,25 +2,42 @@
 import React, {useState} from "react";
 import {Modal, Button} from "react-bootstrap";
 
-function KeyWordsWarning({modelBody, display}) {
-    const [show, setShow] = useState(display)
+class KeyWordsWarning extends React.Component{
+    constructor(props){
+        super(props)
 
-    const handleClose = () => setShow(false)
-    //const handleOpen = () => setShow(true)
+        this.state = {
+            show: false
+        }
+    }
 
+    handleClose = () => {
+        this.setState({
+            show: false
+        })
+    }
+    handleOpen = () => {
+        this.setState({
+            show: true
+        })
+    }
 
+    render() {
+     
         return(
-            <Modal show = {show} onHide = {handleClose}>
+            <Modal show = {this.state.show} onHide = {this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Notice</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
-                    {modelBody}
+                    {this.props.modelBody}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick = {handleClose}>closer</Button>
+                    <Button onClick = {this.handleClose}>closer</Button>
                 </Modal.Footer>
             </Modal>
         )
+       
+    }
 }
 export default KeyWordsWarning;
