@@ -74,6 +74,10 @@ class Search extends Component{
             keyWordsList: [],
             stateSuggestions: [],
             myRef: React.createRef(),
+            //body content of keywords popup window
+            modelBody: "",
+            //whether the keywords popup window show
+            display: false
         };
         //this.removeKey = this.removeKey.bind(this);
     }
@@ -126,6 +130,12 @@ class Search extends Component{
                 //update redux
                 this.props.updateKeys(primaryGenre)
             }
+        }else{
+            this.setState({
+                display: true,
+                modelBody: "Please input a genre"
+            })
+            console.log(this.state.display)
         }
 
     }
@@ -300,6 +310,7 @@ class Search extends Component{
                 userInput,
                 keyWordsList,
                 stateSuggestions,
+                display,
             }
         } = this;
         let keywords;
@@ -354,7 +365,7 @@ class Search extends Component{
                             </button>
                             </Link>
                         {keywords}
-                        <KeyWordsWarning></KeyWordsWarning>
+                        <KeyWordsWarning modelBody = {this.state.modelBody} display = {display}></KeyWordsWarning>
                     </Fragment>
                     
                 </form>
