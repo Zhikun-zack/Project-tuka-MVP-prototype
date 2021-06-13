@@ -78,7 +78,7 @@ export default  class Model extends React.Component{
         this.setState({
             show: false
         })
-        this.logIn.current.handleClose();
+        //this.logIn.current.handleClose();
     }
     handleOpen = () => {
         this.setState({
@@ -247,7 +247,7 @@ export default  class Model extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Already have an account? <a style={{color:'blue'}} onClick = {this.onClick}>Log In</a></div>
+                            {/* <div style={{textAlign:'center',fontSize:'large'}}>Already have an account? <a style={{color:'blue'}} onClick = {this.onClick}>Log In</a></div> */}
                         </Form>
                         <LogIn ref = {this.logIn}></LogIn>
                     </div>

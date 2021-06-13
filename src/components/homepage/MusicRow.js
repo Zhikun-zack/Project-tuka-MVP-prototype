@@ -5,6 +5,8 @@ import './MusicRow.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import LogIn from "./logInWindow";
+
 import leftIcon from "./img/arrow-left.png";
 import rightIcon from "./img/arrow-right.png";
 import closeIcon from "./img/accordion-up.png";
@@ -28,6 +30,7 @@ class MusicRow extends React.Component {
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
         */
+       this.logIn = React.createRef();
     }
     state = {
         active: true,
@@ -103,14 +106,14 @@ class MusicRow extends React.Component {
                     <div className = "carousel_window">
                         <div className = "carousel_mask">
                             <div className = "carousel_display">
-                                <img className = "play" src = {play}></img>
+                                <img className = "play" src = {play} onClick = {this.handlePlay}></img>
                             </div>
                             <div className = "carousel_display">
-                                <img className = "stop" src = {stop}></img>
+                                <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
                             </div> 
                             <div className = "carousel_display">
                                 <Link to = '/details'> 
-                                    <img className = "user" src = {user}></img>
+                                    <img className = "user" src = {user} ></img>
                                 </Link>
                                 
                             </div> 
@@ -168,6 +171,9 @@ class MusicRow extends React.Component {
         })
 
     }
+    handlePlay = () => {
+        this.logIn.current.handleOpen();
+    }
 
     render() {
         let closeButton;
@@ -209,7 +215,7 @@ class MusicRow extends React.Component {
                         <img src= {rightIcon} />
                     </button>
                 </div>
-                
+                <LogIn ref = {this.logIn}></LogIn>
             </div>
         );
     }

@@ -12,9 +12,9 @@ class AuthService {
             });
     }
 
-    logIn(username, password) {
+    logIn(email, password) {
         return API.post("/api/auth/userLogIn", {
-            name: username,
+            email: email,
             password: password
         }).then(response => {
             console.log(response.data)

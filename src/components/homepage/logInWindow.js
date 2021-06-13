@@ -81,7 +81,7 @@ export default  class LogInWin extends React.Component{
         this.setState({
             show: false
         });
-        this.openSingUp.current.handleClose();
+        //this.openSingUp.current.handleClose();
     }
     handleOpen = () => {
         this.setState({
@@ -89,10 +89,7 @@ export default  class LogInWin extends React.Component{
         })
     }
     onClick = () => {
-        
         this.openSingUp.current.handleOpen();
-        console.log(this.openSingUp.current)
-        console.log(this.state.show)
     }
 
     handleChange = e => {
@@ -102,8 +99,8 @@ export default  class LogInWin extends React.Component{
     handleSubmit(e){
         e.preventDefault()
         AuthService.logIn(
-            "Zack3",
-            "password"
+            this.state.Email,
+            this.state.Password
         ).catch(err => {
             console.log(err.response)
             this.setState({
@@ -214,7 +211,7 @@ export default  class LogInWin extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Create account<a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div>
+                            {/* <div style={{textAlign:'center',fontSize:'large'}}>Create account<a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div> */}
                         </Form>
                         
                     </div>

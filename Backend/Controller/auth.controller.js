@@ -28,7 +28,7 @@ exports.signup = (req, res) => {
 exports.logIn = (req, res) => {
     //console.log(res)
     User.findOne({
-        name: req.body.name
+        email: req.body.email
     }).exec((err, user) => {
         console.log(user);
         
