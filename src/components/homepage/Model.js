@@ -3,7 +3,7 @@ import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table, Alert, FormFeedback} from 'reactstrap';
 import axios from 'axios';
 
-
+import LogIn from "./logInWindow"
 import AuthService from "../../services/auth.service";
 //import { Alert } from 'bootstrap';
 
@@ -67,7 +67,7 @@ export default  class Model extends React.Component{
             //for storing status
             error: 200
         };
-
+        this.logIn = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
@@ -78,11 +78,15 @@ export default  class Model extends React.Component{
         this.setState({
             show: false
         })
+        this.logIn.current.handleClose();
     }
     handleOpen = () => {
         this.setState({
             show: true
         })
+    }
+    onClick = () => {
+        this.logIn.current.handleOpen();
     }
 
     handleChange = e => {
@@ -243,8 +247,9 @@ export default  class Model extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Already have an account? <a style={{color:'blue'}}>Log In</a></div>
+                            <div style={{textAlign:'center',fontSize:'large'}}>Already have an account? <a style={{color:'blue'}} onClick = {this.onClick}>Log In</a></div>
                         </Form>
+                        <LogIn ref = {this.logIn}></LogIn>
                     </div>
                 </div>
             </div>
