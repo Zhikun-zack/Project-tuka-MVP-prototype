@@ -3,6 +3,7 @@ import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table, Alert, FormFeedback} from 'reactstrap';
 import axios from 'axios';
 
+import SignUp from "./Model";
 import AuthService from "../../services/auth.service";
 //import { Alert } from 'bootstrap';
 
@@ -66,16 +67,29 @@ export default  class LogInWin extends React.Component{
             //for storing status
             error: 200
         };
-
+        this.openSingUp = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
+
+        
     }
 
     //Click close button and set false back to the Sign2.js state
-    onClick = (e) => {
-        this.props.closeSignUp(false);
+    handleClose = () => {
+        this.setState({
+            show: false
+        })
+    }
+    handleOpen = () => {
+        this.setState({
+            show: true
+        })
+    }
+    onClick = () => {
+        console.log(this.openSingUp.current)
+        this.openSingUp.current.handleOpen();
     }
 
     handleChange = e => {
@@ -109,7 +123,7 @@ export default  class LogInWin extends React.Component{
 
     render() {
         //if show value sent from Sign2.js is false, return nothing
-        if(!this.props.show){
+        if(!this.state.show){
             return null;
         }
         let email
@@ -169,7 +183,7 @@ export default  class LogInWin extends React.Component{
                 <div style={modalStyle}>
                     <div style={headerStyle}>
                         {/* When click this button, change the Sign2.js's state */}
-                        <button onClick={ e => this.onClick(e)}>
+                        <button onClick={ this.handleClose}>
                            X
                         </button>
                     </div>
@@ -197,10 +211,12 @@ export default  class LogInWin extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Create account<a style={{color:'blue'}}>Sign Up</a></div>
+                            <div style={{textAlign:'center',fontSize:'large'}}>Create account<a onClick = {this.onClick()} style={{color:'blue'}}>Sign Up</a></div>
                         </Form>
+                        
                     </div>
                 </div>
+                <SignUp ref = {this.openSingUp}></SignUp>
             </div>
         )
     }

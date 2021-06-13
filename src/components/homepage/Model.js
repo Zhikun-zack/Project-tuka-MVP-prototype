@@ -50,7 +50,7 @@ const verifyEmail = status => {
 }
 
 
-export default  class Modal extends React.Component{
+export default  class Model extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -74,9 +74,15 @@ export default  class Modal extends React.Component{
         this.verifyCallback = this.verifyCallback.bind(this);
     }
 
-    //Click close button and set false back to the Sign2.js state
-    onClick = (e) => {
-        this.props.closeSignUp(false);
+    handleClose = () => {
+        this.setState({
+            show: false
+        })
+    }
+    handleOpen = () => {
+        this.setState({
+            show: true
+        })
     }
 
     handleChange = e => {
@@ -137,7 +143,7 @@ export default  class Modal extends React.Component{
 
     render() {
         //if show value sent from Sign2.js is false, return nothing
-        if(!this.props.show){
+        if(!this.state.show){
             return null;
         }
         let email
@@ -183,7 +189,7 @@ export default  class Modal extends React.Component{
                 <div style={modalStyle}>
                     <div style={headerStyle}>
                         {/* When click this button, change the Sign2.js's state */}
-                        <button onClick={ e => this.onClick(e)}>
+                        <button onClick={ this.handleClose}>
                            X
                         </button>
                     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 // import {Dropdown,Menu} from 'semantic-ui-react'
 import Login_Img from "./img/profile-icon.png";
 import Menu_Img from "./img/hamburger-icon.png";
-import Modal from './Modal';
+import Model from './Model';
 import LogIn from "./logInWindow";
 import { Link } from 'react-router-dom';
 import "./Sign2.js.css";
@@ -20,7 +20,11 @@ class DropdownSign2 extends React.Component{
             formerClickedTarget: "",
             //sign up window display or not 
             showSignUp: false,
+            
         }
+        //ref for open sign in and sign up windows
+        this.signUp = React.createRef();
+        this.logIn = React.createRef();
 
         this.showMenu = this.showMenu.bind(this);
         this.showWindow = this.showWindow.bind(this);
@@ -34,7 +38,14 @@ class DropdownSign2 extends React.Component{
     Click on one button, not close its window, then click on another one, close the first opened window and open the window of the clicked button
     Click on one button and close its window, then click on another one, open the clicked button's window
     */
-   
+    onClick = (e) => {
+        if (e.currentTarget.className == "popUpLogIn1"){
+            this.logIn.current.handleOpen();
+        }
+        else if (e.currentTarget.className == "popUpLogIn2"){
+            this.signUp.current.handleOpen();
+        }
+    }
     showMenu = (event) => {
         //The current className that you click
         const currClassName = event.currentTarget.className;
@@ -81,7 +92,7 @@ class DropdownSign2 extends React.Component{
         console.log(this.state.showLogin)
         e.nativeEvent.stopImmediatePropagation()
     }
-    //Take the false value from Modal.js component(child component) and set to state
+    //Will executed in Model.js Take the false value from Model.js component(child component) and set to state
     closeSignUp = (value) => {
         this.setState({
             showSignUp: value,
@@ -121,9 +132,9 @@ class DropdownSign2 extends React.Component{
         if(this.state.formerClickedTarget == "loginImg"){
             popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
                                 {/* when click show sign up window */}
-                                <div className = "popUpLogIn1" onClick = {this.showLogin}>Log In</div>
+                                <div className = "popUpLogIn1" onClick = {this.onClick}>Log In</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2" onClick = {this.showSignUp}>Sign Up</div>
+                                <div className = "popUpLogIn2" onClick = {this.onClick}>Sign Up</div>
                             </div>);
         }else{
             popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
@@ -170,9 +181,9 @@ class DropdownSign2 extends React.Component{
                     {
                         popUpWindow
                     }
-                    {/* Send showSignUp as a attribute to the Modal.js component and using the button in this component to close signUp window*/}
-                    <LogIn className = "###" closeSignUp = {this.closeSignUp} show = {this.state.showLogin}></LogIn> 
-                    <Modal className = "###" closeSignUp = {this.closeSignUp} show = {this.state.showSignUp}></Modal>
+                    {/* Send showSignUp as a attribute to the Model.js component and using the button in this component to close signUp window*/}
+                    <LogIn className = "###" ref = {this.logIn}></LogIn> 
+                    <Model className = "###" ref = {this.signUp}></Model>
                     
                     
                 </div>

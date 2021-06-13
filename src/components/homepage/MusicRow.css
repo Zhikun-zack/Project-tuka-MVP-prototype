@@ -184,8 +184,9 @@
 }
 .WholeRow{
     width: 100%;
+    min-width: 80rem;
     height: auto;
-    
+
 }
 .WholeRow_hide{
     height: auto;

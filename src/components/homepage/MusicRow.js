@@ -209,6 +209,7 @@ class MusicRow extends React.Component {
                         <img src= {rightIcon} />
                     </button>
                 </div>
+                
             </div>
         );
     }

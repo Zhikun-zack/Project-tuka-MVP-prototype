@@ -97,8 +97,21 @@ class Search extends Component{
         //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
         if(userInput != ""){
             //value pushed into the keywordslist show not equal to any values in keywordslist
-            if(!keyWordsList.some((element) => element === suggestionGenres[0])){
+            if(!keyWordsList.some((element) => element === suggestionGenres[0]) && keyWordsList.length < 5){
                 keyWordsList.push(suggestionGenres[0])
+            }else if(keyWordsList.length == 5){
+                //if select more than 5, popup window
+                this.setState({
+                    modelBody: "Maxmimum number of selected genres is 5, please remove some genres to keep searching"
+                })
+                this.changeKeyPopUp.current.handleOpen()
+            }
+            //repeat selection
+            else if(keyWordsList.some((element) => element === suggestionGenres[0])){
+                this.setState({
+                    modelBody: "Oops, you have selected this genre, please change another one."
+                })
+                this.changeKeyPopUp.current.handleOpen()
             }
             
             this.setState({
@@ -118,7 +131,6 @@ class Search extends Component{
                     break
                 }
             }
-            console.log("primary:" + primaryIndex)
             //whether the userinput is one of the primary genre
             if( primaryIndex != -1){
                 //get the object at the primaryIndex
@@ -132,11 +144,14 @@ class Search extends Component{
                 this.props.updateKeys(primaryGenre)
             }
         }else{
-            this.setState({
-                modelBody: "Please input a genre"
-            })
-            //invoking handleOpen function in PopUpWarning Component by ref
-            this.changeKeyPopUp.current.handleOpen()
+            if (this.state.modelBody != ""){
+                this.changeKeyPopUp.current.handleOpen()
+            }
+            // this.setState({
+            //     modelBody: "Please input a genre"
+            // })
+            // //invoking handleOpen function in PopUpWarning Component by ref
+            // this.changeKeyPopUp.current.handleOpen()
             
         }
 
@@ -258,15 +273,23 @@ class Search extends Component{
     //Autosuggest: Change keyWordsList here and update redux store (old onClick)
     onSuggestionSelected = (e, {suggestion}) => {
         let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
-        console.log(primaryGenre)
+        //console.log(primaryGenre)
 
         if(suggestion != "No suggestions, try a genre!"){
             const keyWordsList = this.state.keyWordsList;
             if(!keyWordsList.some((element) => element === suggestion) && keyWordsList.length < 5){
                 keyWordsList.push(suggestion);
-            }else if (!keyWordsList.some((element) => element === suggestion) && keyWordsList.length >= 5){
-                keyWordsList.shift();
-                keyWordsList.push(suggestion);
+            }else if(keyWordsList.length == 5){
+                //if select more than 5, popup window
+                this.setState({
+                    modelBody: "Maxmimum number of selected genres is 5, please remove some genres to keep searching."
+                })
+                this.changeKeyPopUp.current.handleOpen()
+            }else if(keyWordsList.some((element) => element === suggestion)){
+                this.setState({
+                    modelBody: "Oops, you have selected this genre, please change another one."
+                })
+                this.changeKeyPopUp.current.handleOpen()
             }
             
             let n = keyWordsList.length;

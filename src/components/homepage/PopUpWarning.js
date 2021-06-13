@@ -10,7 +10,7 @@ class KeyWordsWarning extends React.Component{
             show: false
         }
     }
-
+    
     handleClose = () => {
         this.setState({
             show: false
