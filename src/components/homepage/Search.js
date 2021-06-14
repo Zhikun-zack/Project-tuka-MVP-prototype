@@ -85,17 +85,17 @@ class Search extends Component{
     
     //click the any results in suggestions window
     onClick = (e) => {
-        //Suggested genres shows in suggestion windows 
-        const genreSuggest = this.state.stateSuggestions;
-
         const userInput = this.state.userInput;
         let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
 
+        //Suggested genres in suggestion window
         const suggestionGenres = this.getSuggestions(userInput)
+
         const keyWordsList = this.state.keyWordsList;
         //If user input nothing, not execute any code
         //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
-        if(userInput != ""){
+        if(suggestionGenres[0] != "No suggestions, try a genre!" && userInput != ""){
+            console.log(userInput)
             //value pushed into the keywordslist show not equal to any values in keywordslist
             if(!keyWordsList.some((element) => element === suggestionGenres[0]) && keyWordsList.length < 5){
                 keyWordsList.push(suggestionGenres[0])
@@ -144,9 +144,9 @@ class Search extends Component{
                 this.props.updateKeys(primaryGenre)
             }
         }else{
-            if (this.state.modelBody != ""){
-                this.changeKeyPopUp.current.handleOpen()
-            }
+            // if (this.state.modelBody != ""){
+            //     this.changeKeyPopUp.current.handleOpen()
+            // }
             // this.setState({
             //     modelBody: "Please input a genre"
             // })
@@ -154,6 +154,10 @@ class Search extends Component{
             // this.changeKeyPopUp.current.handleOpen()
             
         }
+        this.setState({
+            userInput: "",
+        })
+        console.log(this.state.userInput)
 
     }
     
@@ -272,9 +276,10 @@ class Search extends Component{
     //Autosuggest: Change keyWordsList here and update redux store (old onClick)
     onSuggestionSelected = (e, {suggestion}) => {
         let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
+        let userInput = this.state.userInput;
         //console.log(primaryGenre)
 
-        if(suggestion != "No suggestions, try a genre!"){
+        if(suggestion != "No suggestions, try a genre!" && userInput != ""){
             const keyWordsList = this.state.keyWordsList;
             if(!keyWordsList.some((element) => element === suggestion) && keyWordsList.length < 5){
                 keyWordsList.push(suggestion);
@@ -292,6 +297,9 @@ class Search extends Component{
             }
             
             let n = keyWordsList.length;
+            if(n === 5){
+                console.log("full")
+            }
                 //console.log(keyWordsList[n-1])
             let i
             //location of last selected genre, no match is -1
@@ -325,6 +333,9 @@ class Search extends Component{
             })
 
         }
+        this.setState({
+            userInput: ""
+        })
     }
 
 
