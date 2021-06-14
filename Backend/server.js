@@ -25,9 +25,7 @@ app.get('/', (req, res) => res.send('API Running'));
 // app.use('/api/artist', require('./routes/api/artist'));
 
 require("./routes/authUser")(app);
-
-
-
+require("./routes/Music")(app);
 
 //Define Routes
 // app.use('/api/users', require('./routes/api/users'));

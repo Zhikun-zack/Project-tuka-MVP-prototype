@@ -27,9 +27,10 @@ exports.signup = (req, res) => {
 //When user log in, check whether they are authorized
 exports.logIn = (req, res) => {
     //console.log(res)
-    User.findOne({
-        email: req.body.email
-    }).exec((err, user) => {
+    User.findOne({$or: [
+        {email: req.body.email},
+        {name: req.body.username}
+    ]}).exec((err, user) => {
         console.log(user);
         
         if(err){

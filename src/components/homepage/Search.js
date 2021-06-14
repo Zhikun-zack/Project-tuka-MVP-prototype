@@ -7,13 +7,13 @@ import AutosuggestHighlightMatch from "autosuggest-highlight/umd/match";
 import AutosuggestHighlightParse from "autosuggest-highlight/umd/parse";
 //Fuzzy search
 import Fuse from "fuse.js";
-
 import PropTypes from "prop-types";
 
 import searchIcon from './img/search-icon.png';
 
 import Keywords from "./Keywords";
 import KeyWordsWarning from "./PopUpWarning";
+import MusicService from "../../services/Music.service";
 
 import "./Search.css";
 
@@ -219,7 +219,6 @@ class Search extends Component{
             this.props.updateKeys(primaryGenre);
         }
 
-        console.log(primaryGenre)
     }
 
     //Autosuggest: How to filter the suggestion
@@ -304,7 +303,6 @@ class Search extends Component{
                     break
                 }
             }
-            console.log("primary:" + primaryIndex)
             //whether the userinput is one of the primary genre
             if( primaryIndex != -1){
                 //get the object at the primaryIndex
@@ -322,6 +320,10 @@ class Search extends Component{
                 userInput: "",
             })
             // this.props.updateKeys(keyWordsList);
+            MusicService.extractBasedOnTags("pop").catch(error => {
+                console.log(error.message)
+            })
+
         }
     }
 

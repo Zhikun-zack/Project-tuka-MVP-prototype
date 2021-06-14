@@ -1,5 +1,5 @@
 const Song = require("../models/Song");
-
+const MusicController = require("../Controller/Music.controller");
 const fakeMusics = [
     {
         "title": "Old Town Road",
@@ -64,7 +64,7 @@ const fakeMusics = [
         "userID": "00007",
         "songID": "00007-001",
         "uploadDate": "",
-        "tags": ["hip-hop", "vocal", "country""]
+        "tags": ["hip-hop", "vocal", "country"]
         
     },
     
@@ -111,7 +111,7 @@ const fakeMusics = [
         "userID": "00011",
         "songID": "00011-002",
         "uploadDate": "",
-        "tags": ["pop", "vocal", "rock""]
+        "tags": ["pop", "vocal", "rock"]
     },
     
     {
@@ -463,8 +463,16 @@ function loadFakeMusic() {
 }
 
 module.exports = (app) => {
+    // app.post(
+    //     "/",
+    //     loadFakeMusic()
+    // );
     app.post(
-        "/",
-        loadFakeMusic()
-    )
+        "/api/music",
+        MusicController.UploadSong
+    );
+    app.get(
+        "/api/music",
+        MusicController.ExtractSong
+    );
 }

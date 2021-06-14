@@ -17,7 +17,7 @@ const SongSchema = new mongoose.Schema({
         required: true
     },
     uploadDate: {
-        type: String,
+        type: Date,
     },
     tags: {
         type: Array
@@ -30,4 +30,4 @@ const SongSchema = new mongoose.Schema({
 });
 
 
-module.expoers = Song = mongoose.model('song', SongSchema)
+module.exports = Song = mongoose.model('song', SongSchema)
