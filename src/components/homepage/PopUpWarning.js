@@ -33,7 +33,7 @@ class KeyWordsWarning extends React.Component{
                     {this.props.modelBody}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick = {this.handleClose}>closer</Button>
+                    <Button onClick = {this.handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         )
