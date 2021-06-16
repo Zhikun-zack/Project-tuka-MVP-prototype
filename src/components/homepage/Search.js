@@ -327,6 +327,8 @@ class Search extends Component{
             this.setState({
                 userInput: "",
             })
+            let tags = "pop"
+            console.log("/api/music"+tags)
             // this.props.updateKeys(keyWordsList);
             MusicService.extractBasedOnTags("pop").catch(error => {
                 console.log(error.message)

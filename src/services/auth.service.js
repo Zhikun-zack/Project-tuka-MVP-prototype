@@ -20,6 +20,8 @@ class AuthService {
             console.log(response.data)
         })
     }
+
+    
 }
 
 export default new AuthService();
