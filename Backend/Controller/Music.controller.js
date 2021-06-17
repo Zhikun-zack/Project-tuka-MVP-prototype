@@ -1,13 +1,15 @@
 const Song = require("../models/Song");
 
 exports.ExtractSong = (req, res) => {
-    console.log("request body:")
+    console.log("request query:")
     console.log(req.query)
     Song.find({
         tags: req.query.genre
     })
     .limit(12)
     .exec((err,song) => {
+        console.log("song")
+        console.log(song)
         if(err){
             res.status(500).send({message: err});
             return;
@@ -18,13 +20,18 @@ exports.ExtractSong = (req, res) => {
         }
         //console.log(song)
 
-        res.status(200).send({
-            tags: song.tags,
-            title: song.title,
-            price: song.price,
-            userID: song.userID,
-            songID: song.songID
-        })
+        res.status(200).send(song.map(s => {
+            return(
+                {
+                    tags: s.tags,
+                    title: s.title,
+                    price: s.price,
+                    userID: s.userID,
+                    songID: s.songID
+                }
+            )
+            
+        }))
     })
 }
 

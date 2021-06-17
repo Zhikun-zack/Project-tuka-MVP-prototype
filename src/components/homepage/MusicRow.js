@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import LogIn from "./logInWindow";
+import MusicService from '../../services/Music.service';
 
 import leftIcon from "./img/arrow-left.png";
 import rightIcon from "./img/arrow-right.png";
@@ -98,11 +99,20 @@ class MusicRow extends React.Component {
             }],
 
     };
+    onClick = (e) => {
+        console.log(JSON.parse(e.currentTarget.getAttribute("thumbNailAttribute")))
+    }
     //render all artists windows in each line
     renderSlides(){
+        if(this.props.genres != "Trending Now"){
+            console.log(this.props.genres)
+            MusicService.extractBasedOnTags((this.props.genres).toLowerCase()).then(result => {console.log(result)})
+            
+        }
+
         const slides = this.state.artists.map((item, index) => {
             return (
-                <div className ="carousel_slide">
+                <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
                     <div className = "carousel_window">
                         <div className = "carousel_mask">
                             <div className = "carousel_display">
@@ -184,11 +194,13 @@ class MusicRow extends React.Component {
                     <img src= {closeIcon} className = {this.state.active ? "carouselCloseButtonImg ": "carouselCloseButtonImg carouselCloseButtonImgRotate" }></img>
                 </button>
             )
+            //console.log(MusicService.extractBasedOnTags(this.props.genres.toLowerCase()))
         }else {
             closeButton = (
                 <button className="carouselCloseButton">
                 </button>
             )
+            //console.log(MusicService.extractBasedOnTags(this.props.genres))
         }
 
         return  (
