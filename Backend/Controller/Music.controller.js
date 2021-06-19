@@ -4,14 +4,29 @@ const Song = require("../models/Song");
 exports.ExtractSong = (req, res) => {
     console.log("request query:")
     console.log(req.query)
-
+    /***query structure 
+     * {
+     *    &and: [{
+     *              tags: primarykey
+     *            }, 
+     *            {
+     *               $or: [{tags: subGenre1}, 
+     *                     {tags: subGenre2}]
+     *           }]
+     * }
+     */
+    //
+    //storing the whole query language
     let andQuery = []
+    //saving the or query
     let orQuery = []
+    //always get a primarykey query
     andQuery.push({
         tags: req.query.primaryGenre
     })
+    //if subgenre key exist
     if (req.query.primaryGenre && req.query.subGenre){
-        
+        //if query several subgenres
         if (Array.isArray(req.query.subGenre)){
             for(const g of req.query.subGenre){
                 orQuery.push({
@@ -23,16 +38,13 @@ exports.ExtractSong = (req, res) => {
             andQuery.push({
                 $or: orQuery
             })
+        //if only one subgenre
         }else{
             andQuery.push({
                 tags: req.query.subGenre
             })
-            
-        }
-        
+        }   
     }
-
-
     Song.find({$and: andQuery})
     .limit(12)
     .exec((err,song) => {
