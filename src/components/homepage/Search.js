@@ -323,7 +323,7 @@ class Search extends Component{
                 //update redux
                 this.props.updateKeys(primaryGenre)
             }
-
+            this.props.updateSelectedKeys(keyWordsList);
             this.setState({
                 userInput: "",
             })
@@ -417,10 +417,14 @@ function mapDispatchToProps(dispatch){
     return {
         //add keyWordsList into state for Homepage_Content.js
         updateKeys: (keys) => dispatch({
-            type: "addKeywords",  
-            
+            type: "addKeywords", 
             keyWordsList: keys
+        }),
+        updateSelectedKeys: (selected) => dispatch({
+            type: "addSelectedKeywords",
+            selectedkeys: selected
         })
+
     }
 }
 

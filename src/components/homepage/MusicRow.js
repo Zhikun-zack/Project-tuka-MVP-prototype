@@ -148,8 +148,7 @@ class MusicRow extends React.Component {
 
     //render all artists windows in each line
     renderSlides(){
-        console.log(this.props.genres)
-        console.log(this.state.artists)
+    
         const slides = this.state.artists.map((item, index) => {
             return (
                 <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
@@ -163,7 +162,7 @@ class MusicRow extends React.Component {
                             </div> 
                             <div className = "carousel_display">
                                 <Link to = '/details'> 
-                                    <img src ={require("./img/DameTuCosita.jpg").default}></img>
+                                    <img src ={user}></img>
                                 </Link>
 
                             </div> 

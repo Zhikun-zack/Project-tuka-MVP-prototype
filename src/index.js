@@ -14,13 +14,19 @@ const initialState = {keyWordsList:[{index: 0, name: "Rock", flag: true},
                                     {index: 3, name: "Country", flag: true}, 
                                     {index: 4, name: "Latin", flag: true}, 
                                     {index: 5, name: "Jazz", flag: true}, 
-                                    {index: 6, name: "Classical", flag: true}]};
+                                    {index: 6, name: "Classical", flag: true}],
+                        selectedKeywords: []
+                    };
 
 const reducer = (state = initialState, action) => {
     switch (action.type){
         //when action type is addKeywords, replace old state
         case "addKeywords":
-            return {keyWordsList: action.keyWordsList};
+            return {keyWordsList: action.keyWordsList, ...state.selectedKeywords};
+        case "addSelectedKeywords":
+            console.log("from indexjs")
+            console.log(...state.keyWordsList)
+            return {...state.keyWordsList, selectedKeywords: action.selectedkeys};
         default:
             return state
     } 
