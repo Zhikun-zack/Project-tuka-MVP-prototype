@@ -22,11 +22,10 @@ const reducer = (state = initialState, action) => {
     switch (action.type){
         //when action type is addKeywords, replace old state
         case "addKeywords":
-            return {keyWordsList: action.keyWordsList, ...state.selectedKeywords};
+            return {keyWordsList: action.keyWordsList, ...state};
         case "addSelectedKeywords":
-            console.log("from indexjs")
-            console.log(...state.keyWordsList)
-            return {...state.keyWordsList, selectedKeywords: action.selectedkeys};
+            //change selectedkeywords while not change the other
+            return {...state, selectedKeywords: action.selectedkeys};
         default:
             return state
     } 

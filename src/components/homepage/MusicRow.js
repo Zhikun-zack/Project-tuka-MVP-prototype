@@ -23,6 +23,7 @@ import myImg from './img/Isis.jpg';
 import play from './img/play-button-small.png';
 import stop from "./img/stop-button-small.png";
 import user from "./img/user-profile image example.png";
+import { connect } from 'react-redux';
 
 class MusicRow extends React.Component {
     constructor(props) {
@@ -31,9 +32,11 @@ class MusicRow extends React.Component {
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
         */
+
        this.logIn = React.createRef();
        this.state = {
         active: true,
+        selectedKeywords: [],
         //details informations for artists windows
         artists: [
             {
@@ -108,16 +111,14 @@ class MusicRow extends React.Component {
         if(this.props.genres != "Trending Now"){
             //for saving the new music information get from database
             let newArtist = []
+
             //get data
-            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""))
+            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""), ['rock'])
                 .then(result => {
                     //console.log(result)
                     const musicData = result['data'];
                     //if the tag exists in database
                     if (musicData.length != 0){
-                        //console.log(musicData)
-                        //let musicNameWithoutBlank = musicData[0]['title'].replace(/\s*/g,"")
-
                         //music id
                         let id = 0
                         let image
@@ -137,6 +138,7 @@ class MusicRow extends React.Component {
                             newArtist.push(newArtistDetail);
                             id++;
                         })
+                        
                         //replace the new data with old state
                         this.setState({
                             artists: newArtist
@@ -146,36 +148,10 @@ class MusicRow extends React.Component {
         }
     }
 
-    //render all artists windows in each line
-    renderSlides(){
-    
-        const slides = this.state.artists.map((item, index) => {
-            return (
-                <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
-                    <div className = "carousel_window">
-                        <div className = "carousel_mask">
-                            <div className = "carousel_display">
-                                <img className = "play" src = {play} onClick = {this.handlePlay}></img>
-                            </div>
-                            <div className = "carousel_display">
-                                <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
-                            </div> 
-                            <div className = "carousel_display">
-                                <Link to = '/details'> 
-                                    <img src ={user}></img>
-                                </Link>
-
-                            </div> 
-                        </div>
-                        <img src = {this.props.genres != "Trending Now"? item.image.default: item.image} alt = "artist pic"></img>
-                        {/* Artist and band's name for each elements in Carousel */}
-                        
-                    </div>  
-                    <div className = "carousel_artists">{item.song}</div>      
-                </div>
-            );
-        })
-        return slides;
+    componentDidUpdate(preProps){
+        if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
+            MusicService.extractBasedOnTags()
+        }
     }
     //function for click left arrow
     handleLeftClick = (e) => {
@@ -225,6 +201,35 @@ class MusicRow extends React.Component {
     }
 
     render() {
+        console.log(this.props.reduxState.selectedKeywords)
+
+        const slides = this.state.artists.map((item, index) => {
+            return (
+                <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
+                    <div className = "carousel_window">
+                        <div className = "carousel_mask">
+                            <div className = "carousel_display">
+                                <img className = "play" src = {play} onClick = {this.handlePlay}></img>
+                            </div>
+                            <div className = "carousel_display">
+                                <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
+                            </div> 
+                            <div className = "carousel_display">
+                                <Link to = '/details'> 
+                                    <img src ={user}></img>
+                                </Link>
+
+                            </div> 
+                        </div>
+                        <img src = {this.props.genres != "Trending Now"? item.image.default: item.image} alt = "artist pic"></img>
+                        {/* Artist and band's name for each elements in Carousel */}
+                        
+                    </div>  
+                    <div className = "carousel_artists">{item.song}</div>      
+                </div>
+            );
+        })
+
         let closeButton;
         if(this.props.genres != "Trending Now"){ 
             closeButton = (
@@ -243,7 +248,6 @@ class MusicRow extends React.Component {
         }
         //let musicInitData = this.getInitData();
         //console.log(musicInitData)
-
         return  (
             //whole div for each row
             <div className='WholeRow'>
@@ -261,7 +265,7 @@ class MusicRow extends React.Component {
                     {/* When carousel closed renderSlides disappear with animation */}
                     <div className = {this.state.active? "carousel_viewport" : "carousel_viewport_hide"}>
                         <div className = "carousel" ref="carouselViewport">
-                            {this.renderSlides()}
+                            {slides}
                         </div>  
                     </div>              
                     <button className = "carousel_button carousel_button--right" onClick={this.handleRightClick} >
@@ -273,4 +277,9 @@ class MusicRow extends React.Component {
         );
     }
 }
-export default MusicRow;
+
+function mapStateToProps(state){
+    return{reduxState: state}
+}
+
+export default connect(mapStateToProps)(MusicRow);

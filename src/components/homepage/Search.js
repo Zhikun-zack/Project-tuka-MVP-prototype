@@ -330,9 +330,7 @@ class Search extends Component{
             let tags = "pop"
             console.log("/api/music"+tags)
             // this.props.updateKeys(keyWordsList);
-            MusicService.extractBasedOnTags("pop").catch(error => {
-                console.log(error.message)
-            })
+            
 
         }
         this.setState({

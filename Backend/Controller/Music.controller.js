@@ -1,15 +1,41 @@
+const { query } = require("express");
 const Song = require("../models/Song");
 
 exports.ExtractSong = (req, res) => {
     console.log("request query:")
     console.log(req.query)
-    Song.find({
-        tags: req.query.genre
+
+    let andQuery = []
+    let orQuery = []
+    andQuery.push({
+        tags: req.query.primaryGenre
     })
+    if (req.query.primaryGenre && req.query.subGenre){
+        
+        if (Array.isArray(req.query.subGenre)){
+            for(const g of req.query.subGenre){
+                orQuery.push({
+                    tags: g
+                })
+            }
+            console.log('orQuery')
+            console.log(orQuery)
+            andQuery.push({
+                $or: orQuery
+            })
+        }else{
+            andQuery.push({
+                tags: req.query.subGenre
+            })
+            
+        }
+        
+    }
+
+
+    Song.find({$and: andQuery})
     .limit(12)
     .exec((err,song) => {
-        console.log("song")
-        console.log(song)
         if(err){
             res.status(500).send({message: err});
             return;

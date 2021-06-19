@@ -2,8 +2,15 @@ import axios from "axios";
 const API2 = axios.create({baseURL: "http://localhost:4080"})
 
 class MusicService{
-    extractBasedOnTags(tags){
-        return API2.get("/api/music?genre="+tags)
+    extractBasedOnTags(primaryGenre, subGenre=[]){
+        let url = "/api/music?";
+        url = "/api/music?primaryGenre=" + primaryGenre;
+        if(subGenre.length !== 0){
+            subGenre.map((t) => {
+                url += "&subGenre=" + t
+            })
+        }
+        return API2.get(url)
             .then(response => {
                 return response
             });
