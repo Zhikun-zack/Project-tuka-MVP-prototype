@@ -8,7 +8,7 @@ require('../models/Song');
 //         "price": ".99",
 //         "userID": "00001",
 //         "songID": "00001-001",
-//     "uploadDate": "",
+//         "uploadDate": "",
 //         "tags": ["hip-hop/rap", "country", "pop"]
         
 //     },
@@ -19,7 +19,7 @@ require('../models/Song');
 //         "userID": "00002",
 //         "songID": "00002-001",
 //         "uploadDate": "",
-//         "tags": ["pop", "vocal"]
+//         "tags": ["pop", "vocal", "classical"]
         
 //     },
     
@@ -48,7 +48,7 @@ require('../models/Song');
 //         "userID": "00002",
 //         "songID": "00002-002",
 //         "uploadDate": "",
-//         "tags": ["pop", "vocal"]
+//         "tags": ["pop", "vocal", "rock", "classical"]
 //     },
     
 //     {
@@ -66,7 +66,7 @@ require('../models/Song');
 //         "userID": "00007",
 //         "songID": "00007-001",
 //         "uploadDate": "",
-//         "tags": ["hip-hop", "vocal", "country"]
+//         "tags": ["hip-hop", "vocal", "country", "jazz"]
         
 //     },
     
@@ -76,7 +76,7 @@ require('../models/Song');
 //         "userID": "00004",
 //         "songID": "00004-001",
 //         "uploadDate": "",
-//         "tags": ["country", "rock", "singer/songwriter"]
+//         "tags": ["country", "rock", "singer/songwriter", "jazz"]
         
 //     },
 //     {
@@ -85,7 +85,7 @@ require('../models/Song');
 //         "userID": "00009",
 //         "songID": "00009-001",
 //         "uploadDate": "",
-//         "tags": ["blues", "urban", "jazz"]
+//         "tags": ["blues", "urban", "jazz", "classical"]
         
 //     },
     
@@ -104,7 +104,7 @@ require('../models/Song');
 //         "userID": "00011",
 //         "songID": "00011-001",
 //         "uploadDate": "",
-//         "tags": ["pop", "vocal", "rock"]
+//         "tags": ["pop", "vocal", "rock", "classical"]
 //     },
     
 //     {
@@ -113,7 +113,7 @@ require('../models/Song');
 //         "userID": "00011",
 //         "songID": "00011-002",
 //         "uploadDate": "",
-//         "tags": ["pop", "vocal", "rock"]
+//         "tags": ["pop", "vocal", "rock", "latin"]
 //     },
     
 //     {
@@ -122,7 +122,7 @@ require('../models/Song');
 //         "userID": "00012",
 //         "songID": "00012-001",
 //         "uploadDate": "",
-//         "tags": ["indie rock", "pop", "alternative"]
+//         "tags": ["indie rock", "pop", "alternative", "classical"]
 //     },
     
 //     {
@@ -131,7 +131,7 @@ require('../models/Song');
 //         "userID": "00013",
 //         "songID": "00013-001",
 //         "uploadDate": "",
-//         "tags": ["dance", "hip-hop", "electronic"]
+//         "tags": ["dance", "hip-hop", "electronic", "jazz"]
 //     },
     
 //     {
@@ -140,7 +140,7 @@ require('../models/Song');
 //         "userID": "00014",
 //         "songID": "00014-001",
 //         "uploadDate": "",
-//         "tags": ["rock", "pop", "vocal"]
+//         "tags": ["rock", "pop", "vocal", "classical"]
 //     },
     
 //     {
@@ -149,7 +149,7 @@ require('../models/Song');
 //         "userID": "00015",
 //         "songID": "00015-001",
 //         "uploadDate": "",
-//         "tags": ["pop", "vocal", "country"]
+//         "tags": ["pop", "vocal", "country", "latin"]
 //     },
     
 //     {
@@ -167,7 +167,7 @@ require('../models/Song');
 //         "userID": "00017",
 //         "songID": "00017-001",
 //         "uploadDate": "",
-//         "tags": ["world", "dance", "electronic"]
+//         "tags": ["world", "dance", "electronic", "latin", "classical"]
 //     },
     
 //     {
@@ -176,7 +176,7 @@ require('../models/Song');
 //         "userID": "00035",
 //         "songID": "00035-001",
 //         "uploadDate": "",
-//         "tags": ["indie pop", "indie rock", "alternative", "dance"]
+//         "tags": ["indie pop", "indie rock", "alternative", "dance", "latin"]
 //     },
     
 //     {
@@ -203,7 +203,7 @@ require('../models/Song');
 //         "userID": "00020",
 //         "songID": "00020-001",
 //         "uploadDate": "",
-//         "tags": ["vocal", "hip-hop/rap", "pop"]
+//         "tags": ["vocal", "hip-hop/rap", "pop", "latin"]
 //     },
     
 //     {
@@ -275,7 +275,7 @@ require('../models/Song');
 //         "userID": "00028",
 //         "songID": "00028-001",
 //         "uploadDate": "",
-//         "tags": ["jazz", "r&b", "soul", "instrumental"]
+//         "tags": ["jazz", "r&b", "soul", "instrumental", "classical"]
 //     },
     
 //     {
@@ -284,7 +284,7 @@ require('../models/Song');
 //         "userID": "00029",
 //         "songID": "00029-001",
 //         "uploadDate": "",
-//         "tags": ["blues", "rock", "jazz"]
+//         "tags": ["blues", "rock", "jazz","classical"]
 //     },
     
 //     {
@@ -302,7 +302,7 @@ require('../models/Song');
 //         "userID": "00031",
 //         "songID": "00031-001",
 //         "uploadDate": "",
-//         "tags": ["r&b/soul", "hip-hop/rap"]
+//         "tags": ["r&b/soul", "hip-hop/rap", "jazz"]
 //     },
     
 //     {
@@ -311,7 +311,7 @@ require('../models/Song');
 //         "userID": "00032",
 //         "songID": "00032-001",
 //         "uploadDate": "",
-//         "tags": ["rock", "reggae", "indie"]
+//         "tags": ["rock", "reggae", "indie", "latin"]
 //     },
     
 //     {
@@ -320,7 +320,7 @@ require('../models/Song');
 //         "userID": ".00033",
 //         "songID": "00033-001",
 //         "uploadDate": "",
-//         "tags": ["hip-hop/rap", "country", "pop"]
+//         "tags": ["hip-hop/rap", "country", "pop", "latin"]
 //     },
     
 //     {
@@ -338,7 +338,7 @@ require('../models/Song');
 //         "userID": "00036",
 //         "songID": "00036-001",
 //     "uploadDate": "",
-//         "tags": ["pop", "rock", "country", "acoustic"]
+//         "tags": ["pop", "rock", "country", "acoustic", "classical"]
 //     },
     
 //     {
@@ -356,7 +356,7 @@ require('../models/Song');
 //         "userID": "00034",
 //         "songID": "00034-001",
 //         "uploadDate": "",
-//         "tags": ["world", "indie", "hip-hop/rap"]
+//         "tags": ["world", "indie", "hip-hop/rap", "latin"]
 //     },
     
 //     {
@@ -375,7 +375,7 @@ require('../models/Song');
 //         "userID": "00038",
 //         "songID": "00038-001",
 //         "uploadDate": "",
-//         "tags": ["blues", "jazz", "southern rock"]
+//         "tags": ["blues", "jazz", "southern rock", "latin"]
 //     },
     
 //     {

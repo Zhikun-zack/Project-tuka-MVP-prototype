@@ -13,7 +13,7 @@ import rightIcon from "./img/arrow-right.png";
 import closeIcon from "./img/accordion-up.png";
 
 //images path for artists windows
-import singer1 from './img/DameTu.jpg';
+import singer1 from './img/Me.jpg';
 import singer2 from './img/Faith.jpg';
 import singer3 from './img/GodsCountry.jpg';
 import singer4 from './img/GrowingPains.jpg';
@@ -32,8 +32,7 @@ class MusicRow extends React.Component {
         this.previous = this.previous.bind(this);
         */
        this.logIn = React.createRef();
-    }
-    state = {
+       this.state = {
         active: true,
         //details informations for artists windows
         artists: [
@@ -99,17 +98,58 @@ class MusicRow extends React.Component {
             }],
 
     };
+    }
+    
     onClick = (e) => {
         console.log(JSON.parse(e.currentTarget.getAttribute("thumbNailAttribute")))
     }
+    //execute before render() function, give the initial data for discoverage page
+    componentDidMount(){
+        if(this.props.genres != "Trending Now"){
+            //for saving the new music information get from database
+            let newArtist = []
+            //get data
+            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""))
+                .then(result => {
+                    //console.log(result)
+                    const musicData = result['data'];
+                    //if the tag exists in database
+                    if (musicData.length != 0){
+                        //console.log(musicData)
+                        //let musicNameWithoutBlank = musicData[0]['title'].replace(/\s*/g,"")
+
+                        //music id
+                        let id = 0
+                        let image
+                        musicData.map(m => {
+                            try {
+                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
+                            } catch (error) {
+                                image = require("./img/noimage.jpg")
+                            }
+                            let newArtistDetail = {
+                                name: " ",
+                                id: id,
+                                song: m['title'],
+                                //for invoking the image from file path
+                                image: image
+                            };
+                            newArtist.push(newArtistDetail);
+                            id++;
+                        })
+                        //replace the new data with old state
+                        this.setState({
+                            artists: newArtist
+                        })
+                    }
+                })
+        }
+    }
+
     //render all artists windows in each line
     renderSlides(){
-        if(this.props.genres != "Trending Now"){
-            console.log(this.props.genres)
-            MusicService.extractBasedOnTags((this.props.genres).toLowerCase()).then(result => {console.log(result)})
-            
-        }
-
+        console.log(this.props.genres)
+        console.log(this.state.artists)
         const slides = this.state.artists.map((item, index) => {
             return (
                 <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
@@ -123,16 +163,16 @@ class MusicRow extends React.Component {
                             </div> 
                             <div className = "carousel_display">
                                 <Link to = '/details'> 
-                                    <img className = "user" src = {user} ></img>
+                                    <img src ={require("./img/DameTuCosita.jpg").default}></img>
                                 </Link>
-                                
+
                             </div> 
                         </div>
-                        <img src = {item.image} alt = "artist pic"></img>
+                        <img src = {this.props.genres != "Trending Now"? item.image.default: item.image} alt = "artist pic"></img>
                         {/* Artist and band's name for each elements in Carousel */}
                         
                     </div>  
-                    <div className = "carousel_artists">Artist/Band</div>      
+                    <div className = "carousel_artists">{item.song}</div>      
                 </div>
             );
         })
@@ -202,6 +242,8 @@ class MusicRow extends React.Component {
             )
             //console.log(MusicService.extractBasedOnTags(this.props.genres))
         }
+        //let musicInitData = this.getInitData();
+        //console.log(musicInitData)
 
         return  (
             //whole div for each row

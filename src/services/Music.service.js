@@ -3,8 +3,12 @@ const API2 = axios.create({baseURL: "http://localhost:4080"})
 
 class MusicService{
     extractBasedOnTags(tags){
-        return API2.get("/api/music?genre="+tags);
+        return API2.get("/api/music?genre="+tags)
+            .then(response => {
+                return response
+            });
     }
+    
     uploadFiles(){}
     // uploadMusic(){
     //     return API2.post("/api/music", {
