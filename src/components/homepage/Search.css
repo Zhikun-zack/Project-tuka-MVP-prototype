@@ -15,6 +15,7 @@
     font-family: "Open Sans", sans-serif;
     font-size: 1.6rem;
     padding-left: 1.4rem;
+    background-color: #e8e9ea;
 }
 .react-autosuggest__input::-webkit-input-placeholder{
     color: #C0C0C0;

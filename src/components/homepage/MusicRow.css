@@ -53,7 +53,7 @@
         box-shadow: 0.1rem 0.1rem 0.6rem gray;
     }
     .carousel_window:hover{
-        transform: scale(1.1);
+
         }
         .carousel_window:hover .carousel_artists{
             position:absolute;
@@ -62,6 +62,9 @@
 
     .carousel_window:hover .carousel_mask{
         opacity: 1;
+    }
+    .carousel_window_active{
+        transform: scale(1.2);
     }
     
     .carousel_mask{
@@ -72,14 +75,15 @@
         left: .7rem;
         transition: opacity 0.5s;
         z-index: 1;
+        background-color: rgba(80, 80, 80, 0.8);
         }
         .carousel_mask:hover{
         }
         .carousel_display{
             display: inline-block;
             position: relative;
-            
-            /* transition: all .3s; */
+
+            transition: all .3s;
         }
         .carousel_display:hover{
             transform: scale(1.1);

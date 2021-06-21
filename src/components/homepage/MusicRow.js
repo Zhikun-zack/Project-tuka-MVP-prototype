@@ -36,6 +36,10 @@ class MusicRow extends React.Component {
        this.logIn = React.createRef();
        this.state = {
         active: true,
+        //whether the thumbnail should expand display
+        carouselActive: false,
+        //the index of the thumbnail to expand
+        carouselActiveIndex: -1,
         selectedKeywords: [],
         //details informations for artists windows
         artists: [
@@ -104,7 +108,16 @@ class MusicRow extends React.Component {
     }
     
     onClick = (e) => {
-        console.log(JSON.parse(e.currentTarget.getAttribute("thumbNailAttribute")))
+        const carouselActive = this.state.carouselActive;
+        console.log(e.currentTarget.id)
+        if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
+            this.setState({
+                carouselActive: !carouselActive,
+                carouselActiveIndex: e.currentTarget.id
+            })
+        }
+        console.log(this.state.carouselActive)
+        console.log(this.state.carouselActiveIndex)
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
@@ -182,6 +195,12 @@ class MusicRow extends React.Component {
         duration: totalScrollTime, 
         scrollDirection: 'scrollLeft'});
     }
+    clickCarouselWin = () => {
+        const carouselActive = this.state.carouselActive;
+        this.setState({
+            carouselActive: !carouselActive
+        })
+    }
     //When hover on artist windows
     hoverOnWindows(){
     }
@@ -202,18 +221,26 @@ class MusicRow extends React.Component {
 
     render() {
         console.log(this.props.reduxState.selectedKeywords)
-
+        let thumbNailClassName;
         const slides = this.state.artists.map((item, index) => {
+            console.log("index:" + index)
+            console.log("activeindex:" + this.state.carouselActiveIndex)
+            if(index == this.state.carouselActiveIndex){
+                thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
+                console.log("thumbNail:" + thumbNailClassName)
+            }else{
+                thumbNailClassName = "carousel_window";
+            }
             return (
-                <div className ="carousel_slide" key = {index} onClick = {this.onClick} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
-                    <div className = "carousel_window">
+                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
+                    <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
                         <div className = "carousel_mask">
                             <div className = "carousel_display">
                                 <img className = "play" src = {play} onClick = {this.handlePlay}></img>
                             </div>
-                            <div className = "carousel_display">
+                            {/* <div className = "carousel_display">
                                 <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
-                            </div> 
+                            </div>  */}
                             <div className = "carousel_display">
                                 <Link to = '/details'> 
                                     <img src ={user}></img>
