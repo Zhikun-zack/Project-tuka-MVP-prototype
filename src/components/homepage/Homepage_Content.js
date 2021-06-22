@@ -24,7 +24,7 @@ class Homepage_Content extends React.Component{
             <div> 
                 {
                     GenreList.map((key) => {
-                        return <MusicRow genres = {key}></MusicRow>
+                        return <MusicRow onClick = {this.onClick} genres = {key}></MusicRow>
                     })
                 }
                 

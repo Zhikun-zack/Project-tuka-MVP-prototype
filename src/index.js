@@ -15,7 +15,8 @@ const initialState = {keyWordsList:[{index: 0, name: "Rock", flag: true},
                                     {index: 4, name: "Latin", flag: true}, 
                                     {index: 5, name: "Jazz", flag: true}, 
                                     {index: 6, name: "Classical", flag: true}],
-                        selectedKeywords: []
+                        selectedKeywords: [],
+                        thumbNailActive: false,
                     };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,8 @@ const reducer = (state = initialState, action) => {
         case "addSelectedKeywords":
             //change selectedkeywords while not change the other
             return {...state, selectedKeywords: action.selectedkeys};
+        case "changeThumbNailActive":
+            return {...state, thumbNailActive: action.thumbNailActive};
         default:
             return state
     } 

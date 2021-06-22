@@ -37,7 +37,7 @@ class MusicRow extends React.Component {
        this.state = {
         active: true,
         //whether the thumbnail should expand display
-        carouselActive: false,
+        carouselActive: this.props.reduxState.thumbNailActive,
         //the index of the thumbnail to expand
         carouselActiveIndex: -1,
         selectedKeywords: [],
@@ -115,9 +115,26 @@ class MusicRow extends React.Component {
                 carouselActive: !carouselActive,
                 carouselActiveIndex: e.currentTarget.id
             })
+            this.props.changeThumbNailActive(this.state.carouselActive)
+            console.log(this.props.reduxState.thumbNailActive)
+        }else if (e.currentTarget.id !== this.state.carouselActiveIndex){
+            if(carouselActive === true){
+                this.setState({
+                    carouselActive: carouselActive,
+                    carouselActiveIndex: e.currentTarget.id
+                })
+                this.props.changeThumbNailActive(this.state.carouselActive)
+            }else{
+                this.setState({
+                    carouselActive:!carouselActive,
+                    carouselActiveIndex: e.currentTarget.id
+                })
+                this.props.changeThumbNailActive(this.state.carouselActive)
+            }
+            
+            console.log('changed' + this.state.carouselActiveIndex)
         }
-        console.log(this.state.carouselActive)
-        console.log(this.state.carouselActiveIndex)
+        
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
@@ -220,21 +237,24 @@ class MusicRow extends React.Component {
     }
 
     render() {
-        console.log(this.props.reduxState.selectedKeywords)
+        // console.log(this.props.reduxState.selectedKeywords)
         let thumbNailClassName;
+        let maskClassName;
         const slides = this.state.artists.map((item, index) => {
-            console.log("index:" + index)
-            console.log("activeindex:" + this.state.carouselActiveIndex)
+            // console.log("index:" + index)
+            // console.log("activeindex:" + this.state.carouselActiveIndex)
             if(index == this.state.carouselActiveIndex){
                 thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
-                console.log("thumbNail:" + thumbNailClassName)
+                maskClassName = this.state.carouselActive? "carousel_mask_active carousel_mask": "carousel_mask";
+                // console.log("thumbNail:" + thumbNailClassName)
             }else{
                 thumbNailClassName = "carousel_window";
+                maskClassName = "carousel_mask";
             }
             return (
                 <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
                     <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
-                        <div className = "carousel_mask">
+                        <div className = {maskClassName}>
                             <div className = "carousel_display">
                                 <img className = "play" src = {play} onClick = {this.handlePlay}></img>
                             </div>
@@ -308,5 +328,12 @@ class MusicRow extends React.Component {
 function mapStateToProps(state){
     return{reduxState: state}
 }
+function mapDispatchToProps(dispatch){
+    return {changeThumbNailActive: (thumbNailActive) => dispatch({
+        type: "changeThumbNailActive",
+        thumbNailActive: thumbNailActive,
+    })
+}
+}
 
-export default connect(mapStateToProps)(MusicRow);
+export default connect(mapStateToProps,mapDispatchToProps)(MusicRow);
