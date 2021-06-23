@@ -24,6 +24,7 @@ import play from './img/play-button-small.png';
 import stop from "./img/stop-button-small.png";
 import user from "./img/user-profile image example.png";
 import { connect } from 'react-redux';
+import FormFeedback from 'reactstrap/lib/FormFeedback';
 
 class MusicRow extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class MusicRow extends React.Component {
        this.state = {
         active: true,
         //whether the thumbnail should expand display
-        carouselActive: this.props.reduxState.thumbNailActive,
+        carouselActive: false,
         //the index of the thumbnail to expand
         carouselActiveIndex: -1,
         selectedKeywords: [],
@@ -109,35 +110,37 @@ class MusicRow extends React.Component {
     
     onClick = (e) => {
         const carouselActive = this.state.carouselActive;
-        console.log(e.currentTarget.id)
         if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
             this.setState({
                 carouselActive: !carouselActive,
                 carouselActiveIndex: e.currentTarget.id
             })
-            this.props.changeThumbNailActive(this.state.carouselActive)
-            console.log(this.props.reduxState.thumbNailActive)
+
+            this.props.changeThumbNailActive([this.props.genres,!carouselActive])
+            //console.log(this.props.reduxState.thumbNailActive)
         }else if (e.currentTarget.id !== this.state.carouselActiveIndex){
             if(carouselActive === true){
                 this.setState({
                     carouselActive: carouselActive,
                     carouselActiveIndex: e.currentTarget.id
                 })
-                this.props.changeThumbNailActive(this.state.carouselActive)
+                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive])
             }else{
                 this.setState({
                     carouselActive:!carouselActive,
                     carouselActiveIndex: e.currentTarget.id
                 })
-                this.props.changeThumbNailActive(this.state.carouselActive)
+                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive])
             }
-            
-            console.log('changed' + this.state.carouselActiveIndex)
         }
-        
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
+        if(this.props.onOff){
+            console.log("true")
+        }else{
+            console.log('Not true')
+        }
         if(this.props.genres != "Trending Now"){
             //for saving the new music information get from database
             let newArtist = []
@@ -179,6 +182,14 @@ class MusicRow extends React.Component {
     }
 
     componentDidUpdate(preProps){
+        //When thumbnail in other carousel expanded, close all thumbnails in this carousel
+        if(preProps.onOff === true && this.props.onOff === false){
+            this.setState({
+                carouselActive: false,
+                carouselActiveIndex: -1
+            })
+        }
+        
         if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
             MusicService.extractBasedOnTags()
         }
@@ -235,7 +246,12 @@ class MusicRow extends React.Component {
     handlePlay = () => {
         this.logIn.current.handleOpen();
     }
-
+    handleCloseAllThumbNail = () => {
+        this.setState({
+            carouselActive: false,
+            carouselActiveIndex: -1
+        })
+    }
     render() {
         // console.log(this.props.reduxState.selectedKeywords)
         let thumbNailClassName;
@@ -243,7 +259,9 @@ class MusicRow extends React.Component {
         const slides = this.state.artists.map((item, index) => {
             // console.log("index:" + index)
             // console.log("activeindex:" + this.state.carouselActiveIndex)
-            if(index == this.state.carouselActiveIndex){
+            
+            //onOff is false means this carousel cannot expand any thumbnail in it
+            if(this.props.onOff && index == this.state.carouselActiveIndex){
                 thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
                 maskClassName = this.state.carouselActive? "carousel_mask_active carousel_mask": "carousel_mask";
                 // console.log("thumbNail:" + thumbNailClassName)

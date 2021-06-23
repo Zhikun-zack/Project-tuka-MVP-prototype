@@ -16,7 +16,7 @@ const initialState = {keyWordsList:[{index: 0, name: "Rock", flag: true},
                                     {index: 5, name: "Jazz", flag: true}, 
                                     {index: 6, name: "Classical", flag: true}],
                         selectedKeywords: [],
-                        thumbNailActive: false,
+                        thumbNailActive: ['',false],
                     };
 
 const reducer = (state = initialState, action) => {
