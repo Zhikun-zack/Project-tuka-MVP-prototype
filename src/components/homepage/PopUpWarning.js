@@ -27,14 +27,12 @@ class KeyWordsWarning extends React.Component{
         return(
             <Modal show = {this.state.show} onHide = {this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Notice</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
                     {this.props.modelBody}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick = {this.handleClose}>Close</Button>
-                </Modal.Footer>
+
             </Modal>
         )
        

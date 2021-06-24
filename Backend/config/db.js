@@ -14,7 +14,7 @@ require('../models/Song');
 //     },
     
 //     {
-//         "title": "I Don’t Care",
+//         "title": "I Dont Care",
 //         "price": ".99",
 //         "userID": "00002",
 //         "songID": "00002-001",
@@ -52,7 +52,7 @@ require('../models/Song');
 //     },
     
 //     {
-//         "title": "God’s Country",
+//         "title": "Gods Country",
 //         "price": ".99",
 //         "userID": "00006",
 //         "songID": "00006-001",

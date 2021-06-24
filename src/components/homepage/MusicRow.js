@@ -42,6 +42,7 @@ class MusicRow extends React.Component {
         //the index of the thumbnail to expand
         carouselActiveIndex: -1,
         selectedKeywords: [],
+        newArtist: [],
         //details informations for artists windows
         artists: [
             {
@@ -105,7 +106,7 @@ class MusicRow extends React.Component {
                 image: singer6
             }],
 
-    };
+        };
     }
     
     onClick = (e) => {
@@ -136,49 +137,7 @@ class MusicRow extends React.Component {
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
-        if(this.props.onOff){
-            console.log("true")
-        }else{
-            console.log('Not true')
-        }
-        if(this.props.genres != "Trending Now"){
-            //for saving the new music information get from database
-            let newArtist = []
-
-            //get data
-            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""), ['rock'])
-                .then(result => {
-                    //console.log(result)
-                    const musicData = result['data'];
-                    //if the tag exists in database
-                    if (musicData.length != 0){
-                        //music id
-                        let id = 0
-                        let image
-                        musicData.map(m => {
-                            try {
-                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
-                            } catch (error) {
-                                image = require("./img/noimage.jpg")
-                            }
-                            let newArtistDetail = {
-                                name: " ",
-                                id: id,
-                                song: m['title'],
-                                //for invoking the image from file path
-                                image: image
-                            };
-                            newArtist.push(newArtistDetail);
-                            id++;
-                        })
-                        
-                        //replace the new data with old state
-                        this.setState({
-                            artists: newArtist
-                        })
-                    }
-                })
-        }
+        this.updateMusicData();
     }
 
     componentDidUpdate(preProps){
@@ -189,11 +148,73 @@ class MusicRow extends React.Component {
                 carouselActiveIndex: -1
             })
         }
-        
         if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-            MusicService.extractBasedOnTags()
+            this.updateMusicData(this.props.reduxState.selectedKeywords)
         }
     }
+    
+    //Function for updating the music data get from database
+    //input param: selectedKeywords: the subgenres, default is [], if it is empty, then just searching the primary genre
+    updateMusicData = (selectedKeywords = []) => {
+        if(this.props.genres != "Trending Now"){
+            //for saving the new music information get from database
+            const newArtist = this.state.newArtist;
+            
+            //get data
+            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+                .then(result => {
+                    //console.log(result)
+                    const musicData = result['data'];
+                    //if the tag exists in database
+                    if (musicData.length != 0){
+                        let image
+                        musicData.map((m) => {
+                            //console.log(m)
+                            try {
+                                //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
+                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
+                            } catch (error) {
+                                image = require("./img/noimage.jpg")
+                            }
+                            let newArtistDetail = {
+                                name: " ",
+                                song: m['title'],
+                                tags: m['tags'],
+                                //for invoking the image from file path
+                                image: image
+                            };
+                            //location of the first duplicated element
+                            let i;
+                            //Whether the newArtistDetail has already in the state array
+                            let contains;
+                            newArtist.some((e,index) => {
+                                if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
+                                    contains = true;
+                                    i = index;
+                                }
+                            })
+                            //largest number of thumbnails in the discovery page
+                            if(newArtist.length <= 12){
+                                if(contains){
+                                    newArtist.splice(i, 1);
+                                    newArtist.unshift(newArtistDetail);
+                                }else{
+                                    newArtist.unshift(newArtistDetail);
+                                }
+                            }else{
+                                newArtist.unshift(newArtistDetail);
+                                newArtist.pop();
+                            }
+                        })
+                        //replace the new data with old state
+                        this.setState({
+                            artists: newArtist
+                        })
+                    }
+                })
+        }
+    }
+
     //function for click left arrow
     handleLeftClick = (e) => {
         //div carouselView
@@ -257,6 +278,7 @@ class MusicRow extends React.Component {
         let thumbNailClassName;
         let maskClassName;
         const slides = this.state.artists.map((item, index) => {
+            //console.log(item)
             // console.log("index:" + index)
             // console.log("activeindex:" + this.state.carouselActiveIndex)
             
@@ -270,7 +292,7 @@ class MusicRow extends React.Component {
                 maskClassName = "carousel_mask";
             }
             return (
-                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({genre: ["pop", "rock"], artist: "try"})}>
+                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({genre: item.tags, name: item.song})}>
                     <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
                         <div className = {maskClassName}>
                             <div className = "carousel_display">
