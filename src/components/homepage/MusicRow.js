@@ -137,7 +137,7 @@ class MusicRow extends React.Component {
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
-        this.updateMusicData();
+        this.updateMusicData(this.props.genres);
     }
 
     componentDidUpdate(preProps){
@@ -148,22 +148,50 @@ class MusicRow extends React.Component {
                 carouselActiveIndex: -1
             })
         }
+        let selectedKeywords = this.props.reduxState.selectedKeywords;
+        let subGenres = this.extractSubGenres(selectedKeywords);
+        //When selected keywords changed
         if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-            this.updateMusicData(this.props.reduxState.selectedKeywords)
+            //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
+            if(this.props.genres != preProps.genres){
+                this.updateMusicData(this.props.genres, subGenres)
+            }
+            //When user only select subgenres
+            else{
+                this.updateMusicData(this.props.genres, subGenres)
+            }
         }
     }
-    
+
+    //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
+    extractSubGenres = (selectedKeywords) => {
+        const primaryGenre = ["Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]
+        //define new variable and return this one instead of changing the redux state driectly
+        let subGenres = []
+        primaryGenre.map(m => {
+            if (selectedKeywords.includes(m)){
+                let i = selectedKeywords.indexOf(m);
+                
+                for(let j = 0; j < selectedKeywords.length; j++){
+                    if (j != i ){
+                        subGenres.push(selectedKeywords[j])
+                    }
+                }
+            }
+        })
+        return subGenres
+    }
     //Function for updating the music data get from database
     //input param: selectedKeywords: the subgenres, default is [], if it is empty, then just searching the primary genre
-    updateMusicData = (selectedKeywords = []) => {
+    updateMusicData = (primaryGenre, selectedKeywords = []) => {
         if(this.props.genres != "Trending Now"){
             //for saving the new music information get from database
             const newArtist = this.state.newArtist;
-            
+            //console.log('primaryGenres:' + primaryGenre)
             //get data
-            MusicService.extractBasedOnTags((this.props.genres).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+            MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
                 .then(result => {
-                    //console.log(result)
+                    // console.log(result)
                     const musicData = result['data'];
                     //if the tag exists in database
                     if (musicData.length != 0){
@@ -193,6 +221,7 @@ class MusicRow extends React.Component {
                                     i = index;
                                 }
                             })
+                            //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
                             //largest number of thumbnails in the discovery page
                             if(newArtist.length <= 12){
                                 if(contains){
@@ -296,15 +325,16 @@ class MusicRow extends React.Component {
                     <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
                         <div className = {maskClassName}>
                             <div className = "carousel_display">
-                                <img className = "play" src = {play} onClick = {this.handlePlay}></img>
+                                <img className = "play" src = {play} ></img>
                             </div>
                             {/* <div className = "carousel_display">
                                 <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
                             </div>  */}
-                            <div className = "carousel_display">
-                                <Link to = '/details'> 
-                                    <img src ={user}></img>
-                                </Link>
+                            <div className = "carousel_display" onClick = {this.handlePlay}>
+                                <img src ={user}></img>
+                                {/* <Link to = '/details'> 
+                                    
+                                </Link> */}
 
                             </div> 
                         </div>

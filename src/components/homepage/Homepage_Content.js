@@ -24,19 +24,19 @@ class Homepage_Content extends React.Component{
         return (
             <div> 
                 {
-                    GenreList.map((key) => {
+                    GenreList.map((key, index) => {
                         //thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
                         if (key === this.props.homePageGenres.thumbNailActive[0]){
                             //onOff represent whether this carousel can expand any thumbnail, false no, true means it can expand any thumbnail
-                            return <MusicRow onClick = {this.onClick} genres = {key} onOff = {true} ref = {this.musicRowRef}></MusicRow>
+                            return <MusicRow id = {index} onClick = {this.onClick} genres = {key} onOff = {true} ref = {this.musicRowRef}></MusicRow>
                         }else {
                             //if one carousel's thumbnail is expanded, the other carousels cannot expand any thumbnail
                             if(this.props.homePageGenres.thumbNailActive[1]){
-                                return <MusicRow onClick = {this.onClick} genres = {key} onOff = {false} ref = {this.musicRowRef}></MusicRow>
+                                return <MusicRow id = {index} onClick = {this.onClick} genres = {key} onOff = {false} ref = {this.musicRowRef}></MusicRow>
                             }
                             //if one thumbnail was clicked and is closed, the other carousel can expand any one
                             else{
-                                return <MusicRow onClick = {this.onClick} genres = {key} onOff = {true} ref = {this.musicRowRef}></MusicRow>
+                                return <MusicRow id = {index} onClick = {this.onClick} genres = {key} onOff = {true} ref = {this.musicRowRef}></MusicRow>
                             }
                         }
                     })

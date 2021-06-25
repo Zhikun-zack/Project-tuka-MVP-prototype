@@ -220,7 +220,9 @@ class Search extends Component{
                 }
             }
             //console.log(primaryGenre)
+            //update redux state when remove one of the keys
             this.props.updateKeys(primaryGenre);
+            this.props.updateSelectedKeys(list);
         }
 
     }
