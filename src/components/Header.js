@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Logo_Img from './homepage/img/logo.png'
+import Logo_Img from './homepage/img/TukaNewLogo2 red arrows.jpg'
 import './Header.css'
 
 import DropdownSign2 from './homepage/Sign2'
@@ -31,7 +31,7 @@ class Header extends React.Component {
                 <div className="nav_bar">
                     <div className = "nav_logo" name="tuka_logo"><Link to = "/" ><img src={Logo_Img} alt="Tuka logo" /></Link></div>
                     <div style={{ width: '40%' }}>
-                        <h1 className="navbar__linklist" > Discover • Share • Connect</h1>
+                        {/* <h1 className="navbar__linklist" > Discover • Share • Connect</h1> */}
                         <Search 
                         tValue = {(childValue) => this.transportValue(childValue)}
                         suggestions={[

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import {Dropdown,Menu} from 'semantic-ui-react'
 import Login_Img from "./img/profile-icon.png";
 import Menu_Img from "./img/hamburger-icon.png";
@@ -138,7 +138,7 @@ class DropdownSign2 extends React.Component{
                             </div>);
         }else{
             popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
-                                <div className = "popUpLogIn1">About</div>
+                                <Link to = "/about"><div className = "popUpLogIn1">About</div></Link>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
                                 <div className = "popUpLogIn2">Blog</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
