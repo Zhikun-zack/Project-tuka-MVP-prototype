@@ -1,4 +1,16 @@
-.AboutPage {
+.aboutPageContainer{
+    height: 100rem;
+    width: 100%;
+    min-width: 80rem;
+    background-color: #e8e9ea;
+}
+.aboutLoading{
+    width: 100%;
+    height: 100rem;
+    margin-left: 50%;
+    padding-top: 10%;
+}
+.aboutPage {
     height: 100rem;
     width: 100%;
     min-width: 80rem;

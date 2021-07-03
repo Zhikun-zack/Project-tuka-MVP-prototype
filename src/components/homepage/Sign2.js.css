@@ -1,6 +1,7 @@
 .logindiv{
     display: flex;
     position: relative;
+    margin-top: 3rem;
     /* transition: opacity 0.3s; */
     }
     .loginImg{

@@ -26,7 +26,7 @@ class App extends React.Component{
                     <Route path='/' exact component={Homepage_Content} header = {(headerValue) => this.HeaderValue(headerValue)}/>
                     <Route path = '/details' exact component = {Detail_Content}></Route>
                     <Route path = '/about' exact component = {About}></Route>
-                    <Route path = '/about' exact component = {About}></Route>
+                    <Route path = '/mission' exact component = {About}></Route>
                     <Footer />
     
                 </div>
