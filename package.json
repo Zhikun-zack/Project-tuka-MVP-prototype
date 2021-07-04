@@ -41,7 +41,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run server --prefix Backend"
+    "heroku-postbuild": "npm install && npm run server --prefix Backend"
   },
  
   "eslintConfig": {
