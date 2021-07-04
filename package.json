@@ -29,6 +29,10 @@
     "styled-components": "^5.2.3",
     "yarn": "^1.16.0"
   },
+  "engines": {
+    "node": "12.16.3",
+    "npm": "6.14.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "server": "npm run server --prefix Backend",
@@ -39,6 +43,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "cd Backend && npm install && npm run server"
   },
+ 
   "eslintConfig": {
     "extends": "react-app"
   },
