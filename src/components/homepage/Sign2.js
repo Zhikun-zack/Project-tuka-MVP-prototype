@@ -5,14 +5,15 @@ import Menu_Img from "./img/hamburger-icon.png";
 import Model from './Model';
 import LogIn from "./logInWindow";
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 import "./Sign2.js.css";
 
 class DropdownSign2 extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             //whether show the menu popup window
-            showMenu: false,
+            showMenu: this.props.reduxState.showMenu,
             //login window display or not
             showLogin: false,
             showWindow: false,
@@ -60,6 +61,7 @@ class DropdownSign2 extends React.Component{
             showMenu : showMenu,
             formerClickedTarget: currClassName,
         }); 
+        this.props.updateShowMenu(showMenu);
  
         //stop the action bubble up to document
         event.nativeEvent.stopImmediatePropagation()
@@ -72,6 +74,8 @@ class DropdownSign2 extends React.Component{
                 //showSignUp: false
             })
         })
+
+        this.props.updateShowMenu("false");
     }
     //when click secondary menu of signup button
     showSignUp = (e) => {
@@ -81,6 +85,7 @@ class DropdownSign2 extends React.Component{
         })
         console.log(this.state.showSignUp)
         e.nativeEvent.stopImmediatePropagation()
+        this.props.updateShowMenu("false");
     }
     //when click login button
     showLogin = (e) => {
@@ -91,6 +96,7 @@ class DropdownSign2 extends React.Component{
         })
         console.log(this.state.showLogin)
         e.nativeEvent.stopImmediatePropagation()
+        this.props.updateShowMenu("false");
     }
     //Will executed in Model.js Take the false value from Model.js component(child component) and set to state
     closeSignUp = (value) => {
@@ -127,7 +133,6 @@ class DropdownSign2 extends React.Component{
             })
         })
 
-
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.formerClickedTarget == "loginImg"){
             popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
@@ -140,17 +145,11 @@ class DropdownSign2 extends React.Component{
             popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
                                 <Link to = "/about"><div className = "popUpLogIn1">About</div></Link>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">Blog</div>
+                                <Link to = "/mission/"><div className = "popUpLogIn2">Vision</div></Link>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">FAQs</div>
+                                <Link to = "/faqs/"><div className = "popUpLogIn2">FAQs</div></Link>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">Contact</div>
-                                <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">Terms</div>
-                                <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">Privacy</div>
-                                <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2">Copyright</div>
+                                <Link to = "/blog-2/"><div className = "popUpLogIn2">Blog</div></Link>
                             </div>);
         }
 
@@ -190,5 +189,16 @@ class DropdownSign2 extends React.Component{
     )
     }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        updateShowMenu: (keys) =>dispatch({
+            type: "changeMenu",
+            changeMenu: keys
+        })
+    }
+}
+function mapStateToProps(state){
+    return{reduxState: state}
+}
 
-export default DropdownSign2
+export default connect(mapStateToProps, mapDispatchToProps)(DropdownSign2)

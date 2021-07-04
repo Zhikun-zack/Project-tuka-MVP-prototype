@@ -17,6 +17,7 @@ const initialState = {keyWordsList:[{index: 0, name: "Rock", flag: true},
                                     {index: 6, name: "Classical", flag: true}],
                         selectedKeywords: [],
                         thumbNailActive: ['',false],
+                        showMenu: false
                     };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +30,8 @@ const reducer = (state = initialState, action) => {
             return {...state, selectedKeywords: action.selectedkeys};
         case "changeThumbNailActive":
             return {...state, thumbNailActive: action.thumbNailActive};
+        case "changeMenu":
+            return {...state, showMenu: action.changeMenu};
         default:
             return state
     } 

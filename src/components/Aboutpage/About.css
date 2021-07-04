@@ -1,18 +1,21 @@
 .aboutPageContainer{
-    height: 100rem;
+    height: auto;
     width: 100%;
     min-width: 80rem;
     background-color: #e8e9ea;
+    
 }
 .aboutLoading{
     width: 100%;
     height: 100rem;
     margin-left: 50%;
     padding-top: 10%;
+    overflow-y: hidden;
 }
 .aboutPage {
     height: 100rem;
     width: 100%;
     min-width: 80rem;
     border: none;
+    overflow-y: hidden;
 }

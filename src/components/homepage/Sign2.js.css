@@ -27,7 +27,7 @@
         text-align: center;
         padding: 5px 0;
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         top: 150%;
         border-radius: 2rem;
         box-shadow: 1rem 1rem 4rem rgb(73, 71, 71);}
@@ -44,7 +44,7 @@
         opacity: 0;}
     .logInPopUp{
         width: 160%;
-        height: 260%;
+        height: 290%;
         left: -35%;
         }
         .logInPopUp::after{
@@ -52,7 +52,7 @@
             margin-left: -5.5rem;}
     .menuPopUp{
         width: 160%;
-        height: 950%;
+        height: 600%;
         left: -35%;
         }
         .menuPopUp::after{

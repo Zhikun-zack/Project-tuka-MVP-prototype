@@ -27,6 +27,8 @@ class App extends React.Component{
                     <Route path = '/details' exact component = {Detail_Content}></Route>
                     <Route path = '/about' exact component = {About}></Route>
                     <Route path = '/mission' exact component = {About}></Route>
+                    <Route path = '/faqs/' exact component = {About}></Route>
+                    <Route path = '/blog-2/' exact component = {About}></Route>
                     <Footer />
     
                 </div>

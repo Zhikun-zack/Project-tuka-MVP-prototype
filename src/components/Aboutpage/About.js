@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux";
 import Spinner from 'react-spinkit';
 
 
@@ -12,14 +13,24 @@ class About extends React.Component{
             loading: true
         }
     }
-
+    onClick = () => {
+        document.addEventListener("click", () => {
+            this.props.updateShowMenu("false")
+        })
+    }
     hideSpinner = () => {
+        console.log(this.props.match)
         this.setState({
             loading: false
         });
     };
 
     render(){
+        let src = this.props.match.path == '/about' ? 'https://www.tukaglobal.com' : 'https://www.tukaglobal.com' + this.props.match.path;
+        console.log(this.props.reduxState.showMenu)
+        document.removeEventListener("click", () => {
+            this.props.updateShowMenu("false");
+        })
         return (
             <div className = 'aboutPageContainer'>
                 {
@@ -34,7 +45,7 @@ class About extends React.Component{
                 <iframe 
                     className = 'aboutPage' 
                     onLoad = {this.hideSpinner} 
-                    src = 'http://www.tukaglobal.com/'>
+                    src = {src}>
                         About
                 </iframe>
             </div>
@@ -44,4 +55,17 @@ class About extends React.Component{
     }
 }
 
-export default About;
+function mapDispatchToProps(dispatch){
+    return {
+        updateShowMenu: (keys) =>dispatch({
+            type: "changeMenu",
+            changeMenu: keys
+        })
+    }
+}
+
+function mapStateToProps(state){
+    return{reduxState: state}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(About);
