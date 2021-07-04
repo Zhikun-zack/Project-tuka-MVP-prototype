@@ -37,7 +37,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTIO=false npm i --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "cd Backend && npm install && npm run server"
   },
   "eslintConfig": {
     "extends": "react-app"
