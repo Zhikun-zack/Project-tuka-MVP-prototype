@@ -8,13 +8,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 //Redux Set default state
 //index store the order of each genre
 //flag represent whether that genre's order has been changed
-const initialState = {keyWordsList:[{index: 0, name: "Rock", flag: true},
-                                    {index: 1, name: "Hip-Hop / Rap", flag: true},
-                                    {index: 2, name: "Pop", flag : true},
-                                    {index: 3, name: "Country", flag: true}, 
-                                    {index: 4, name: "Latin", flag: true}, 
-                                    {index: 5, name: "Jazz", flag: true}, 
-                                    {index: 6, name: "Classical", flag: true}],
+const initialState = {keyWordsList:[{index: 1, name: "Rock", flag: true},
+                                    {index: 2, name: "Hip-Hop / Rap", flag: true},
+                                    {index: 3, name: "Pop", flag : true},
+                                    {index: 4, name: "Country", flag: true}, 
+                                    {index: 5, name: "Latin", flag: true}, 
+                                    {index: 6, name: "Jazz", flag: true}, 
+                                    {index: 7, name: "Classical", flag: true}],
                         selectedKeywords: [],
                         thumbNailActive: ['',false],
                         showMenu: false

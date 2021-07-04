@@ -19,3 +19,11 @@
     border: none;
     overflow-y: hidden;
 }
+.aboutOverLay{
+    position: absolute;
+    background-color: transparent;
+    top: 13rem;
+
+    width: 100%;
+    height: 100rem
+}

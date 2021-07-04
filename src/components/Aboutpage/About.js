@@ -14,9 +14,8 @@ class About extends React.Component{
         }
     }
     onClick = () => {
-        document.addEventListener("click", () => {
-            this.props.updateShowMenu("false")
-        })
+        //When click the overlay of iframe, close the menu on the top right
+        this.props.updateShowMenu("false")
     }
     hideSpinner = () => {
         console.log(this.props.match)
@@ -27,10 +26,7 @@ class About extends React.Component{
 
     render(){
         let src = this.props.match.path == '/about' ? 'https://www.tukaglobal.com' : 'https://www.tukaglobal.com' + this.props.match.path;
-        console.log(this.props.reduxState.showMenu)
-        document.removeEventListener("click", () => {
-            this.props.updateShowMenu("false");
-        })
+
         return (
             <div className = 'aboutPageContainer'>
                 {
@@ -44,10 +40,12 @@ class About extends React.Component{
                 }
                 <iframe 
                     className = 'aboutPage' 
-                    onLoad = {this.hideSpinner} 
+                    onLoad = {this.hideSpinner}
                     src = {src}>
                         About
                 </iframe>
+                {/* Over lay of iframe element */}
+                <div className = "aboutOverLay" onClick = {this.onClick}></div>
             </div>
             
         )

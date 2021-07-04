@@ -8,8 +8,9 @@ class Homepage_Content extends React.Component{
     render () {
         //primary genres stored in redux(list of objects)
         let keyWordsList = this.props.homePageGenres.keyWordsList;
+        console.log(keyWordsList)
         //carousels will use this list to display
-        const GenreList =  ['Trending Now']; 
+        let GenreList =  ["Trending Now"]; 
         let len = keyWordsList.length;
         //if empty, give default values
         if(len == 0){
@@ -19,6 +20,9 @@ class Homepage_Content extends React.Component{
         let i 
         for(i = 0; i < len; i++){
             GenreList.push(keyWordsList[i].name)
+        }
+        if(this.props.homePageGenres.selectedKeywords.length == 0){
+            GenreList = ["Trending Now", "Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]
         }
 
         return (
