@@ -30,7 +30,7 @@
     "yarn": "^1.16.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run start\" \" npm run server\"",
+    "start": "react-scripts start",
     "server": "npm run server --prefix Backend",
     "dev": "concurrently \"npm run start\" \" npm run server\"",
     "build": "react-scripts build",
