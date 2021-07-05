@@ -37,12 +37,11 @@
     "start": "react-scripts start",
     "server": "npm run server --prefix Backend",
     "reactStart":"react-scripts start",
-    "dev": "concurrently \"npm run reactStart\" \" npm run server\"",
+    "dev": "concurrently \"npm run start\" \" npm run server\"",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": "react-app"
