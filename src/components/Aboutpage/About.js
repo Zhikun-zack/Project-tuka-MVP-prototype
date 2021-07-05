@@ -45,7 +45,7 @@ class About extends React.Component{
                         About
                 </iframe>
                 {/* Over lay of iframe element */}
-                <div className = "aboutOverLay" onClick = {this.onClick}></div>
+                {/* <div className = "aboutOverLay" onClick = {this.onClick}></div> */}
             </div>
             
         )
