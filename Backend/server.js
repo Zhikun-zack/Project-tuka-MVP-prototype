@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => res.send('API Running'));
 
 
+
 // app.use('/api/users', require('./routes/api/users'));
 // app.use('/api/auth', require('./routes/api/auth'));
 // app.use('/api/artist', require('./routes/api/artist'));
@@ -33,6 +34,7 @@ require("./routes/Music")(app);
 // app.use('/api/profile', require('./routes/api/profile'));
 // app.use('/api/posts', require('./routes/api/posts'));
 
+app.use(express.static(__dirname + "../build"));
 
 const PORT = process.env.PORT || 4080;
 
