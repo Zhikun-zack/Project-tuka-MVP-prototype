@@ -42,7 +42,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run reactStart"
+    "heroku-postbuild": "npm install --prefix Backend && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
