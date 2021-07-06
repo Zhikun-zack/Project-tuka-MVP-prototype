@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table, Alert, FormFeedback} from 'reactstrap';
 import axios from 'axios';
@@ -50,7 +51,7 @@ const verifyEmail = status => {
 }
 
 
-export default  class LogInWin extends React.Component{
+class LogInWin extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -101,14 +102,28 @@ export default  class LogInWin extends React.Component{
         AuthService.logIn(
             this.state.Email,
             this.state.Password
-        ).catch(err => {
-            console.log(err.response)
-            this.setState({
-                error: err.response.status
-            })
-        })
-    }
-
+        ).then(
+            () => {
+                console.log(this.props.history)
+                // this.props.history.push("/details");
+                // window.location.reload();
+                // console.log("redirected")
+            },
+            error => {
+                const resMessage =
+                  (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                  error.message ||
+                  error.toString();
+      
+                this.setState({
+                  loading: false,
+                  message: resMessage
+                });
+              }
+            );
+          }
     recaptchaLoaded(){
         console.log("capcha loaded");
     }
@@ -221,3 +236,4 @@ export default  class LogInWin extends React.Component{
         )
     }
 }
+export default LogInWin;
