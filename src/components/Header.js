@@ -21,12 +21,14 @@ class Header extends React.Component {
         })
     }
     handleClick = () => {
+
         console.log("in header.js" + this.state.value);
         this.props.header(this.state.value);
     }
 
     render() {
         console.log("in header.js render" + this.state.value);
+        
         return (
                 <div className="nav_bar">
                     <div className = "nav_logo" name="tuka_logo"><Link to = "/" ><img src={Logo_Img} alt="Tuka logo" /></Link></div>

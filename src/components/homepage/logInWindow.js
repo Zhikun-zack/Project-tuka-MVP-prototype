@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter  } from 'react-router-dom';
 import Recaptcha from 'react-recaptcha';
 import {Form, FormGroup, Input, Label, Button,Table, Alert, FormFeedback} from 'reactstrap';
 import axios from 'axios';
@@ -104,7 +104,15 @@ class LogInWin extends React.Component{
             this.state.Password
         ).then(
             () => {
-                console.log(this.props.history)
+                console.log(this.props)
+                this.setState({
+                    successful: true
+                })
+                console.log(this.state.successful)
+                if (this.state.successful){
+                    console.log("redirected");
+                    
+                }
                 // this.props.history.push("/details");
                 // window.location.reload();
                 // console.log("redirected")
@@ -123,6 +131,9 @@ class LogInWin extends React.Component{
                 });
               }
             );
+
+            
+            
           }
     recaptchaLoaded(){
         console.log("capcha loaded");
@@ -137,6 +148,7 @@ class LogInWin extends React.Component{
     }
 
     render() {
+        console.log(this.props)
         //if show value sent from Sign2.js is false, return nothing
         if(!this.state.show){
             return null;

@@ -302,7 +302,8 @@ class MusicRow extends React.Component {
 
     }
     handlePlay = () => {
-        this.logIn.current.handleOpen();
+        console.log(this.logIn.current);
+        //this.logIn.current.handleOpen();
     }
     handleCloseAllThumbNail = () => {
         this.setState({

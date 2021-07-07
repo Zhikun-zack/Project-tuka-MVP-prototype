@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Detail_Content from './Detailpage/Detail';
 import About from './Aboutpage/About';
+import logInWindow from './homepage/logInWindow';
 
 class App extends React.Component{
     state = {
@@ -22,7 +23,8 @@ class App extends React.Component{
             <div>
             <BrowserRouter>
                 <div>
-                    <Header />
+                    <Header></Header>
+                    {/* <Route path = '/' component = {Header}></Route> */}
                     <Route path='/' exact component={Homepage_Content} header = {(headerValue) => this.HeaderValue(headerValue)}/>
                     <Route path = '/details' exact component = {Detail_Content}></Route>
                     <Route path = '/about' exact component = {About}></Route>
