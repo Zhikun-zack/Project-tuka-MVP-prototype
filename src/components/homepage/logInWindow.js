@@ -50,6 +50,20 @@ const verifyEmail = status => {
     }
 }
 
+const withRouterAndRef = (WrappedComponent) => {
+    class InnerComponentWithRef extends React.Component{
+        render() {
+            const{ forwardRef, ...rest } = this.props;
+            return <WrappedComponent {...rest} ref = {forwardRef}></WrappedComponent>
+        }
+    }
+    const ComponentWithRouter = withRouter(InnerComponentWithRef, { withRef: true });
+    return React.forwardRef((props,ref) => {
+        console.log(props)
+        console.log(ref)
+        return <ComponentWithRouter {...props} forwardRef={ref}></ComponentWithRouter>
+    });
+}
 
 class LogInWin extends React.Component{
     constructor(props){
@@ -248,4 +262,5 @@ class LogInWin extends React.Component{
         )
     }
 }
-export default LogInWin;
+// export default withRouter(LogInWin, {withRef: true});
+export default withRouterAndRef(LogInWin);
