@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 // import {Dropdown,Menu} from 'semantic-ui-react'
+
 import Login_Img from "./img/profile-icon.png";
 import Menu_Img from "./img/hamburger-icon.png";
 import Model from './Model';
 import LogIn from "./logInWindow";
-import { Link } from 'react-router-dom';
-import { connect } from "react-redux";
+import authService from '../../services/auth.service';
+
 import "./Sign2.js.css";
 
 class DropdownSign2 extends React.Component{
@@ -21,7 +24,8 @@ class DropdownSign2 extends React.Component{
             formerClickedTarget: "",
             //sign up window display or not 
             showSignUp: false,
-            
+            //storing current logged user
+            currentUser: "",   
         }
         //ref for open sign in and sign up windows
         this.signUp = React.createRef();
@@ -33,6 +37,16 @@ class DropdownSign2 extends React.Component{
 
         
     }
+    componentDidMount(){
+        const user = authService.getCurrentUser();
+        console.log(user)
+        if(user){
+            this.setState({
+                currentUser: user
+            })
+        }
+    }
+
     //for logIn and menu buttons on the top right
     /*
     When click on one button, its popup window appears
@@ -45,6 +59,9 @@ class DropdownSign2 extends React.Component{
         }
         else if (e.currentTarget.className == "popUpLogIn2"){
             this.signUp.current.handleOpen();
+        }
+        else if (e.currentTarget.className == "popUpLogIn4"){
+            authService.logOut();
         }
     }
     showMenu = (event) => {
@@ -123,7 +140,8 @@ class DropdownSign2 extends React.Component{
 
     render() {
         let popUpWindow;
-
+        const { currentUser } = this.state;
+    
         //avoid memory leak
         document
         .removeEventListener("click",() => {
@@ -135,12 +153,19 @@ class DropdownSign2 extends React.Component{
 
         //if click login tag, shows the logIn popUp window, vice versa
         if(this.state.formerClickedTarget == "loginImg"){
-            popUpWindow = (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
+            popUpWindow = currentUser? (<div className={this.state.showMenu? "popUp logInPopUp": "popUp logInPopUp popUpHide"}>
                                 {/* when click show sign up window */}
-                                <div className = "popUpLogIn1" onClick = {this.onClick}>Log In</div>
+                                <div className = "popUpLogIn3" onClick = {this.onClick}>Profile</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn2" onClick = {this.onClick}>Sign Up</div>
-                            </div>);
+                                <div className = "popUpLogIn4" onClick = {this.onClick}>Log Out</div>
+                            </div>): (<div className={this.state.showMenu ? "popUp logInPopUp" : "popUp logInPopUp popUpHide"}>
+                                {/* when click show sign up window */}
+
+                                <div className="popUpLogIn1" onClick={this.onClick}>Log In</div>
+                                <hr className="popUpLine" color="#D95457" ></hr>
+                                <div className="popUpLogIn2" onClick={this.onClick}>Sign Up</div>
+                            </div>
+                            );
         }else{
             popUpWindow =  (<div className={this.state.showMenu? "popUp menuPopUp": "popUp menuPopUp popUpHide"}>
                                 <Link to = "/about"><div className = "popUpLogIn1">About</div></Link>

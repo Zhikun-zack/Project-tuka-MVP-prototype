@@ -20,6 +20,7 @@ class AuthService {
             if(response.data.accessToken){
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
+            console.log(JSON.stringify(response.data));
             return response.data;
         })
     }
@@ -29,6 +30,7 @@ class AuthService {
     }
     //service for getting current user
     getCurrentUser(){
+        console.log(JSON.parse(localStorage.getItem('user')))
         return JSON.parse(localStorage.getItem('user'));
     }
 

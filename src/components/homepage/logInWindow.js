@@ -50,17 +50,18 @@ const verifyEmail = status => {
     }
 }
 
+//wrap withrouter and ref, so that component will invoke both router attribute and ref
 const withRouterAndRef = (WrappedComponent) => {
+    //append ref
     class InnerComponentWithRef extends React.Component{
         render() {
             const{ forwardRef, ...rest } = this.props;
             return <WrappedComponent {...rest} ref = {forwardRef}></WrappedComponent>
         }
     }
+    //wrap original component using withrouter
     const ComponentWithRouter = withRouter(InnerComponentWithRef, { withRef: true });
     return React.forwardRef((props,ref) => {
-        console.log(props)
-        console.log(ref)
         return <ComponentWithRouter {...props} forwardRef={ref}></ComponentWithRouter>
     });
 }
@@ -118,18 +119,8 @@ class LogInWin extends React.Component{
             this.state.Password
         ).then(
             () => {
-                console.log(this.props)
-                this.setState({
-                    successful: true
-                })
-                console.log(this.state.successful)
-                if (this.state.successful){
-                    console.log("redirected");
-                    
-                }
-                // this.props.history.push("/details");
-                // window.location.reload();
-                // console.log("redirected")
+                this.props.history.push("/details");
+                window.location.reload();
             },
             error => {
                 const resMessage =
@@ -220,7 +211,7 @@ class LogInWin extends React.Component{
 
         //if show is true, render the signUp window
         return (
-            <div style={backdropStyle}>
+            <div style={backdropStyle} >
                 <div style={modalStyle}>
                     <div style={headerStyle}>
                         {/* When click this button, change the Sign2.js's state */}
