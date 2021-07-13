@@ -97,7 +97,11 @@ class LogInWin extends React.Component{
         this.setState({
             show: false
         });
-        //this.openSingUp.current.handleClose();
+        console.log(this.openSingUp.current)
+        if(this.openSingUp && this.openSingUp.current.state.show){
+            this.openSingUp.current.handleClose();
+        }
+        console.log(this.openSingUp.current.state.show)
     }
     handleOpen = () => {
         this.setState({
@@ -105,7 +109,9 @@ class LogInWin extends React.Component{
         })
     }
     onClick = () => {
+        
         this.openSingUp.current.handleOpen();
+        
     }
 
     handleChange = e => {
@@ -153,7 +159,6 @@ class LogInWin extends React.Component{
     }
 
     render() {
-        console.log(this.props)
         //if show value sent from Sign2.js is false, return nothing
         if(!this.state.show){
             return null;
@@ -224,6 +229,9 @@ class LogInWin extends React.Component{
                             <b>Log In</b>
                         </div>
                         <Form onSubmit={this.handleSubmit}>
+                            {this.state.message && (
+                                <Alert color = {this.state.successful? 'success': 'danger'}>{this.state.message}</Alert>
+                            )}
                             {email}
                             <FormGroup>
                                 <Label for="Password" />
@@ -243,7 +251,7 @@ class LogInWin extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            {/* <div style={{textAlign:'center',fontSize:'large'}}>Create account<a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div> */}
+                            <div style={{textAlign:'center',fontSize:'large'}}>Already has an account: <a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div>
                         </Form>
                         
                     </div>

@@ -22,7 +22,7 @@ const backdropStyle = {
 const modalStyle = {
     backgroundColor: '#fff',
     borderRadius:5,
-    maxWidth:500,
+    maxWidth:580,
     minHeight:800,
     height: 'auto',
     margin:'0 auto',
@@ -50,7 +50,6 @@ const verifyEmail = status => {
         )
     }
 }
-
 
 export default  class Model extends React.Component{
     constructor(props){
@@ -81,12 +80,16 @@ export default  class Model extends React.Component{
         this.setState({
             show: false
         })
-        //this.logIn.current.handleClose();
+        console.log(this.logIn.current)
+        if(this.logIn !== undefined && this.logIn.current.state.show){
+            this.logIn.current.handleClose();
+        }
     }
     handleOpen = () => {
         this.setState({
             show: true
         })
+        console.log("opened")
     }
     onClick = () => {
         this.logIn.current.handleOpen();
@@ -111,11 +114,14 @@ export default  class Model extends React.Component{
             })
         }).then(
             response => {
-
+                if(response != undefined){
+                    console.log(response)
                     this.setState({
                         message: response.data.message,
                         successful: true
                     });
+                }
+                    
             
                     
                 
@@ -150,6 +156,7 @@ export default  class Model extends React.Component{
     }
 
     render() {
+        console.log(this.state.show)
         //if show value sent from Sign2.js is false, return nothing
         if(!this.state.show){
             return null;
@@ -159,32 +166,26 @@ export default  class Model extends React.Component{
             if(this.state.error == 200){
                 email = (
                     <FormGroup>
-                                <Label for="Email" />
-
-
-                                <Input
-                                    type="email"
-                                    name="Email"
-                                    onChange={this.handleChange}
-                                    placeholder="Email"/>
-                            </FormGroup>  
+                                    <Label for="Username" />
+                                    <Input
+                                        type="Username"
+                                        name="Username"
+                                        onChange={this.handleChange}
+                                        placeholder="Profile Name"/></FormGroup>
                 )
                     
             }else if (this.state.error === 400){
                 email = (
                     <FormGroup>
-                                <Label for="Email" />
-
-
-                                <Input
-                        invalid
-                        type="email"
-                        name="Email"
-                        onChange={this.handleChange}
-                        placeholder="Email"/>
-                    <FormFeedback>Oh no! that name is already taken</FormFeedback>
-                            </FormGroup>  
-                    
+                                    <Label for="Username" />
+                                    <Input
+                                        invalid
+                                        type="Username"
+                                        name="Username"
+                                        onChange={this.handleChange}
+                                        placeholder="Profile Name"/>
+                                        <FormFeedback>That name is already taken</FormFeedback>
+                    </FormGroup>                    
                 )
             }
         
@@ -209,15 +210,20 @@ export default  class Model extends React.Component{
                             {this.state.message && (
                                 <Alert color = {this.state.successful? 'success': 'danger'}>{this.state.message}</Alert>
                             )}
+                            
                             <FormGroup>
-                                    <Label for="Username" />
-                                    <Input
-                                        type="Username"
-                                        name="Username"
-                                        onChange={this.handleChange}
-                                        placeholder="What should we call you?"/></FormGroup>
-                                <FormGroup>
                             {email}
+                            <FormGroup>
+                                <Label for="Email" />
+
+
+                                <Input
+                                    type="email"
+                                    name="Email"
+                                    onChange={this.handleChange}
+                                    placeholder="Email"/>
+                            </FormGroup>  
+                            
                             
                                 <Label for="ConfirmEmail" />
                                 <Input
