@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import LogIn from "./logInWindow"
 import AuthService from "../../services/auth.service";
+import Autosuggest from 'react-autosuggest';
 //import { Alert } from 'bootstrap';
 
 const backdropStyle = {
@@ -22,7 +23,8 @@ const modalStyle = {
     backgroundColor: '#fff',
     borderRadius:5,
     maxWidth:500,
-    minHeight:600,
+    minHeight:800,
+    height: 'auto',
     margin:'0 auto',
     padding: 30,
     position: 'relative'
@@ -55,6 +57,7 @@ export default  class Model extends React.Component{
         super(props);
         this.state = {
             isVerified:false,
+            Username: '',
             Email:'',
             ConfirmEmail:'',
             Password:'',
@@ -96,12 +99,11 @@ export default  class Model extends React.Component{
     handleSubmit(e){
         e.preventDefault()
 
-        const { Email,ConfirmEmail,Password,ConfirmPassword} = this.state;
-        console.log(Email)
+        const { Username, Email,ConfirmEmail,Password,ConfirmPassword} = this.state;
         AuthService.register(
-            "name",
-            "xxxx@gmail.com",
-            "ppppppppppp"
+            Username,
+            Email,
+            Password
         ).catch(error => {
             // console.log(error.response)
             this.setState({
@@ -109,12 +111,13 @@ export default  class Model extends React.Component{
             })
         }).then(
             response => {
-                if(response === "undefinded"){
+
                     this.setState({
                         message: response.data.message,
                         successful: true
                     });
-                }
+            
+                    
                 
             },
             error => {
@@ -128,9 +131,10 @@ export default  class Model extends React.Component{
                     successful: false,
                     message: resMessage
                 });
-            }
+            },
+            console.log(this.state.message),
+            
         )
-        console.log(this.state.message) 
     }
 
     recaptchaLoaded(){
@@ -178,7 +182,7 @@ export default  class Model extends React.Component{
                         name="Email"
                         onChange={this.handleChange}
                         placeholder="Email"/>
-                    <FormFeedback>Oh noes! that name is already taken</FormFeedback>
+                    <FormFeedback>Oh no! that name is already taken</FormFeedback>
                             </FormGroup>  
                     
                 )
@@ -202,9 +206,19 @@ export default  class Model extends React.Component{
                             <b>Sign Up</b>
                         </div>
                         <Form onSubmit={this.handleSubmit}>
-                            {email}
-
+                            {this.state.message && (
+                                <Alert color = {this.state.successful? 'success': 'danger'}>{this.state.message}</Alert>
+                            )}
                             <FormGroup>
+                                    <Label for="Username" />
+                                    <Input
+                                        type="Username"
+                                        name="Username"
+                                        onChange={this.handleChange}
+                                        placeholder="What should we call you?"/></FormGroup>
+                                <FormGroup>
+                            {email}
+                            
                                 <Label for="ConfirmEmail" />
                                 <Input
                                     valid={this.state.Email!==""&&this.state.Email===this.state.ConfirmEmail}

@@ -329,7 +329,7 @@ class MusicRow extends React.Component {
                 maskClassName = "carousel_mask";
             }
             return (
-                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({genre: item.tags, name: item.song})}>
+                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({"genre": item.tags, "name": item.song})}>
                     <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
                         <div className = {maskClassName}>
                             <div className = "carousel_display">

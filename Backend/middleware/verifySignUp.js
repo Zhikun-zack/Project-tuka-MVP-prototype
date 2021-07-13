@@ -30,7 +30,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
             }
             //send back the user info
             if(user){
-                res.status(400).send({message: err + "The user has already exist"});
+                res.status(400).send({message: err + "This email has already exist"});
                 return;
             }
             next();

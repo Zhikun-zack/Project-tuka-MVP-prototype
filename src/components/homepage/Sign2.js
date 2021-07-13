@@ -157,7 +157,9 @@ class DropdownSign2 extends React.Component{
                                 {/* when click show sign up window */}
                                 <div className = "popUpLogIn3" onClick = {this.onClick}>Profile</div>
                                 <hr className = "popUpLine"color="#D95457" ></hr>
-                                <div className = "popUpLogIn4" onClick = {this.onClick}>Log Out</div>
+                                <div className = "popUpLogIn4" onClick = {this.onClick}>
+                                    <a href = "/" >Log Out</a>
+                                </div>
                             </div>): (<div className={this.state.showMenu ? "popUp logInPopUp" : "popUp logInPopUp popUpHide"}>
                                 {/* when click show sign up window */}
 

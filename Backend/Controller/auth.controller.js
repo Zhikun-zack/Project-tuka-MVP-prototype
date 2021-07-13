@@ -41,8 +41,7 @@ exports.logIn = (req, res) => {
         if(user == null){
             return res.status(404).send({message: "User not found"});
         }
-        console.log("user is "+ user)
-        console.log("request password is "+ req.body.password)
+
         //check whether the input password is same as stored
         var passwordIsValid = bcrypt.compareSync(
             //password user input 
