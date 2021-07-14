@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import SignUp from "./Model";
 import AuthService from "../../services/auth.service";
+import "./logIn.css";
 //import { Alert } from 'bootstrap';
 
 const backdropStyle = {
@@ -116,6 +117,11 @@ class LogInWin extends React.Component{
 
     handleChange = e => {
         this.setState({[e.target.name]: e.target.value})
+        if(e.target.value === ''){
+            this.setState({
+                error: 200
+            })
+        }
     };
 
     handleSubmit(e){
@@ -138,7 +144,8 @@ class LogInWin extends React.Component{
       
                 this.setState({
                   loading: false,
-                  message: resMessage
+                  message: resMessage,
+                  error: error.response.status
                 });
               }
             );
@@ -163,54 +170,87 @@ class LogInWin extends React.Component{
         if(!this.state.show){
             return null;
         }
-        let email
+        let email;
+        let password;
 
-            if(this.state.error == 200){
-                email = (
-                    <FormGroup>
-                                <Label for="Email" />
-                                <Input
-                                    type="email"
-                                    name="Email"
-                                    onChange={this.handleChange}
-                                    placeholder="Email"/>
-                            </FormGroup>  
-                )
-                    
-            }else if (this.state.error === 404){
-                console.log(400)
-                email = (
-                    <FormGroup>
-                                <Label for="Email" />
+        //success or not input
+        if (this.state.error == 200) {
+            email = (
+                <FormGroup>
+                    <Label for="Email" />
+                    <Input
+                        type="email"
+                        name="Email"
+                        onChange={this.handleChange}
+                        placeholder="Email" />
+                </FormGroup>
+            )
+            password = (
+                <FormGroup>
+                    <Label for="Password" />
+                    <Input
+                        type="password"
+                        name="Password"
+                        //pattern={{value: '^[A-Za-z0-9]{8}+$'}}
+                        onChange={this.handleChange}
+                        placeholder="Password(8 characters minimum)" /></FormGroup>
+            )
+        }
+        //wrong email
+        else if (this.state.error === 404) {
+            console.log(400)
+            email = (
+                <FormGroup>
+                    <Label for="Email" />
 
 
-                                <Input
+                    <Input
                         invalid
                         type="email"
                         name="Email"
                         onChange={this.handleChange}
-                        placeholder="Email"/>
-                    <FormFeedback>Please input correct email</FormFeedback>
-                            </FormGroup>  
-                    
-                )
-            }else{
-                email = (
-                    <FormGroup>
-                                <Label for="Email" />
-
-
-                                <Input
-                        invalid
+                        placeholder="Email" />
+                    <FormFeedback>User Email is not found</FormFeedback>
+                </FormGroup>
+            )
+            password = (
+                <FormGroup>
+                    <Label for="Password" />
+                    <Input
+                        type="password"
+                        name="Password"
+                        //pattern={{value: '^[A-Za-z0-9]{8}+$'}}
+                        onChange={this.handleChange}
+                        placeholder="Password(8 characters minimum)" /></FormGroup>
+            )
+        }
+        //wrong password 
+        else {
+            console.log(this.state.error)
+            email = (
+                <FormGroup>
+                    <Label for="Email" />
+                    <Input
                         type="email"
                         name="Email"
                         onChange={this.handleChange}
-                        placeholder="Email"/>
+                        placeholder="Email" />
+                </FormGroup>
+            )
+            password = (
+                <FormGroup>
+                    <Label for="Password" />
+                    <Input
+                        invalid
+                        type="Password"
+                        name="Password"
+                        onChange={this.handleChange}
+                        placeholder="Password(8 characters minimum)" />
                     <FormFeedback>Please input correct password</FormFeedback>
-                            </FormGroup>  
-                )
-            }
-        
+                </FormGroup>
+            )
+        }
+
 
 
 
@@ -225,22 +265,12 @@ class LogInWin extends React.Component{
                         </button>
                     </div>
                     <div style={contentStyle}>
-                        <div style={{textAlign:'center',fontSize:'large'}}>
+                        <div className = "logInHeader" style={{textAlign:'center',fontSize:'large'}}>
                             <b>Log In</b>
                         </div>
                         <Form onSubmit={this.handleSubmit}>
-                            {this.state.message && (
-                                <Alert color = {this.state.successful? 'success': 'danger'}>{this.state.message}</Alert>
-                            )}
                             {email}
-                            <FormGroup>
-                                <Label for="Password" />
-                                <Input
-                                    type="password"
-                                    name="Password"
-                                    //pattern={{value: '^[A-Za-z0-9]{8}+$'}}
-                                    onChange={this.handleChange}
-                                    placeholder="Password(8 characters minimum)"/></FormGroup>
+                            {password}
                             <Table className="Table1">
                                 <tr className="tr1">
                                 <th className="th1">
@@ -251,7 +281,7 @@ class LogInWin extends React.Component{
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>
                             <div style={{height:'1px',width:'100%',margin:'10px',backgroundColor:'grey',marginLeft:'-10px'}} />
-                            <div style={{textAlign:'center',fontSize:'large'}}>Already has an account: <a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div>
+                            <div style={{textAlign:'center',fontSize:'large'}}>Create a new account:  <a onClick = {this.onClick} style={{color:'blue'}}>Sign Up</a></div>
                         </Form>
                         
                     </div>
