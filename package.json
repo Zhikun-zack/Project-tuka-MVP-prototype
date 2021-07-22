@@ -26,6 +26,7 @@
     "reactstrap": "^8.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1",
+    "serve": "^12.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.3",
     "yarn": "^1.16.0"
@@ -59,7 +60,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://tukaglobal.github.io/tuka-MVP-prototype/",
   "devDependencies": {
     "@kapost/react-component-slider": "^1.0.5",
     "autosuggest-highlight": "^3.1.1",

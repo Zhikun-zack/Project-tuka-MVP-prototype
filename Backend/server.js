@@ -34,7 +34,6 @@ require("./routes/Music")(app);
 // app.use('/api/profile', require('./routes/api/profile'));
 // app.use('/api/posts', require('./routes/api/posts'));
 
-if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
     // like our main.js file, or main.css file!
     app.use(express.static('../build'));
@@ -43,10 +42,10 @@ if (process.env.NODE_ENV === 'production') {
     // if it doesn't recognize the route
     const path = require('path');
     app.get('*', (req, res) => {
+      console.log(__dirname)
       res.sendFile(path.join(__dirname + '../build/index.html'));
     });
-  }
 
 const PORT = process.env.PORT || 4080;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT);
