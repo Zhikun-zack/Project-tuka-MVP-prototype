@@ -1,5 +1,5 @@
 import axios from "axios";
-const API2 = axios.create({baseURL: "http://localhost:4080"})
+const API2 = axios.create({baseURL: "http://localhost:8080"})
 
 class MusicService{
     extractBasedOnTags(primaryGenre, subGenre=[]){

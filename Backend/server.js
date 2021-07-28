@@ -34,18 +34,18 @@ require("./routes/Music")(app);
 // app.use('/api/profile', require('./routes/api/profile'));
 // app.use('/api/posts', require('./routes/api/posts'));
 
-    // Express will serve up production assets
-    // like our main.js file, or main.css file!
-    app.use(express.static('../build'));
+// Express will serve up production assets
+// like our main.js file, or main.css file!
+app.use(express.static('build'));
   
-    // Express will serve up the index.html file
-    // if it doesn't recognize the route
-    const path = require('path');
-    app.get('*', (req, res) => {
-      console.log(__dirname)
-      res.sendFile(path.join(__dirname + '../build/index.html'));
-    });
+// Express will serve up the index.html file
+// if it doesn't recognize the route
+const path = require('path');
+app.get('*', (req, res) => {
+  console.log(__dirname)
+  res.sendFile(path.join(__dirname + '/build/index.html'));
+});
 
-const PORT = process.env.PORT || 4080;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT);

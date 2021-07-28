@@ -41,6 +41,7 @@
     "reactStart": "react-scripts start",
     "dev": "concurrently \"npm run start\" \" npm run server\"",
     "build": "react-scripts build",
+    "postbuild": "move build ./Backend",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
