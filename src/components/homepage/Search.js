@@ -18,6 +18,8 @@ import MusicService from "../../services/Music.service";
 import "./Search.css";
 
 var match = require('autosuggest-highlight/match');
+//saving the index of inserted primary key words
+let primaryFlag = 0
 
 //Autosuggest: Implement it to teach Autosuggest what should be the input value when suggestion is clicked.
 const getSuggestionValue = suggestion => suggestion;
@@ -95,7 +97,6 @@ class Search extends Component{
         //If user input nothing, not execute any code
         //if user input something but not equals to the suggestion, give the first suggestion to keywordslist and show it in key element
         if(suggestionGenres[0] != "No suggestions, try a genre!" && userInput != ""){
-            console.log(userInput)
             //value pushed into the keywordslist show not equal to any values in keywordslist
             if(!keyWordsList.some((element) => element === suggestionGenres[0]) && keyWordsList.length < 5){
                 keyWordsList.push(suggestionGenres[0])
@@ -138,8 +139,11 @@ class Search extends Component{
                 insertKey.flag = false
                 //remove that object
                 primaryGenre.splice(primaryIndex, 1)
-                //insert to head
-                primaryGenre.unshift(insertKey)
+                primaryGenre.splice(primaryFlag, 0, insertKey)
+                //update primaryFlag
+                if (primaryFlag <= 5){
+                    primaryFlag += 1
+                }
                 //update redux
                 this.props.updateKeys(primaryGenre)
             }
@@ -211,11 +215,12 @@ class Search extends Component{
             primaryGenre.splice(primaryIndex, 1);
 
             //insert the deleted genre back to the primary genre based on index
-            let insertIndex
             for (i = 0; i < primaryGenre.length; i++){
                 if(primaryGenre[i].flag && primaryGenre[i].index > deleteKeyIndex){
-                    console.log("Insert")
                     primaryGenre.splice(i, 0, deleteKey);
+                    if(primaryFlag > 0){
+                        primaryFlag -= 1
+                    }
                     break
                 }
             }
@@ -320,8 +325,12 @@ class Search extends Component{
                 insertKey.flag = false
                 //remove that object
                 primaryGenre.splice(primaryIndex, 1)
-                //insert to head
-                primaryGenre.unshift(insertKey)
+                //after extract the primary key word, insert it to the position which above the not changed keys below the former added keys
+                primaryGenre.splice(primaryFlag, 0, insertKey)
+                //update primaryFlag
+                if (primaryFlag <= 5){
+                    primaryFlag += 1
+                }
                 //update redux
                 this.props.updateKeys(primaryGenre)
             }

@@ -150,7 +150,6 @@ class MusicRow extends React.Component {
         }
         
         
-        console.log('id'+ this.props.id)
         // console.log("old:" + preProps.genres)
         // console.log("new:" + this.props.genres)
         // console.log( preProps)
@@ -169,13 +168,12 @@ class MusicRow extends React.Component {
         //     }
         // }
         if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-                    console.log("changed")
                     //console.log(this.props.genres)
                     //
                     let selectedKeywords = this.props.reduxState.selectedKeywords;
-                    console.log(selectedKeywords)
+           
                     let subGenres = this.extractSubGenres(selectedKeywords);
-                    console.log(subGenres)
+            
                     this.updateMusicData(this.props.genres, subGenres)
          }
         //this.updateMusicData(this.props.genres, subGenres)
@@ -199,7 +197,6 @@ class MusicRow extends React.Component {
             //get data
             MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
                 .then(result => {
-                    console.log(result)
                     const musicData = result['data'];
                     //if the tag exists in database
                     if (musicData.length != 0){
