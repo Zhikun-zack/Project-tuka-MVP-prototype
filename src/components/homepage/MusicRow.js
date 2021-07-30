@@ -42,6 +42,7 @@ class MusicRow extends React.Component {
         //the index of the thumbnail to expand
         carouselActiveIndex: -1,
         selectedKeywords: [],
+        subGenres: [],
         newArtist: [],
         //details informations for artists windows
         artists: [
@@ -135,12 +136,23 @@ class MusicRow extends React.Component {
             }
         }
     }
+    shouldComponentUpdate(){
+        console.log("component should update")
+    }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
         this.updateMusicData(this.props.genres);
     }
 
     componentDidUpdate(preProps){
+        console.log(preProps)
+        console.log(this.props.genres +' componentupdated')
+        let selectedKeywords = this.props.reduxState.selectedKeywords; 
+        let subGenres = this.extractSubGenres(selectedKeywords);
+        console.log("new props")
+        console.log(this.props.reduxState.selectedKeywords)
+        console.log("old props")
+        console.log(preProps.reduxState.selectedKeywords)
         //When thumbnail in other carousel expanded, close all thumbnails in this carousel
         if(preProps.onOff === true && this.props.onOff === false){
             this.setState({
@@ -167,16 +179,22 @@ class MusicRow extends React.Component {
         //         this.updateMusicData(this.props.genres, subGenres)
         //     }
         // }
+        // if(preProps.subGenres !== subGenres){
+        //     this.updateMusicData(this.props.genres, subGenres)
+        // }
         if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
                     //console.log(this.props.genres)
-                    //
-                    let selectedKeywords = this.props.reduxState.selectedKeywords;
-           
-                    let subGenres = this.extractSubGenres(selectedKeywords);
-            
-                    this.updateMusicData(this.props.genres, subGenres)
+            this.updateMusicData(this.props.genres, subGenres)
+                    
+         }
+         if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
+             console.log('updated')
+             this.updateMusicData(this.props.genres)
          }
         //this.updateMusicData(this.props.genres, subGenres)
+        // this.setState({
+        //     subGenres: subGenres
+        // })
     }
 
     //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
@@ -307,8 +325,16 @@ class MusicRow extends React.Component {
             carouselActiveIndex: -1
         })
     }
+    handleChange = () => {
+        console.log(this.props.reduxState.selectedKeywords)
+        if(this.props.reduxState.selectedKeywords.length === 0){
+            console.log("this is empty")
+        }
+        console.log('handle change')
+    }
     render() {
-        // console.log(this.props.reduxState.selectedKeywords)
+        console.log("rerender")
+        {this.handleChange()}
         let thumbNailClassName;
         let maskClassName;
         const slides = this.state.artists.map((item, index) => {

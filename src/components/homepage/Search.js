@@ -209,6 +209,7 @@ class Search extends Component{
                 break
             } 
         }
+        console.log(primaryIndex)
         if(primaryIndex != -1){
             let deleteKey = primaryGenre[primaryIndex];
             let deleteKeyIndex = deleteKey.index;
@@ -224,11 +225,13 @@ class Search extends Component{
                     break
                 }
             }
-            //console.log(primaryGenre)
-            //update redux state when remove one of the keys
-            this.props.updateKeys(primaryGenre);
-            this.props.updateSelectedKeys(list);
         }
+        //console.log(primaryGenre)
+        //update redux state when remove one of the keys
+        this.props.updateKeys(primaryGenre);
+        console.log('we have updated list')
+        console.log(list)
+        this.props.updateSelectedKeys(list);
 
     }
 
