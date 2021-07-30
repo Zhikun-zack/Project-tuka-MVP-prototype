@@ -26,6 +26,9 @@ import user from "./img/user-profile image example.png";
 import { connect } from 'react-redux';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 
+
+
+
 class MusicRow extends React.Component {
     constructor(props) {
         super(props);
@@ -108,8 +111,8 @@ class MusicRow extends React.Component {
             }],
 
         };
+        this.artists = [{}]
     }
-    
     onClick = (e) => {
         const carouselActive = this.state.carouselActive;
         if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
@@ -136,66 +139,67 @@ class MusicRow extends React.Component {
             }
         }
     }
-    shouldComponentUpdate(){
-        console.log("component should update")
-    }
+
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
         this.updateMusicData(this.props.genres);
+        // console.log(newArtists)
+        // this.artists = newArtists
     }
-
-    componentDidUpdate(preProps){
-        console.log(preProps)
-        console.log(this.props.genres +' componentupdated')
-        let selectedKeywords = this.props.reduxState.selectedKeywords; 
-        let subGenres = this.extractSubGenres(selectedKeywords);
-        console.log("new props")
-        console.log(this.props.reduxState.selectedKeywords)
-        console.log("old props")
-        console.log(preProps.reduxState.selectedKeywords)
-        //When thumbnail in other carousel expanded, close all thumbnails in this carousel
-        if(preProps.onOff === true && this.props.onOff === false){
-            this.setState({
-                carouselActive: false,
-                carouselActiveIndex: -1
-            })
-        }
+    
+    // componentDidUpdate(preProps,preState){
+    //     // console.log(preProps)
+    //     // console.log(this.props.genres +' componentupdated')
+    //     let selectedKeywords = this.props.reduxState.selectedKeywords; 
+    //     let subGenres = this.extractSubGenres(selectedKeywords);
+    //     // console.log("new props")
+    //     // console.log(this.props.reduxState.selectedKeywords)
+    //     // console.log("old props")
+    //     // console.log(preProps.reduxState.selectedKeywords)
+    //     //When thumbnail in other carousel expanded, close all thumbnails in this carousel
+    //     if(preProps.onOff === true && this.props.onOff === false){
+    //         this.setState({
+    //             carouselActive: false,
+    //             carouselActiveIndex: -1
+    //         })
+    //     }
         
         
-        // console.log("old:" + preProps.genres)
-        // console.log("new:" + this.props.genres)
-        // console.log( preProps)
-        // console.log("new:" + this.props.reduxState.selectedKeywords)
-        //When selected keywords changed
-        // if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
+    //     // console.log("old:" + preProps.genres)
+    //     // console.log("new:" + this.props.genres)
+    //     // console.log( preProps)
+    //     // console.log("new:" + this.props.reduxState.selectedKeywords)
+    //     //When selected keywords changed
+    //     // if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
             
-        //     //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
-        //     if(this.props.genres != preProps.genres){
-        //         console.log("changed")
-        //         this.updateMusicData(this.props.genres, subGenres)
-        //     }
-        //     //When user only select subgenres
-        //     else{
-        //         this.updateMusicData(this.props.genres, subGenres)
-        //     }
-        // }
-        // if(preProps.subGenres !== subGenres){
-        //     this.updateMusicData(this.props.genres, subGenres)
-        // }
-        if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-                    //console.log(this.props.genres)
-            this.updateMusicData(this.props.genres, subGenres)
+    //     //     //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
+    //     //     if(this.props.genres != preProps.genres){
+    //     //         console.log("changed")
+    //     //         this.updateMusicData(this.props.genres, subGenres)
+    //     //     }
+    //     //     //When user only select subgenres
+    //     //     else{
+    //     //         this.updateMusicData(this.props.genres, subGenres)
+    //     //     }
+    //     // }
+    //     // if(preProps.subGenres !== subGenres){
+    //     //     this.updateMusicData(this.props.genres, subGenres)
+    //     // }
+    //     if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
+    //                 //console.log(this.props.genres)
+    //         this.updateMusicData(this.props.genres, subGenres)
+    //         this.setState({
+    //             subGenres: subGenres
+    //         })
                     
-         }
-         if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
-             console.log('updated')
-             this.updateMusicData(this.props.genres)
-         }
-        //this.updateMusicData(this.props.genres, subGenres)
-        // this.setState({
-        //     subGenres: subGenres
-        // })
-    }
+    //      }
+    //      if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
+    //          console.log('updated')
+    //          this.updateMusicData(this.props.genres)
+
+             
+    //      }
+    // }
 
     //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
     extractSubGenres = (selectedKeywords) => {
@@ -258,12 +262,16 @@ class MusicRow extends React.Component {
                                 newArtist.pop();
                             }
                         })
-                        //replace the new data with old state
-                        this.setState({
-                            artists: newArtist
-                        })
+                        console.log(newArtist)
+                        // //replace the new data with old state
+                        // this.setState({
+                        //     artists: newArtist
+                        // })
+                        return newArtist
                     }
                 })
+                //console.log(newArtist)
+                
         }
     }
 
@@ -325,18 +333,22 @@ class MusicRow extends React.Component {
             carouselActiveIndex: -1
         })
     }
-    handleChange = () => {
-        console.log(this.props.reduxState.selectedKeywords)
-        if(this.props.reduxState.selectedKeywords.length === 0){
-            console.log("this is empty")
-        }
-        console.log('handle change')
-    }
     render() {
-        console.log("rerender")
-        {this.handleChange()}
+        // if (this.state.subGenres !== this.extractSubGenres(this.props.reduxState.selectedKeywords)){
+        //     let subGenres = this.props.reduxState.selectedKeywords
+        //     console.log('different')
+        //     this.setState({
+        //         subGenres: subGenres
+        //     })
+        // }
+        console.log(this.updateMusicData(this.props.genres, this.extractSubGenres(this.props.reduxState.selectedKeywords)))
+        
+        console.log(this.artists.length)
+        console.log("rendered")
         let thumbNailClassName;
         let maskClassName;
+        console.log(this.state.artists[0])
+        console.log(this.artists)
         const slides = this.state.artists.map((item, index) => {
             //console.log(item)
             // console.log("index:" + index)
