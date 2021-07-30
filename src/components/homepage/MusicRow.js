@@ -139,12 +139,19 @@ class MusicRow extends React.Component {
             }
         }
     }
-
+    componentWill
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
         this.updateMusicData(this.props.genres);
+        console.log("componentDidMount")
         // console.log(newArtists)
         // this.artists = newArtists
+    }
+    componentDidUpdate(){
+        console.log("did updated")
+    }
+    componentWillUpdate(){
+        console.log('will updated')
     }
     
     // componentDidUpdate(preProps,preState){
@@ -217,60 +224,63 @@ class MusicRow extends React.Component {
             const newArtist = this.state.newArtist;
             //console.log('primaryGenres:' + primaryGenre)
             //get data
-            MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
-                .then(result => {
-                    const musicData = result['data'];
-                    //if the tag exists in database
-                    if (musicData.length != 0){
-                        let image
-                        musicData.map((m) => {
-                            //console.log(m)
-                            try {
-                                //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
-                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
-                            } catch (error) {
-                                image = require("./img/noimage.jpg")
-                            }
-                            let newArtistDetail = {
-                                name: " ",
-                                song: m['title'],
-                                tags: m['tags'],
-                                //for invoking the image from file path
-                                image: image
-                            };
-                            //location of the first duplicated element
-                            let i;
-                            //Whether the newArtistDetail has already in the state array
-                            let contains;
-                            newArtist.some((e,index) => {
-                                if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
-                                    contains = true;
-                                    i = index;
-                                }
-                            })
-                            //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
-                            //largest number of thumbnails in the discovery page
-                            if(newArtist.length <= 12){
-                                if(contains){
-                                    newArtist.splice(i, 1);
-                                    newArtist.unshift(newArtistDetail);
-                                }else{
-                                    newArtist.unshift(newArtistDetail);
-                                }
-                            }else{
-                                newArtist.unshift(newArtistDetail);
-                                newArtist.pop();
-                            }
-                        })
-                        console.log(newArtist)
-                        // //replace the new data with old state
-                        // this.setState({
-                        //     artists: newArtist
-                        // })
-                        return newArtist
-                    }
-                })
-                //console.log(newArtist)
+
+            const response = MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+            console.log(response)
+            // MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+            //     .then(result => {
+            //         const musicData = result['data'];
+            //         //if the tag exists in database
+            //         if (musicData.length != 0){
+            //             let image
+            //             musicData.map((m) => {
+            //                 //console.log(m)
+            //                 try {
+            //                     //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
+            //                     image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
+            //                 } catch (error) {
+            //                     image = require("./img/noimage.jpg")
+            //                 }
+            //                 let newArtistDetail = {
+            //                     name: " ",
+            //                     song: m['title'],
+            //                     tags: m['tags'],
+            //                     //for invoking the image from file path
+            //                     image: image
+            //                 };
+            //                 //location of the first duplicated element
+            //                 let i;
+            //                 //Whether the newArtistDetail has already in the state array
+            //                 let contains;
+            //                 newArtist.some((e,index) => {
+            //                     if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
+            //                         contains = true;
+            //                         i = index;
+            //                     }
+            //                 })
+            //                 //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
+            //                 //largest number of thumbnails in the discovery page
+            //                 if(newArtist.length <= 12){
+            //                     if(contains){
+            //                         newArtist.splice(i, 1);
+            //                         newArtist.unshift(newArtistDetail);
+            //                     }else{
+            //                         newArtist.unshift(newArtistDetail);
+            //                     }
+            //                 }else{
+            //                     newArtist.unshift(newArtistDetail);
+            //                     newArtist.pop();
+            //                 }
+            //             })
+            //             console.log(newArtist)
+            //             // //replace the new data with old state
+            //             // this.setState({
+            //             //     artists: newArtist
+            //             // })
+            //             return newArtist
+            //         }
+            //     })
+            //     //console.log(newArtist)
                 
         }
     }
