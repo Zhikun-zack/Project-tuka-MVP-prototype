@@ -109,9 +109,10 @@ class MusicRow extends React.Component {
                 song: "song title",
                 image: singer6
             }],
+        count : 0
 
         };
-        this.artists = [{}]
+        this.artists = []
     }
     onClick = (e) => {
         const carouselActive = this.state.carouselActive;
@@ -139,19 +140,36 @@ class MusicRow extends React.Component {
             }
         }
     }
-    componentWill
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
-        this.updateMusicData(this.props.genres);
-        console.log("componentDidMount")
+        //this.updateMusicData(this.props.genres);
         // console.log(newArtists)
         // this.artists = newArtists
     }
-    componentDidUpdate(){
-        console.log("did updated")
-    }
-    componentWillUpdate(){
-        console.log('will updated')
+    // componentDidUpdate(){
+    //     console.log("did updated")
+    // }
+    componentDidUpdate(prevProps,prevState){
+
+        console.log("new props")
+        console.log(this.props.reduxState.selectedKeywords)
+        console.log("old props")
+        console.log(this.state.selectedKeywords)
+        console.log(prevState)
+        if(this.state.selectedKeywords != prevState.selectedKeywords){
+            console.log("selected keyword has been changed")
+        }
+        //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
+        
+        let count = this.state.count + 1
+        if(this.props.reduxState.selectedKeywords != prevState.selectedKeywords){
+            //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
+            this.setState({
+                selectedKeywords: this.props.reduxState.selectedKeywords,
+                count: count
+            })
+            console.log(count + 'selectedkeywords has been updated')
+        }
     }
     
     // componentDidUpdate(preProps,preState){
@@ -226,7 +244,7 @@ class MusicRow extends React.Component {
             //get data
 
             const response = MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
-            console.log(response)
+           
             // MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
             //     .then(result => {
             //         const musicData = result['data'];
@@ -351,14 +369,8 @@ class MusicRow extends React.Component {
         //         subGenres: subGenres
         //     })
         // }
-        console.log(this.updateMusicData(this.props.genres, this.extractSubGenres(this.props.reduxState.selectedKeywords)))
-        
-        console.log(this.artists.length)
-        console.log("rendered")
         let thumbNailClassName;
         let maskClassName;
-        console.log(this.state.artists[0])
-        console.log(this.artists)
         const slides = this.state.artists.map((item, index) => {
             //console.log(item)
             // console.log("index:" + index)
