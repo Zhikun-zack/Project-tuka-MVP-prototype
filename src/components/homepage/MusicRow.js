@@ -140,45 +140,14 @@ class MusicRow extends React.Component {
             }
         }
     }
-    //execute before render() function, give the initial data for discoverage page
+    //execute after render() function, give the initial data for discoverage page
     componentDidMount(){
         this.updateMusicData(this.props.genres);
     }
-    // componentDidUpdate(){
-    //     console.log("did updated")
-    // }
-    // componentDidUpdate(prevProps,prevState){
-
-    //     // console.log("new props")
-    //     // console.log(this.props.reduxState.selectedKeywords)
-    //     // console.log("old props")
-    //     // console.log(this.state.selectedKeywords)
-    //     // console.log(prevState)
-    //     // if(this.state.selectedKeywords != prevState.selectedKeywords){
-    //     //     console.log("selected keyword has been changed")
-    //     // }
-    //     //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
-        
-    //     let count = this.state.count + 1
-    //     if(this.props.reduxState.selectedKeywords != prevState.selectedKeywords){
-    //         //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
-    //         this.setState({
-    //             selectedKeywords: this.props.reduxState.selectedKeywords,
-    //             count: count
-    //         })
-    //         console.log(count + 'selectedkeywords has been updated')
-    //     }
-    // }
-    
     componentDidUpdate(preProps,preState){
-        // console.log(preProps)
-        // console.log(this.props.genres +' componentupdated')
         let selectedKeywords = this.props.reduxState.selectedKeywords; 
         let subGenres = this.extractSubGenres(selectedKeywords);
-        // console.log("new props")
-        // console.log(this.props.reduxState.selectedKeywords)
-        // console.log("old props")
-        // console.log(preProps.reduxState.selectedKeywords)
+
         //When thumbnail in other carousel expanded, close all thumbnails in this carousel
         if(preProps.onOff === true && this.props.onOff === false){
             this.setState({
@@ -186,54 +155,9 @@ class MusicRow extends React.Component {
                 carouselActiveIndex: -1
             })
         }
-        
-        
-        // console.log("old:" + preProps.genres)
-        // console.log("new:" + this.props.genres)
-        // console.log( preProps)
-        // console.log("new:" + this.props.reduxState.selectedKeywords)
-        //When selected keywords changed
-        // if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-            
-        //     //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
-        //     if(this.props.genres != preProps.genres){
-        //         console.log("changed")
-        //         this.updateMusicData(this.props.genres, subGenres)
-        //     }
-        //     //When user only select subgenres
-        //     else{
-        //         this.updateMusicData(this.props.genres, subGenres)
-        //     }
-        // }
-        // if(preProps.subGenres !== subGenres){
-        //     this.updateMusicData(this.props.genres, subGenres)
-        // }
-        this.updateMusicData(this.props.genres, subGenres)
-        // if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-        //             //console.log(this.props.genres)
-        //     this.updateMusicData(this.props.genres, subGenres)
-        //     this.setState({
-        //         subGenres: subGenres
-        //     })
-                    
-        //  }
-        //  if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
-        //      console.log('updated')
-        //      this.updateMusicData(this.props.genres)
-
-             
-        //  }
+        //Update search result based on the new selected keywords
+        this.updateMusicData(this.props.genres, subGenres) 
     }
-    // shouldComponentUpdate(prevProps){
-    //     let selectedKet
-    //     this.updateMusicData(this.props.genres);
-    //     // console.log(this.props.reduxState.selectedKeywords)
-    //     // console.log(prevProps.reduxState.selectedKeywords)
-    //     // if (prevProps.reduxState.selectedKeywords !== this.props.reduxState.selectedKeywords){
-    //     //     console.log("will updated")
-    //     //     return true
-    //     // }
-    // }
 
     //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
     extractSubGenres = (selectedKeywords) => {
