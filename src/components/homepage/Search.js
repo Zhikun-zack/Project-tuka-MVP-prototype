@@ -161,7 +161,7 @@ class Search extends Component{
         this.setState({
             userInput: "",
         })
-        console.log(this.state.userInput)
+        //this.props.updateSelectedKeys(keyWordsList)
 
     }
     
@@ -287,10 +287,11 @@ class Search extends Component{
     onSuggestionSelected = (e, {suggestion}) => {
         let primaryGenre = this.props.searchPrimaryGenre.keyWordsList;
         let userInput = this.state.userInput;
+        const keyWordsList = this.state.keyWordsList;
         //console.log(primaryGenre)
 
         if(suggestion != "No suggestions, try a genre!" && userInput != ""){
-            const keyWordsList = this.state.keyWordsList;
+            
             if(!keyWordsList.some((element) => element === suggestion) && keyWordsList.length < 5){
                 keyWordsList.push(suggestion);
             }else if(keyWordsList.length == 5){
@@ -337,7 +338,7 @@ class Search extends Component{
                 //update redux
                 this.props.updateKeys(primaryGenre)
             }
-            this.props.updateSelectedKeys(keyWordsList);
+            
             this.setState({
                 userInput: "",
             })
@@ -350,8 +351,9 @@ class Search extends Component{
         this.setState({
             userInput: ""
         })
+        console.log(keyWordsList)
+        this.props.updateSelectedKeys(keyWordsList);
     }
-
 
     render(){
         const{
@@ -436,7 +438,6 @@ function mapDispatchToProps(dispatch){
             type: "addSelectedKeywords",
             selectedkeys: selected
         })
-
     }
 }
 

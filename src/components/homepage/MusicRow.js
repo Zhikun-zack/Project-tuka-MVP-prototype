@@ -142,88 +142,97 @@ class MusicRow extends React.Component {
     }
     //execute before render() function, give the initial data for discoverage page
     componentDidMount(){
-        //this.updateMusicData(this.props.genres);
-        // console.log(newArtists)
-        // this.artists = newArtists
+        this.updateMusicData(this.props.genres);
     }
     // componentDidUpdate(){
     //     console.log("did updated")
     // }
-    componentDidUpdate(prevProps,prevState){
+    // componentDidUpdate(prevProps,prevState){
 
-        console.log("new props")
-        console.log(this.props.reduxState.selectedKeywords)
-        console.log("old props")
-        console.log(this.state.selectedKeywords)
-        console.log(prevState)
-        if(this.state.selectedKeywords != prevState.selectedKeywords){
-            console.log("selected keyword has been changed")
-        }
-        //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
-        
-        let count = this.state.count + 1
-        if(this.props.reduxState.selectedKeywords != prevState.selectedKeywords){
-            //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
-            this.setState({
-                selectedKeywords: this.props.reduxState.selectedKeywords,
-                count: count
-            })
-            console.log(count + 'selectedkeywords has been updated')
-        }
-    }
-    
-    // componentDidUpdate(preProps,preState){
-    //     // console.log(preProps)
-    //     // console.log(this.props.genres +' componentupdated')
-    //     let selectedKeywords = this.props.reduxState.selectedKeywords; 
-    //     let subGenres = this.extractSubGenres(selectedKeywords);
     //     // console.log("new props")
     //     // console.log(this.props.reduxState.selectedKeywords)
     //     // console.log("old props")
-    //     // console.log(preProps.reduxState.selectedKeywords)
-    //     //When thumbnail in other carousel expanded, close all thumbnails in this carousel
-    //     if(preProps.onOff === true && this.props.onOff === false){
+    //     // console.log(this.state.selectedKeywords)
+    //     // console.log(prevState)
+    //     // if(this.state.selectedKeywords != prevState.selectedKeywords){
+    //     //     console.log("selected keyword has been changed")
+    //     // }
+    //     //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
+        
+    //     let count = this.state.count + 1
+    //     if(this.props.reduxState.selectedKeywords != prevState.selectedKeywords){
+    //         //let selectedKeywords = this.props.reduxState.selectedKeywords.slice()
     //         this.setState({
-    //             carouselActive: false,
-    //             carouselActiveIndex: -1
+    //             selectedKeywords: this.props.reduxState.selectedKeywords,
+    //             count: count
     //         })
+    //         console.log(count + 'selectedkeywords has been updated')
     //     }
+    // }
+    
+    componentDidUpdate(preProps,preState){
+        // console.log(preProps)
+        // console.log(this.props.genres +' componentupdated')
+        let selectedKeywords = this.props.reduxState.selectedKeywords; 
+        let subGenres = this.extractSubGenres(selectedKeywords);
+        // console.log("new props")
+        // console.log(this.props.reduxState.selectedKeywords)
+        // console.log("old props")
+        // console.log(preProps.reduxState.selectedKeywords)
+        //When thumbnail in other carousel expanded, close all thumbnails in this carousel
+        if(preProps.onOff === true && this.props.onOff === false){
+            this.setState({
+                carouselActive: false,
+                carouselActiveIndex: -1
+            })
+        }
         
         
-    //     // console.log("old:" + preProps.genres)
-    //     // console.log("new:" + this.props.genres)
-    //     // console.log( preProps)
-    //     // console.log("new:" + this.props.reduxState.selectedKeywords)
-    //     //When selected keywords changed
-    //     // if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
+        // console.log("old:" + preProps.genres)
+        // console.log("new:" + this.props.genres)
+        // console.log( preProps)
+        // console.log("new:" + this.props.reduxState.selectedKeywords)
+        //When selected keywords changed
+        // if(this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
             
-    //     //     //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
-    //     //     if(this.props.genres != preProps.genres){
-    //     //         console.log("changed")
-    //     //         this.updateMusicData(this.props.genres, subGenres)
-    //     //     }
-    //     //     //When user only select subgenres
-    //     //     else{
-    //     //         this.updateMusicData(this.props.genres, subGenres)
-    //     //     }
-    //     // }
-    //     // if(preProps.subGenres !== subGenres){
-    //     //     this.updateMusicData(this.props.genres, subGenres)
-    //     // }
-    //     if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
-    //                 //console.log(this.props.genres)
-    //         this.updateMusicData(this.props.genres, subGenres)
-    //         this.setState({
-    //             subGenres: subGenres
-    //         })
+        //     //When user selected one of the primary keys, then the this.props.genres of carousel will be changed to new one, update the thumbnail contents
+        //     if(this.props.genres != preProps.genres){
+        //         console.log("changed")
+        //         this.updateMusicData(this.props.genres, subGenres)
+        //     }
+        //     //When user only select subgenres
+        //     else{
+        //         this.updateMusicData(this.props.genres, subGenres)
+        //     }
+        // }
+        // if(preProps.subGenres !== subGenres){
+        //     this.updateMusicData(this.props.genres, subGenres)
+        // }
+        this.updateMusicData(this.props.genres, subGenres)
+        // if(this.props.genres != preProps.genres || this.props.reduxState.selectedKeywords !== preProps.reduxState.selectedKeywords){
+        //             //console.log(this.props.genres)
+        //     this.updateMusicData(this.props.genres, subGenres)
+        //     this.setState({
+        //         subGenres: subGenres
+        //     })
                     
-    //      }
-    //      if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
-    //          console.log('updated')
-    //          this.updateMusicData(this.props.genres)
+        //  }
+        //  if (preProps.reduxState.selectedKeywords.length !== 0 && this.props.reduxState.selectedKeywords.length === 0){
+        //      console.log('updated')
+        //      this.updateMusicData(this.props.genres)
 
              
-    //      }
+        //  }
+    }
+    // shouldComponentUpdate(prevProps){
+    //     let selectedKet
+    //     this.updateMusicData(this.props.genres);
+    //     // console.log(this.props.reduxState.selectedKeywords)
+    //     // console.log(prevProps.reduxState.selectedKeywords)
+    //     // if (prevProps.reduxState.selectedKeywords !== this.props.reduxState.selectedKeywords){
+    //     //     console.log("will updated")
+    //     //     return true
+    //     // }
     // }
 
     //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
@@ -234,6 +243,7 @@ class MusicRow extends React.Component {
         subGenres = selectedKeywords.filter(value => (!primaryGenre.includes(value)));
         return subGenres
     }
+    
     //Function for updating the music data get from database
     //input param: selectedKeywords: the subgenres, default is [], if it is empty, then just searching the primary genre
     updateMusicData = (primaryGenre, selectedKeywords = []) => {
@@ -242,63 +252,69 @@ class MusicRow extends React.Component {
             const newArtist = this.state.newArtist;
             //console.log('primaryGenres:' + primaryGenre)
             //get data
-
-            const response = MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
            
-            // MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
-            //     .then(result => {
-            //         const musicData = result['data'];
-            //         //if the tag exists in database
-            //         if (musicData.length != 0){
-            //             let image
-            //             musicData.map((m) => {
-            //                 //console.log(m)
-            //                 try {
-            //                     //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
-            //                     image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
-            //                 } catch (error) {
-            //                     image = require("./img/noimage.jpg")
-            //                 }
-            //                 let newArtistDetail = {
-            //                     name: " ",
-            //                     song: m['title'],
-            //                     tags: m['tags'],
-            //                     //for invoking the image from file path
-            //                     image: image
-            //                 };
-            //                 //location of the first duplicated element
-            //                 let i;
-            //                 //Whether the newArtistDetail has already in the state array
-            //                 let contains;
-            //                 newArtist.some((e,index) => {
-            //                     if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
-            //                         contains = true;
-            //                         i = index;
-            //                     }
-            //                 })
-            //                 //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
-            //                 //largest number of thumbnails in the discovery page
-            //                 if(newArtist.length <= 12){
-            //                     if(contains){
-            //                         newArtist.splice(i, 1);
-            //                         newArtist.unshift(newArtistDetail);
-            //                     }else{
-            //                         newArtist.unshift(newArtistDetail);
-            //                     }
-            //                 }else{
-            //                     newArtist.unshift(newArtistDetail);
-            //                     newArtist.pop();
-            //                 }
-            //             })
-            //             console.log(newArtist)
-            //             // //replace the new data with old state
-            //             // this.setState({
-            //             //     artists: newArtist
-            //             // })
-            //             return newArtist
-            //         }
-            //     })
-            //     //console.log(newArtist)
+            MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+                .then(result => {
+                    const musicData = result['data'];
+                    //if the tag exists in database
+                    if (musicData.length != 0){
+                        let image
+                        musicData.map((m) => {
+                            //console.log(m)
+                            try {
+                                //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
+                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
+                            } catch (error) {
+                                image = require("./img/noimage.jpg")
+                            }
+                            let newArtistDetail = {
+                                name: " ",
+                                song: m['title'],
+                                tags: m['tags'],
+                                //for invoking the image from file path
+                                image: image
+                            };
+                            //location of the first duplicated element
+                            let i;
+                            //Whether the newArtistDetail has already in the state array
+                            let contains;
+                            newArtist.some((e,index) => {
+                                if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
+                                    contains = true;
+                                    i = index;
+                                }
+                            })
+                            //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
+                            //largest number of thumbnails in the discovery page
+                            if(newArtist.length <= 12){
+                                if(contains){
+                                    newArtist.splice(i, 1);
+                                    newArtist.unshift(newArtistDetail);
+                                }else{
+                                    newArtist.unshift(newArtistDetail);
+                                }
+                            }else{
+                                newArtist.unshift(newArtistDetail);
+                                newArtist.pop();
+                            }
+                        })
+                        console.log("this is the old state for: " + this.props.genres)
+                        // console.log(this.state.artists)
+                        // console.log(newArtist)
+                        if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
+                            console.log("updated this . state. artists")
+                            const copyNewArtist = [].concat(newArtist)
+                            this.setState({
+                                artists: copyNewArtist
+                            })
+                        }
+                        // //replace the new data with old state
+                        // this.setState({
+                        //     artists: newArtist
+                        // })
+                        return newArtist
+                    }
+                })
                 
         }
     }
