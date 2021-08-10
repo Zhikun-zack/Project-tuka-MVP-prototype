@@ -26,9 +26,6 @@ import user from "./img/user-profile image example.png";
 import { connect } from 'react-redux';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 
-
-
-
 class MusicRow extends React.Component {
     constructor(props) {
         super(props);
@@ -146,7 +143,7 @@ class MusicRow extends React.Component {
     }
     componentDidUpdate(preProps,preState){
         let selectedKeywords = this.props.reduxState.selectedKeywords; 
-        let subGenres = this.extractSubGenres(selectedKeywords);
+        let otherGenres = this.extractGenresExceptThisGenre(selectedKeywords);
 
         //When thumbnail in other carousel expanded, close all thumbnails in this carousel
         if(preProps.onOff === true && this.props.onOff === false){
@@ -155,16 +152,23 @@ class MusicRow extends React.Component {
                 carouselActiveIndex: -1
             })
         }
+        console.log(this.props.genres + "updated")
+        this.updateMusicData("Country", otherGenres);
         //Update search result based on the new selected keywords
-        this.updateMusicData(this.props.genres, subGenres) 
+        // if(otherGenres.length !== 0){
+        //     this.updateMusicData(this.props.genres, otherGenres); 
+        // }else{
+        //     this.updateMusicData(this.props.genres);
+        // }
     }
 
-    //The selectedkeywords in redux state contains all the genres that the user selected, this function remove the primary genres, because the database query split the primary and sub genres
-    extractSubGenres = (selectedKeywords) => {
-        const primaryGenre = ["Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]
+    //The selectedkeywords in redux state contains all the genres that the user selected, this function remove this music row's genre
+    //database needs to params for request, this music row's genre and others
+    extractGenresExceptThisGenre = (selectedKeywords) => {
+        const thisGenre = this.props.genres;
         //define new variable and return this one instead of changing the redux state driectly
         let subGenres = []
-        subGenres = selectedKeywords.filter(value => (!primaryGenre.includes(value)));
+        subGenres = selectedKeywords.filter(value => (value !== thisGenre));
         return subGenres
     }
     
@@ -212,6 +216,9 @@ class MusicRow extends React.Component {
                             //largest number of thumbnails in the discovery page
                             if(newArtist.length <= 12){
                                 if(contains){
+                                    if(this.props.genres === "Hip-Hop / Rap"){
+                                        console.log(newArtist[i])
+                                    }
                                     newArtist.splice(i, 1);
                                     newArtist.unshift(newArtistDetail);
                                 }else{
@@ -222,9 +229,8 @@ class MusicRow extends React.Component {
                                 newArtist.pop();
                             }
                         })
-                        console.log("this is the old state for: " + this.props.genres)
-                        // console.log(this.state.artists)
-                        // console.log(newArtist)
+                        console.log(this.state.artists)
+                        console.log(newArtist)
                         if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
                             console.log("updated this . state. artists")
                             const copyNewArtist = [].concat(newArtist)
@@ -232,10 +238,6 @@ class MusicRow extends React.Component {
                                 artists: copyNewArtist
                             })
                         }
-                        // //replace the new data with old state
-                        // this.setState({
-                        //     artists: newArtist
-                        // })
                         return newArtist
                     }
                 })

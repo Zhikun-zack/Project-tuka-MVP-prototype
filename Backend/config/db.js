@@ -3,25 +3,25 @@ const key = require('./keys.js');
 require('../models/Song');
 //const fakeMusics = require("../public/fakeMusicData")
 // const fakeMusics = [
-//     {
-//         "title": "Old Town Road",
-//         "price": ".99",
-//         "userID": "00001",
-//         "songID": "00001-001",
-//         "uploadDate": "",
-//         "tags": ["hip-hop/rap", "country", "pop"]
-        
-//     },
+    // {
+    //     "title": "Old Town Road",
+    //     "price": ".99",
+    //     "userID": "00001",
+    //     "songID": "00001-001",
+    //     "uploadDate": "",
+    //     "tags": ["hip-hop/rap", "country", "pop"]
+    //     "numberOfPlay": 15
+    // },
     
-//     {
-//         "title": "I Dont Care",
-//         "price": ".99",
-//         "userID": "00002",
-//         "songID": "00002-001",
-//         "uploadDate": "",
-//         "tags": ["pop", "vocal", "classical"]
+    // {
+    //     "title": "I Dont Care",
+    //     "price": ".99",
+    //     "userID": "00002",
+    //     "songID": "00002-001",
+    //     "uploadDate": "",
+    //     "tags": ["pop", "vocal", "classical"]
         
-//     },
+    // },
     
 //     {
 //         "title": "Suge",
