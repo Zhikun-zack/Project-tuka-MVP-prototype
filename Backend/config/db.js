@@ -9,7 +9,7 @@ require('../models/Song');
     //     "userID": "00001",
     //     "songID": "00001-001",
     //     "uploadDate": "",
-    //     "tags": ["hip-hop/rap", "country", "pop"]
+    //     "tags": ["let normalPrimaryGenre = this.normalizationGenre(this.props.genres);", "country", "pop"]
     //     "numberOfPlay": 15
     // },
     

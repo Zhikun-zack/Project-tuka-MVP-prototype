@@ -139,7 +139,8 @@ class MusicRow extends React.Component {
     }
     //execute after render() function, give the initial data for discoverage page
     componentDidMount(){
-        this.updateMusicData(this.props.genres);
+        let normalPrimaryGenre = this.normalizationGenre(this.props.genres);
+        this.updateMusicData(normalPrimaryGenre);
     }
     componentDidUpdate(preProps,preState){
         let selectedKeywords = this.props.reduxState.selectedKeywords; 
@@ -152,8 +153,13 @@ class MusicRow extends React.Component {
                 carouselActiveIndex: -1
             })
         }
-        console.log(this.props.genres + "updated")
-        this.updateMusicData("Country", otherGenres);
+        let normalPrimaryGenre = this.normalizationGenre(this.props.genres);
+        let normalOtherGenres = [];
+        for (let i = 0; i < selectedKeywords.length; i++){
+            normalOtherGenres[i] = this.normalizationGenre(selectedKeywords[i])
+        }
+
+        this.updateMusicData(normalPrimaryGenre, normalOtherGenres);
         //Update search result based on the new selected keywords
         // if(otherGenres.length !== 0){
         //     this.updateMusicData(this.props.genres, otherGenres); 
@@ -171,7 +177,10 @@ class MusicRow extends React.Component {
         subGenres = selectedKeywords.filter(value => (value !== thisGenre));
         return subGenres
     }
-    
+    //Remove the special symbol and modify upper case to lower case
+    normalizationGenre = (genre) => {
+        return genre.toLowerCase().replace(/\s*/g, "")
+    }
     //Function for updating the music data get from database
     //input param: selectedKeywords: the subgenres, default is [], if it is empty, then just searching the primary genre
     updateMusicData = (primaryGenre, selectedKeywords = []) => {
@@ -181,14 +190,17 @@ class MusicRow extends React.Component {
             //console.log('primaryGenres:' + primaryGenre)
             //get data
            
-            MusicService.extractBasedOnTags((primaryGenre).toLowerCase().replace(/\s*/g, ""), selectedKeywords)
+            MusicService.extractBasedOnTags(primaryGenre, selectedKeywords)
                 .then(result => {
                     const musicData = result['data'];
+
+                    console.log(musicData.length + " is the length")
+
                     //if the tag exists in database
                     if (musicData.length != 0){
                         let image
                         musicData.map((m) => {
-                            //console.log(m)
+                            console.log(m)
                             try {
                                 //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
                                 image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
@@ -216,9 +228,7 @@ class MusicRow extends React.Component {
                             //largest number of thumbnails in the discovery page
                             if(newArtist.length <= 12){
                                 if(contains){
-                                    if(this.props.genres === "Hip-Hop / Rap"){
-                                        console.log(newArtist[i])
-                                    }
+                                    console.log(i)
                                     newArtist.splice(i, 1);
                                     newArtist.unshift(newArtistDetail);
                                 }else{
@@ -232,7 +242,6 @@ class MusicRow extends React.Component {
                         console.log(this.state.artists)
                         console.log(newArtist)
                         if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
-                            console.log("updated this . state. artists")
                             const copyNewArtist = [].concat(newArtist)
                             this.setState({
                                 artists: copyNewArtist
