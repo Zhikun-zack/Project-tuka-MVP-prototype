@@ -276,7 +276,7 @@ class LogInWin extends React.Component{
                                 <th className="th1">
                                    
                                 </th>
-                            <th className="th2"><Button size="lg" color="danger">Sign Up</Button></th>
+                            <th className="th2"><Button size="lg" color="danger">Log In</Button></th>
                                 </tr></Table>
                             <div>By Signing up, you agree to our <a style={{color:'blue'}}>Term of Use</a> and
                                 <a style={{color:'blue'}}> Privacy Policy</a></div>

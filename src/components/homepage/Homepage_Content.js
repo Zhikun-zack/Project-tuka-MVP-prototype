@@ -27,7 +27,7 @@ class Homepage_Content extends React.Component{
 
         return (
             <div> 
-                {/* {
+                {
                     GenreList.map((key, index) => {
                         //thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
                         if (key === this.props.homePageGenres.thumbNailActive[0]){
@@ -44,10 +44,10 @@ class Homepage_Content extends React.Component{
                             }
                         }
                     })
-                } */}
+                }
 
-
-                <MusicRow id = {1} onClick = {this.onClick} genres = {'Hip-Hop / Rap'} onOff = {true} ref = {this.musicRowRef}></MusicRow>
+                {/* Only display one row */}
+                {/* <MusicRow id = {1} onClick = {this.onClick} genres = {'Hip-Hop / Rap'} onOff = {true} ref = {this.musicRowRef}></MusicRow> */}
             </div>
     
         );

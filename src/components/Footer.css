@@ -7,7 +7,7 @@
 /*}*/
 .footer_bg{
     background:#d2d8d9;
-    width:100%;
+    min-width:80rem;
     height:80px;
 }
 

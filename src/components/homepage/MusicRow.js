@@ -141,6 +141,7 @@ class MusicRow extends React.Component {
     componentDidMount(){
         let normalPrimaryGenre = this.normalizationGenre(this.props.genres);
         this.updateMusicData(normalPrimaryGenre);
+        console.log(this.state.artists)
     }
     componentDidUpdate(preProps,preState){
         let selectedKeywords = this.props.reduxState.selectedKeywords; 
@@ -194,10 +195,8 @@ class MusicRow extends React.Component {
                 .then(result => {
                     const musicData = result['data'];
 
-                    console.log(musicData.length + " is the length")
-
                     //if the tag exists in database
-                    if (musicData.length != 0){
+                    if (musicData.length > 1){
                         let image
                         musicData.map((m) => {
                             console.log(m)
@@ -246,8 +245,56 @@ class MusicRow extends React.Component {
                             this.setState({
                                 artists: copyNewArtist
                             })
+                            console.log("artists has updated")
                         }
-                        return newArtist
+                        
+                    }else if(musicData.length == 1){
+                        console.log(1)
+                        // let m = musicData[0]
+                        // let image
+                        // try {
+                        //     //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
+                        //     image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
+                        // } catch (error) {
+                        //     image = require("./img/noimage.jpg")
+                        // }
+                        // let newArtistDetail = {
+                        //     name: " ",
+                        //     song: m['title'],
+                        //     tags: m['tags'],
+                        //     //for invoking the image from file path
+                        //     image: image
+                        // };
+                        // //location of the first duplicated element
+                        // let i;
+                        // //Whether the newArtistDetail has already in the state array
+                        // let contains;
+                        // newArtist.some((e,index) => {
+                        //     if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
+                        //         contains = true;
+                        //         i = index;
+                        //     }
+                        // })
+                        // //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
+                        // //largest number of thumbnails in the discovery page
+                        // if(newArtist.length <= 12){
+                        //     if(contains){
+                        //         console.log(i)
+                        //         newArtist.splice(i, 1);
+                        //         newArtist.unshift(newArtistDetail);
+                        //     }else{
+                        //         newArtist.unshift(newArtistDetail);
+                        //     }
+                        // }else{
+                        //     newArtist.unshift(newArtistDetail);
+                        //     newArtist.pop();
+                        // }
+                        // if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
+                        //     const copyNewArtist = [].concat(newArtist)
+                        //     this.setState({
+                        //         artists: copyNewArtist
+                        //     })
+                        // }
                     }
                 })
                 
