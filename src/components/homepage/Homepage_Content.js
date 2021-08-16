@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import MusicRow from './MusicRow';
+import MusicPlayer from './MusicPlayer';
 
 class Homepage_Content extends React.Component{
 
@@ -27,6 +28,7 @@ class Homepage_Content extends React.Component{
 
         return (
             <div> 
+                <MusicPlayer></MusicPlayer>
                 {
                     GenreList.map((key, index) => {
                         //thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
@@ -45,7 +47,7 @@ class Homepage_Content extends React.Component{
                         }
                     })
                 }
-
+                
                 {/* Only display one row */}
                 {/* <MusicRow id = {1} onClick = {this.onClick} genres = {'Hip-Hop / Rap'} onOff = {true} ref = {this.musicRowRef}></MusicRow> */}
             </div>

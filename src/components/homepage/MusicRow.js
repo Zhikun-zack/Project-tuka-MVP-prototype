@@ -106,8 +106,9 @@ class MusicRow extends React.Component {
                 song: "song title",
                 image: singer6
             }],
-        count : 0
-
+        count : 0,
+        //whether music is playing 
+        player: "stopped"
         };
         this.artists = []
     }
@@ -141,7 +142,6 @@ class MusicRow extends React.Component {
     componentDidMount(){
         let normalPrimaryGenre = this.normalizationGenre(this.props.genres);
         this.updateMusicData(normalPrimaryGenre);
-        console.log(this.state.artists)
     }
     componentDidUpdate(preProps,preState){
         let selectedKeywords = this.props.reduxState.selectedKeywords; 
@@ -199,7 +199,7 @@ class MusicRow extends React.Component {
                     if (musicData.length > 1){
                         let image
                         musicData.map((m) => {
-                            console.log(m)
+                            // console.log(m)
                             try {
                                 //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
                                 image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
@@ -227,7 +227,7 @@ class MusicRow extends React.Component {
                             //largest number of thumbnails in the discovery page
                             if(newArtist.length <= 12){
                                 if(contains){
-                                    console.log(i)
+                                    
                                     newArtist.splice(i, 1);
                                     newArtist.unshift(newArtistDetail);
                                 }else{
@@ -238,14 +238,14 @@ class MusicRow extends React.Component {
                                 newArtist.pop();
                             }
                         })
-                        console.log(this.state.artists)
-                        console.log(newArtist)
+                        // console.log(this.state.artists)
+                        // console.log(newArtist)
                         if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
                             const copyNewArtist = [].concat(newArtist)
                             this.setState({
                                 artists: copyNewArtist
                             })
-                            console.log("artists has updated")
+                           
                         }
                         
                     }else if(musicData.length == 1){
@@ -360,20 +360,10 @@ class MusicRow extends React.Component {
         })
     }
     render() {
-        // if (this.state.subGenres !== this.extractSubGenres(this.props.reduxState.selectedKeywords)){
-        //     let subGenres = this.props.reduxState.selectedKeywords
-        //     console.log('different')
-        //     this.setState({
-        //         subGenres: subGenres
-        //     })
-        // }
+        console.log(this.props.reduxState.musicInstance)
         let thumbNailClassName;
         let maskClassName;
         const slides = this.state.artists.map((item, index) => {
-            //console.log(item)
-            // console.log("index:" + index)
-            // console.log("activeindex:" + this.state.carouselActiveIndex)
-            
             //onOff is false means this carousel cannot expand any thumbnail in it
             if(this.props.onOff && index == this.state.carouselActiveIndex){
                 thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
@@ -388,7 +378,10 @@ class MusicRow extends React.Component {
                     <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
                         <div className = {maskClassName}>
                             <div className = "carousel_display">
-                                <img className = "play" src = {play} ></img>
+                                {
+                                    this.state.player == "playing" && (<button onClick = {() => {this.setState({player: "stopped"})}}><img className = "play" src = {play} ></img></button>) 
+                                }
+                                {this.state.player == "stopped" && (<button onClick = {() => {this.setState({player: "playing"})}}><img className = "stop" src = {stop} ></img></button>)}
                             </div>
                             {/* <div className = "carousel_display">
                                 <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>
@@ -459,7 +452,9 @@ class MusicRow extends React.Component {
 }
 
 function mapStateToProps(state){
-    return{reduxState: state}
+    return{
+        reduxState: state
+    }
 }
 function mapDispatchToProps(dispatch){
     return {changeThumbNailActive: (thumbNailActive) => dispatch({

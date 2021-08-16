@@ -17,7 +17,9 @@ const initialState = {keyWordsList:[{index: 1, name: "Rock", flag: true},
                                     {index: 7, name: "Classical", flag: true}],
                         selectedKeywords: [],
                         thumbNailActive: ['',false],
-                        showMenu: false
+                        showMenu: false,
+                        //music instance for music player
+                        musicInstance: {},
                     };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +34,8 @@ const reducer = (state = initialState, action) => {
             return {...state, thumbNailActive: action.thumbNailActive};
         case "changeMenu":
             return {...state, showMenu: action.changeMenu};
+        case "getMusicInstance":
+            return {...state, musicInstance: action.musicInstance};
         default:
             return state
     } 
