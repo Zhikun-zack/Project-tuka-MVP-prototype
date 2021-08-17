@@ -113,6 +113,7 @@ class MusicRow extends React.Component {
         this.artists = []
     }
     onClick = (e) => {
+        console.log(e.currentTarget)
         const carouselActive = this.state.carouselActive;
         if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
             this.setState({
@@ -331,6 +332,7 @@ class MusicRow extends React.Component {
         scrollDirection: 'scrollLeft'});
     }
     clickCarouselWin = () => {
+        console.log("cliled")
         const carouselActive = this.state.carouselActive;
         this.setState({
             carouselActive: !carouselActive
@@ -360,28 +362,31 @@ class MusicRow extends React.Component {
         })
     }
     render() {
-        console.log(this.props.reduxState.musicInstance)
+        //console.log(this.props.reduxState.musicInstance)
         let thumbNailClassName;
         let maskClassName;
+        let playOrStopSrc;
         const slides = this.state.artists.map((item, index) => {
             //onOff is false means this carousel cannot expand any thumbnail in it
             if(this.props.onOff && index == this.state.carouselActiveIndex){
                 thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
                 maskClassName = this.state.carouselActive? "carousel_mask_active carousel_mask": "carousel_mask";
+                playOrStopSrc = this.state.carouselActive? stop : play;
                 // console.log("thumbNail:" + thumbNailClassName)
             }else{
                 thumbNailClassName = "carousel_window";
                 maskClassName = "carousel_mask";
+                playOrStopSrc = play;
             }
             return (
-                <div className ="carousel_slide" onClick = {this.onClick} id = {index} thumbNailAttribute = {JSON.stringify({"genre": item.tags, "name": item.song})}>
-                    <div className = {thumbNailClassName} key = {index} onClick = {this.clickCarouselWin}>
+                <div className ="carousel_slide"  thumbNailAttribute = {JSON.stringify({"genre": item.tags, "name": item.song})}>
+                    <div className = {thumbNailClassName} key = {index} >
                         <div className = {maskClassName}>
-                            <div className = "carousel_display">
-                                {
-                                    this.state.player == "playing" && (<button onClick = {() => {this.setState({player: "stopped"})}}><img className = "play" src = {play} ></img></button>) 
-                                }
-                                {this.state.player == "stopped" && (<button onClick = {() => {this.setState({player: "playing"})}}><img className = "stop" src = {stop} ></img></button>)}
+                            <div className = "carousel_display" id = {index} onClick = {this.onClick}>
+                                
+                                <button ><img className = "play" src = {playOrStopSrc} ></img></button> 
+                                
+                                {/* {this.state.player == "playing" && (<button onClick = {() => {this.setState({player: "stopped"})}}><img className = "stop" src = {stop} ></img></button>)} */}
                             </div>
                             {/* <div className = "carousel_display">
                                 <img className = "stop" src = {stop} onClick = {this.handlePlay}></img>

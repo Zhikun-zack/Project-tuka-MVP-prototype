@@ -15,7 +15,7 @@ const audioList1 = [
       // musicSrc: async () => {
       //   return await fetch('/api')
       // },
-      duration: 15
+      duration:100
     },
     {
       name: 'Dorost Nemisham',
@@ -43,6 +43,7 @@ class MusicPlayer extends React.Component {
                     this.props.getMusicInstance(instance)
                 }}
                 audioLists = {audioList1}
+                mode = 'full'
             />
         )       
     }

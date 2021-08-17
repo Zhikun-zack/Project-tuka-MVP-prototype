@@ -13,6 +13,7 @@ class Homepage_Content extends React.Component{
         //carousels will use this list to display
         let GenreList =  ["Trending Now"]; 
         let len = keyWordsList.length;
+        let musicPlayer;
         //if empty, give default values
         if(len == 0){
             keyWordsList = keyWordsList.concat(["Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]); 
@@ -25,11 +26,17 @@ class Homepage_Content extends React.Component{
         if(this.props.homePageGenres.selectedKeywords.length == 0){
             GenreList = ["Trending Now", "Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]
         }
-
+        if(this.props.homePageGenres.thumbNailActive[1]) {
+            
+            musicPlayer = <MusicPlayer></MusicPlayer>
+        }
         return (
             <div> 
-                <MusicPlayer></MusicPlayer>
+                
+                {musicPlayer}
+
                 {
+                    
                     GenreList.map((key, index) => {
                         //thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
                         if (key === this.props.homePageGenres.thumbNailActive[0]){
