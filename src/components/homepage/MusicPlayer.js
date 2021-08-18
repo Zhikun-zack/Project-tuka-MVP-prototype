@@ -15,7 +15,7 @@ const audioList1 = [
       // musicSrc: async () => {
       //   return await fetch('/api')
       // },
-      duration:100
+      duration:(10.00)
     },
     {
       name: 'Dorost Nemisham',

@@ -382,7 +382,10 @@ class MusicRow extends React.Component {
     }
     //When button in thumbnail is play, append .play function to the button, else append .pause function
     handleMusic = (e) => {
-        //document.getElementsByTagName("audio")[0].duration = 10
+        //document.getElementsByTagName("audio").getByClassName("music-player-audio")[0].duration = 10
+        let elementClass = document.getElementsByClassName("music-player-audio")
+        elementClass.duration = 10
+        console.log(elementClass.duration)
         //Current selected thumbnail play button id
         let currId = e.currentTarget.id;
         //Previous selected id
