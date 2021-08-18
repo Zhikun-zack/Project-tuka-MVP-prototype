@@ -16,7 +16,7 @@ const initialState = {keyWordsList:[{index: 1, name: "Rock", flag: true},
                                     {index: 6, name: "Jazz", flag: true}, 
                                     {index: 7, name: "Classical", flag: true}],
                         selectedKeywords: [],
-                        thumbNailActive: ['',false],
+                        thumbNailActive: ['',false, ""],
                         showMenu: false,
                         //music instance for music player
                         musicInstance: {},

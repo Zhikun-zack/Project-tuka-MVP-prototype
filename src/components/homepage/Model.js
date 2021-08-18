@@ -156,7 +156,6 @@ export default  class Model extends React.Component{
     }
 
     render() {
-        console.log(this.state.show)
         //if show value sent from Sign2.js is false, return nothing
         if(!this.state.show){
             return null;

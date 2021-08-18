@@ -107,37 +107,56 @@ class MusicRow extends React.Component {
                 image: singer6
             }],
         count : 0,
-        //whether music is playing 
-        player: "stopped"
+        //whether music is playing, has three values: play, pause and stop 
+        player: "play"
         };
         this.artists = []
     }
     onClick = (e) => {
-        console.log(e.currentTarget)
+        
         const carouselActive = this.state.carouselActive;
         if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
-            this.setState({
-                carouselActive: !carouselActive,
-                carouselActiveIndex: e.currentTarget.id
-            })
-
-            this.props.changeThumbNailActive([this.props.genres,!carouselActive])
-            //console.log(this.props.reduxState.thumbNailActive)
-        }else if (e.currentTarget.id !== this.state.carouselActiveIndex){
+            //if the play button is play, just change the button to stop
+            if (this.state.player === "play"){
+                this.setState({
+                    carouselActive: true,
+                    carouselActiveIndex: e.currentTarget.id,
+                    player: "stop"
+                })
+            }
+            //if the play button is stop, cancel this thumbnail's active state
+            else if(this.state.player === "stop"){
+                this.setState({
+                    carouselActive: true,
+                    carouselActiveIndex: e.currentTarget.id,
+                    player: "play"
+                })
+            }
+            
+            this.props.changeThumbNailActive([this.props.genres,!carouselActive, "play"])
+        }
+        //when click on different thumbnail
+        else if (e.currentTarget.id !== this.state.carouselActiveIndex){
+            //click others when one thumbnail is active
             if(carouselActive === true){
                 this.setState({
                     carouselActive: carouselActive,
-                    carouselActiveIndex: e.currentTarget.id
+                    carouselActiveIndex: e.currentTarget.id,
+                    player: "stop"
                 })
-                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive])
-            }else{
+                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive, "play"])
+            }
+            //click others when no thumbnail is active
+            else{
                 this.setState({
                     carouselActive:!carouselActive,
-                    carouselActiveIndex: e.currentTarget.id
+                    carouselActiveIndex: e.currentTarget.id,
+                    player: "stop"
                 })
-                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive])
+                this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive, "play"])
             }
         }
+       
     }
     //execute after render() function, give the initial data for discoverage page
     componentDidMount(){
@@ -361,30 +380,62 @@ class MusicRow extends React.Component {
             carouselActiveIndex: -1
         })
     }
+    //When button in thumbnail is play, append .play function to the button, else append .pause function
+    handleMusic = (e) => {
+        //document.getElementsByTagName("audio")[0].duration = 10
+        //Current selected thumbnail play button id
+        let currId = e.currentTarget.id;
+        //Previous selected id
+        let prevId = this.state.carouselActiveIndex;
+        //Play or pause same thumbnail 
+        if (currId === prevId) {
+            //thumbnail itself is playing when click
+            if (document.getElementsByTagName("audio")[0] && this.state.player === "play"){
+                console.log("play")
+                document.getElementsByTagName("audio")[0].play();
+            }
+            //itself is stopped when click
+            else if(document.getElementsByTagName("audio")[0] && this.state.player === "stop"){
+                console.log("stop")
+                document.getElementsByTagName("audio")[0].pause();
+            }
+        }
+        //click play of other thumbnail
+        else{
+//needs to modify
+            //when previous thumbnail is playing
+            if (document.getElementsByTagName("audio")[0] && this.state.player === "play"){
+                document.getElementsByTagName("audio")[0].play();
+            }
+            //when previous thumbnail is stopped
+            else if(document.getElementsByTagName("audio")[0] && this.state.player === "stop"){
+                document.getElementsByTagName("audio")[0].play();
+            }
+        }
+    }
+
     render() {
-        //console.log(this.props.reduxState.musicInstance)
-        let thumbNailClassName;
         let maskClassName;
         let playOrStopSrc;
         const slides = this.state.artists.map((item, index) => {
             //onOff is false means this carousel cannot expand any thumbnail in it
             if(this.props.onOff && index == this.state.carouselActiveIndex){
-                thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
+                //thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
                 maskClassName = this.state.carouselActive? "carousel_mask_active carousel_mask": "carousel_mask";
-                playOrStopSrc = this.state.carouselActive? stop : play;
+                playOrStopSrc = this.state.player === "play"? play : stop;
                 // console.log("thumbNail:" + thumbNailClassName)
             }else{
-                thumbNailClassName = "carousel_window";
+                //thumbNailClassName = "carousel_window";
                 maskClassName = "carousel_mask";
                 playOrStopSrc = play;
             }
             return (
                 <div className ="carousel_slide"  thumbNailAttribute = {JSON.stringify({"genre": item.tags, "name": item.song})}>
-                    <div className = {thumbNailClassName} key = {index} >
+                    <div className = "carousel_window" key = {index} >
                         <div className = {maskClassName}>
                             <div className = "carousel_display" id = {index} onClick = {this.onClick}>
                                 
-                                <button ><img className = "play" src = {playOrStopSrc} ></img></button> 
+                                <img className = "carousel_display_playButton" id = {index} className = "play" src = {playOrStopSrc} onClick = {this.handleMusic} ></img>
                                 
                                 {/* {this.state.player == "playing" && (<button onClick = {() => {this.setState({player: "stopped"})}}><img className = "stop" src = {stop} ></img></button>)} */}
                             </div>

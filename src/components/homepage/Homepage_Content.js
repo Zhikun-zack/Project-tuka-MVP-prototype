@@ -9,7 +9,6 @@ class Homepage_Content extends React.Component{
     render () {
         //primary genres stored in redux(list of objects)
         let keyWordsList = this.props.homePageGenres.keyWordsList;
-        console.log(keyWordsList)
         //carousels will use this list to display
         let GenreList =  ["Trending Now"]; 
         let len = keyWordsList.length;
@@ -26,7 +25,7 @@ class Homepage_Content extends React.Component{
         if(this.props.homePageGenres.selectedKeywords.length == 0){
             GenreList = ["Trending Now", "Rock","Hip-Hop / Rap","Pop","Country", "Latin", "Jazz", "Classical"]
         }
-        if(this.props.homePageGenres.thumbNailActive[1]) {
+        if(this.props.homePageGenres.thumbNailActive[2] === 'play') {
             
             musicPlayer = <MusicPlayer></MusicPlayer>
         }
@@ -38,7 +37,7 @@ class Homepage_Content extends React.Component{
                 {
                     
                     GenreList.map((key, index) => {
-                        //thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
+                        //['Rock', true]:thumbNailActive state saved the last clicked thumbnail's carousel name and the state of this thumbnail(expanded or not)
                         if (key === this.props.homePageGenres.thumbNailActive[0]){
                             //onOff represent whether this carousel can expand any thumbnail, false no, true means it can expand any thumbnail
                             return <MusicRow id = {index} onClick = {this.onClick} genres = {key} onOff = {true} ref = {this.musicRowRef}></MusicRow>
