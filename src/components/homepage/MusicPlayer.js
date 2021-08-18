@@ -15,7 +15,7 @@ const audioList1 = [
       // musicSrc: async () => {
       //   return await fetch('/api')
       // },
-      duration:(10.00)
+      duration:(15.00)
     },
     {
       name: 'Dorost Nemisham',
@@ -39,8 +39,20 @@ class MusicPlayer extends React.Component {
         return(
             <ReactJkMusicPlayer 
                 getAudioInstance={(instance) => {
-                    console.log(instance.play())
+                    console.log(instance)
                     this.props.getMusicInstance(instance)
+                    //set start and end time of music
+                    instance.addEventListener("canplaythrough", () => {
+                      //set start time
+                      // if(instance.currentTime < 10){
+                      //   instance.currentTime = 10;
+                      // }
+                      
+                      //set duration 15s
+                      setTimeout(() => {
+                        instance.pause();
+                      }, 15000)
+                    })
                 }}
                 audioLists = {audioList1}
                 mode = 'full'
