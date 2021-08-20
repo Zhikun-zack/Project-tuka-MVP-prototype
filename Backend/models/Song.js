@@ -22,6 +22,9 @@ const SongSchema = new mongoose.Schema({
     tags: {
         type: Array
     },
+    download: {
+        type: Number,
+    }
     // shared: {
     //     type: String,
     //     required: true
