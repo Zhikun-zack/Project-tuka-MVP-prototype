@@ -56,8 +56,7 @@ exports.ExtractSong = (req, res) => {
             res.status(404).send({message:"Song not found"});
             return;
         }
-        //console.log(song)
-
+        //Success, set status to 200 and return information back to client side 
         res.status(200).send(song.map(s => {
             return(
                 {
@@ -72,6 +71,14 @@ exports.ExtractSong = (req, res) => {
         }))
     })
 }
+exports.GetSongByDownload = (req, res) => {
+    Song.find()
+    .sort(Song.download)
+    .limit(12)
+    .exec((err, song) => {
+        console.log(song)
+    })
+} 
 
 exports.UploadSong = (req, res) => {
     console.log(req.body)

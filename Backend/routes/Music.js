@@ -11,4 +11,8 @@ module.exports = (app) => {
         "/api/music",
         MusicController.ExtractSong
     );
+    app.get(
+        "/api/music",
+        MusicController.GetSongByDownload
+    )
 }

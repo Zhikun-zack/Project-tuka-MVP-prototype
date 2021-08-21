@@ -129,7 +129,7 @@
     /* transition: all .2s;  */
 }
     .carousel_button--right{
-        margin-right: 1.5rem;
+        margin-right: -2rem;
     }
     .carousel_button--left{
         margin-left: 1.5rem;
