@@ -205,9 +205,11 @@ class MusicRow extends React.Component {
     //Function for updating the music data get from database
     //input param: selectedKeywords: the subgenres, default is [], if it is empty, then just searching the primary genre
     updateMusicData = (primaryGenre, selectedKeywords = []) => {
+        //for saving the new music information get from database
+        const newArtist = this.state.newArtist;
         if(this.props.genres != "Trending Now"){
-            //for saving the new music information get from database
-            const newArtist = this.state.newArtist;
+            
+            
             //console.log('primaryGenres:' + primaryGenre)
             //get data
            
@@ -270,54 +272,70 @@ class MusicRow extends React.Component {
                         
                     }else if(musicData.length == 1){
                         console.log(1)
-                        // let m = musicData[0]
-                        // let image
-                        // try {
-                        //     //console.log("./img/"+ m['title'].replace(/\s*/g, "") +".jpg")
-                        //     image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg") 
-                        // } catch (error) {
-                        //     image = require("./img/noimage.jpg")
-                        // }
-                        // let newArtistDetail = {
-                        //     name: " ",
-                        //     song: m['title'],
-                        //     tags: m['tags'],
-                        //     //for invoking the image from file path
-                        //     image: image
-                        // };
-                        // //location of the first duplicated element
-                        // let i;
-                        // //Whether the newArtistDetail has already in the state array
-                        // let contains;
-                        // newArtist.some((e,index) => {
-                        //     if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
-                        //         contains = true;
-                        //         i = index;
-                        //     }
-                        // })
-                        // //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
-                        // //largest number of thumbnails in the discovery page
-                        // if(newArtist.length <= 12){
-                        //     if(contains){
-                        //         console.log(i)
-                        //         newArtist.splice(i, 1);
-                        //         newArtist.unshift(newArtistDetail);
-                        //     }else{
-                        //         newArtist.unshift(newArtistDetail);
-                        //     }
-                        // }else{
-                        //     newArtist.unshift(newArtistDetail);
-                        //     newArtist.pop();
-                        // }
-                        // if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
-                        //     const copyNewArtist = [].concat(newArtist)
-                        //     this.setState({
-                        //         artists: copyNewArtist
-                        //     })
-                        // }
                     }
                 })
                 
+        }else{
+            MusicService.extractBasedOnDownloads()
+                .then(result => {
+                    const musicData = result['data'];
+                    //if the tag exists in database
+                    if (musicData.length > 1){
+                        let image
+                        musicData.map((m) => {
+                            // console.log(m)
+                            try {
+                                image = require("./img/"+ m['title'].replace(/\s*/g, "") +".jpg"); 
+                            } catch (error) {
+                                image = require("./img/noimage.jpg")
+                            }
+                            let newArtistDetail = {
+                                name: " ",
+                                song: m['title'],
+                                tags: m['tags'],
+                                //for invoking the image from file path
+                                image: image
+                            };
+                            //location of the first duplicated element
+                            let i;
+                            //Whether the newArtistDetail has already in the state array
+                            let contains = false;
+                            newArtist.some((e,index) => {
+                                if(JSON.stringify(newArtistDetail) === JSON.stringify(e)){
+                                    contains = true;
+                                    i = index;
+                                }
+                            })
+                            //console.log("this is the length of new artist in:" + this.props.genres + " " + newArtist.length)
+                            //largest number of thumbnails in the discovery page
+                            if(newArtist.length <= 12){
+                                if(contains){
+                                    //console.log(i)
+                                    //error: without repeat but keep executing these codes
+                                    newArtist.splice(i, 1);
+                                    newArtist.push(newArtistDetail);
+                                }else{
+                                    newArtist.push(newArtistDetail);
+                                }
+                            }else{
+                                newArtist.unshift(newArtistDetail);
+                                newArtist.pop();
+                            }
+                        })
+                        // console.log(this.state.artists)
+                        // console.log(newArtist)
+                        if(JSON.stringify(this.state.artists) != JSON.stringify(newArtist)){
+                            const copyNewArtist = [].concat(newArtist)
+                            this.setState({
+                                artists: copyNewArtist
+                            })
+                        
+                        }
+                        
+                    }else if(musicData.length == 1){
+                        console.log(1)
+                    }
+                })
         }
     }
 
@@ -423,6 +441,7 @@ class MusicRow extends React.Component {
         let maskClassName;
         let playOrStopSrc;
         const slides = this.state.artists.map((item, index) => {
+            console.log(item)
             //onOff is false means this carousel cannot expand any thumbnail in it
             if(this.props.onOff && index == this.state.carouselActiveIndex){
                 //thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";
@@ -455,7 +474,7 @@ class MusicRow extends React.Component {
 
                             </div> 
                         </div>
-                        <img src = {this.props.genres != "Trending Now"? item.image.default: item.image} alt = "artist pic"></img>
+                        <img src = {item.image.default} alt = "artist pic"></img>
                         {/* Artist and band's name for each elements in Carousel */}
                         
                     </div>  

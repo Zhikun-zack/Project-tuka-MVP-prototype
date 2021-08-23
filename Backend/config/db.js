@@ -14,7 +14,7 @@ const fakeMusics = [
     },
     
     {
-        "title": "I Don’t Care",
+        "title": "I Don't Care",
         "price": ".99",
         "userID": "00002",
         "songID": "00002-001",
@@ -52,7 +52,7 @@ const fakeMusics = [
     },
     
     {
-        "title": "God’s Country",
+        "title": "God's Country",
         "price": ".99",
         "userID": "00006",
         "songID": "00006-001",
@@ -180,7 +180,7 @@ const fakeMusics = [
     },
     
     {
-        "title": "God’s Plan",
+        "title": "Gods Plan",
         "price": ".60",
         "userID": "00018",
         "songID": "00018-001",
@@ -793,7 +793,7 @@ const fakeMusics = [
     },
     
     {
-        "title": "No Woman, No Cry",
+        "title": "No Woman No Cry",
         "price": ".70",
         "userID": "00051",
         "songID": "00051-003",
@@ -1032,7 +1032,8 @@ const connectDB = async () => {
         mongoose.connect(key.mongoURI, {
             useNewUrlParser: true,
             useCreateIndex: true
-        })
+        });
+        mongoose.set('useFindAndModify', false);
         console.log("connected");
     } catch (error) {
         console.error(error.message);

@@ -15,7 +15,20 @@ class MusicService{
                 return response
             });
     }
+
+    extractBasedOnDownloads(){
+        let url = "/api/music/downloads";
+        return API2.get(url)
+            .then(response => {
+                return response;
+            })
+    }
     
+    updateDownloadsById(id, updateDownloads){
+        let url = "/api/music/downloads?id=" + id + "&updateD=" + updateDownloads;
+        return API2.put(url)
+            .then(response => {console.log(response)});
+    }
     uploadFiles(){}
     // uploadMusic(){
     //     return API2.post("/api/music", {
