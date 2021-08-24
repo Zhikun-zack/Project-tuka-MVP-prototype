@@ -441,7 +441,7 @@ class MusicRow extends React.Component {
         let maskClassName;
         let playOrStopSrc;
         const slides = this.state.artists.map((item, index) => {
-            console.log(item)
+            //console.log(item)
             //onOff is false means this carousel cannot expand any thumbnail in it
             if(this.props.onOff && index == this.state.carouselActiveIndex){
                 //thumbNailClassName = this.state.carouselActive? "carousel_window_active carousel_window" :"carousel_window";

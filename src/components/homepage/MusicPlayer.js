@@ -32,12 +32,17 @@ const audioList1 = [
 const options = {
     audioList1: audioList1
 }
+const customDownloader = () => {
+  const link = document.createElement('a')
+}
 class MusicPlayer extends React.Component {
     constructor() {
         super()
         this.instance = null
     }
-
+    onClickDownload = (e) => {
+      console.log(e.target.className)
+    }
     render() {
         return(
             <ReactJkMusicPlayer 
@@ -64,6 +69,7 @@ class MusicPlayer extends React.Component {
                       }
                     })
                 }}
+                onClick = {() => {console.log("clicked")}}
                 audioLists = {audioList1}
                 mode = 'full'
             />
