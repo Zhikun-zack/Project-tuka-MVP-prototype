@@ -16,6 +16,7 @@ const initialState = {keyWordsList:[{index: 1, name: "Rock", flag: true},
                                     {index: 6, name: "Jazz", flag: true}, 
                                     {index: 7, name: "Classical", flag: true}],
                         selectedKeywords: [],
+                        //["name of primary genre", "whether it has thumbnail open", "status of play button: play or stop"]
                         thumbNailActive: ['',false, ""],
                         showMenu: false,
                         //music instance for music player

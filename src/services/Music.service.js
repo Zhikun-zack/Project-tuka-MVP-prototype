@@ -23,7 +23,13 @@ class MusicService{
                 return response;
             })
     }
-    
+    extractBasedOnId(id){
+        let url = "/api/music/" + id;
+        return API2.get(url)
+            .then(response => {
+                return response;
+            })
+    }
     updateDownloadsById(id, updateDownloads){
         let url = "/api/music/downloads?id=" + id + "&updateD=" + updateDownloads;
         return API2.put(url)

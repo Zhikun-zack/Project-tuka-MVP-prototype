@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import MusicService from '../../services/Music.service';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
 import tequila from "./img/Tequila.mp3";
@@ -7,6 +8,7 @@ import tequilaImg from "./img/Tequila.jpg";
 
 const audioList1 = [
     {
+      id: '611f2207f95db06d0035d094',
       name: 'Tequila',
       singer: 'Dan, Shay',
       cover:
@@ -32,22 +34,31 @@ const audioList1 = [
 const options = {
     audioList1: audioList1
 }
-const customDownloader = () => {
-  const link = document.createElement('a')
-}
 class MusicPlayer extends React.Component {
     constructor() {
         super()
         this.instance = null
     }
-    onClickDownload = (e) => {
-      console.log(e.target.className)
+    //When download button is clicked
+    onAudioDownload = (e) => {
+      MusicService.extractBasedOnId(audioList1[0].id)
+        .then(result => {
+          console.log(result)
+          let curId = result.data.id;
+          let curDownload = result.data.downloads += 1;
+          MusicService.updateDownloadsById(curId, curDownload);
+          console.log("download updated")
+        })
+
+      
     }
     render() {
+
         return(
             <ReactJkMusicPlayer 
                 getAudioInstance={(instance) => {
                     console.log(instance)
+                    console.log(instance.audioLists)
                     this.props.getMusicInstance(instance)
                     //set start and end time of music
                     instance.addEventListener("canplaythrough", () => {
@@ -69,9 +80,9 @@ class MusicPlayer extends React.Component {
                       }
                     })
                 }}
-                onClick = {() => {console.log("clicked")}}
                 audioLists = {audioList1}
                 mode = 'full'
+                onAudioDownload = {this.onAudioDownload}
             />
         )       
     }

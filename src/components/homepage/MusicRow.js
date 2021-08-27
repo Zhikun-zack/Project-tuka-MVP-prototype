@@ -113,7 +113,7 @@ class MusicRow extends React.Component {
         this.artists = []
     }
     onClick = (e) => {
-        
+        //Deside which thumbnail should expand
         const carouselActive = this.state.carouselActive;
         if(this.state.carouselActiveIndex === -1 || e.currentTarget.id === this.state.carouselActiveIndex){
             //if the play button is play, just change the button to stop
@@ -156,6 +156,8 @@ class MusicRow extends React.Component {
                 this.props.changeThumbNailActive([this.props.genres,this.state.carouselActive, "play"])
             }
         }
+
+        
        
     }
     //execute after render() function, give the initial data for discoverage page
@@ -290,6 +292,7 @@ class MusicRow extends React.Component {
                                 image = require("./img/noimage.jpg")
                             }
                             let newArtistDetail = {
+                                id: m['id'],
                                 name: " ",
                                 song: m['title'],
                                 tags: m['tags'],
@@ -438,6 +441,7 @@ class MusicRow extends React.Component {
     }
 
     render() {
+        console.log(this.props.reduxState)
         let maskClassName;
         let playOrStopSrc;
         const slides = this.state.artists.map((item, index) => {
@@ -454,10 +458,10 @@ class MusicRow extends React.Component {
                 playOrStopSrc = play;
             }
             return (
-                <div className ="carousel_slide"  thumbNailAttribute = {JSON.stringify({"genre": item.tags, "name": item.song})}>
+                <div className ="carousel_slide"  thumbNailAttribute = {JSON.stringify({"id": item.id, "genre": item.tags, "name": item.song})}>
                     <div className = "carousel_window" key = {index} >
                         <div className = {maskClassName}>
-                            <div className = "carousel_display" id = {index} onClick = {this.onClick}>
+                            <div className = "carousel_display" id = {index} music_Id = {item.id} onClick = {this.onClick}>
                                 
                                 <img className = "carousel_display_playButton" id = {index} className = "play" src = {playOrStopSrc} onClick = {this.handleMusic} ></img>
                                 
@@ -499,8 +503,6 @@ class MusicRow extends React.Component {
             )
             //console.log(MusicService.extractBasedOnTags(this.props.genres))
         }
-        //let musicInitData = this.getInitData();
-        //console.log(musicInitData)
         return  (
             //whole div for each row
             <div className='WholeRow'>

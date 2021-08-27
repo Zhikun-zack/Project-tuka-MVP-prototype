@@ -65,7 +65,8 @@ exports.ExtractSong = (req, res) => {
                     title: s.title,
                     price: s.price,
                     userID: s.userID,
-                    songID: s.songID
+                    songID: s.songID,
+                    downloads: s.download 
                 }
             )
             
@@ -94,19 +95,51 @@ exports.GetSongByDownload = (req, res) => {
                 title: s.title,
                 price: s.price,
                 userID: s.userID,
-                songID: s.songID
+                songID: s.songID,
+                downloads: s.download 
             })
         }))
     })
 } 
+//get the id value from request, return only one song value
+exports.GetSongById = (req, res) => {
+    Song.findById(req.params.id)
+        .exec((err, song) =>{
+            console.log(song)
+            if(err){
+                res.status(500).send({message: err.message});
+                return;
+            }
+            if(song == null){
+                res.status(404).send({message: "Song not found"});
+                return;
+            }
+            res.status(200).send(
+                {
+                    id: song._id,
+                    tags: song.tags,
+                    title: song.title,
+                    price: song.price,
+                    userID: song.userID,
+                    songID: song.songID,
+                    downloads: song.download 
+                }
+            )
+        })
+}
 
 //Update downloads when use click download button of that song
 exports.UpdateDownloadsById = (req, res) => {
     Song.findOneAndUpdate({_id: req.query.id}, {download: req.query.updateD})
-        .then((err) => {
+        .then((err, song) => {
             if(err){
-                res.status(500).send({message: err.message});
+                res.status(500).send({message: "Error updating downloads with id = " + req.query.id});
                 return;
+            }
+            if(song == null){
+                res.status(404).send({
+                    message: "Cannot update downloads attribute of Song: " + req.query.id
+                })
             }
             res.send({message: "update downloads successfully!"})
         })

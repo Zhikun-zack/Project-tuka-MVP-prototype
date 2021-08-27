@@ -19,4 +19,8 @@ module.exports = (app) => {
         "/api/music/downloads",
         MusicController.UpdateDownloadsById
     )
+    app.get(
+        "/api/music/:id",
+        MusicController.GetSongById
+    )
 }
